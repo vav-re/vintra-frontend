@@ -1,0 +1,152 @@
+<main class="app-content">
+  <div class="patient-header fade-in">
+    <div class="patient-avatar">
+      <img src="/images/patients/joao-silva.jpg" alt="João Silva">
+    </div>
+    
+    <div class="patient-info">
+      <h1 class="patient-name">João Silva</h1>
+      <div class="patient-meta">
+        <div class="patient-meta-item">
+          <i class="fas fa-calendar"></i>
+          <span>48 anos</span>
+        </div>
+        <div class="patient-meta-item">
+          <i class="fas fa-envelope"></i>
+          <span>joao.silva@email.com</span>
+        </div>
+        <div class="patient-meta-item">
+          <i class="fas fa-phone"></i>
+          <span>(41) 98765-4321</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="patient-actions">
+      <button class="btn btn-secondary">
+        <i class="fas fa-edit btn-icon"></i>
+        Editar
+      </button>
+      <button class="btn btn-primary">
+        <i class="fas fa-plus btn-icon"></i>
+        Nova Sessão
+      </button>
+    </div>
+  </div>
+  
+  <div class="patient-tabs fade-in">
+    <div class="patient-tab active">Sessões</div>
+    <div class="patient-tab">Evolução</div>
+    <div class="patient-tab">Documentos</div>
+    <div class="patient-tab">Notas</div>
+  </div>
+  
+  <div class="patient-content fade-in-up">
+    <div class="section-header">
+      <h2 class="section-title">Histórico de Sessões</h2>
+      <button class="btn btn-primary">
+        <i class="fas fa-plus btn-icon"></i>
+        Nova Sessão
+      </button>
+    </div>
+    
+    <div class="session-list">
+      <!-- Sessão com dimensional card -->
+      <div class="dimensional-card anxiedade">
+        <div class="dimensional-info">
+          <div class="dimensional-date">6 de maio de 2024, 10:00</div>
+          <div class="dimensional-label">
+            <div class="dimensional-indicator" style="background-color: #F59E0B;"></div>
+            <span>Ansiedade generalizada</span>
+          </div>
+        </div>
+        
+        <div class="dimensional-mini-chart">
+          <canvas id="radar-chart-1"></canvas>
+        </div>
+        
+        <div class="dimensional-action">
+          <span>Ver Sessão</span>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      
+      <!-- Mais sessões com dimensional cards -->
+      <div class="dimensional-card insonia">
+        <div class="dimensional-info">
+          <div class="dimensional-date">28 de abril de 2024, 15:30</div>
+          <div class="dimensional-label">
+            <div class="dimensional-indicator" style="background-color: #10B981;"></div>
+            <span>Insônia persistente</span>
+          </div>
+        </div>
+        
+        <div class="dimensional-mini-chart">
+          <canvas id="radar-chart-2"></canvas>
+        </div>
+        
+        <div class="dimensional-action">
+          <span>Ver Sessão</span>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      
+      <div class="dimensional-card estresse">
+        <div class="dimensional-info">
+          <div class="dimensional-date">15 de abril de 2024, 09:45</div>
+          <div class="dimensional-label">
+            <div class="dimensional-indicator" style="background-color: #EF4444;"></div>
+            <span>Estresse ocupacional</span>
+          </div>
+        </div>
+        
+        <div class="dimensional-mini-chart">
+          <canvas id="radar-chart-3"></canvas>
+        </div>
+        
+        <div class="dimensional-action">
+          <span>Ver Sessão</span>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      
+      <!-- Botão para nova sessão -->
+      <button class="new-session-btn">
+        <i class="fas fa-plus"></i>
+        <span>Adicionar Sessão</span>
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- Script para inicializar os mini-charts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Dados dimensionais
+    const sessao1 = {
+      v1: -3.5, v2: 8.0, v3: 2.0, v4: 7.0,
+      v5: 6.0, v6: 4.0, v7: 3.0, v8: 8.0,
+      v9_past: 6.0, v9_present: 3.0, v9_future: 1.0,
+      v10: 3.0
+    };
+    
+    const sessao2 = {
+      v1: -2.0, v2: 7.0, v3: 3.0, v4: 6.0,
+      v5: 5.0, v6: 5.0, v7: 4.0, v8: 6.0,
+      v9_past: 5.0, v9_present: 4.0, v9_future: 2.0,
+      v10: 4.0
+    };
+    
+    const sessao3 = {
+      v1: -4.0, v2: 9.0, v3: 1.0, v4: 8.0,
+      v5: 4.0, v6: 3.0, v7: 2.0, v8: 7.0,
+      v9_past: 7.0, v9_present: 2.0, v9_future: 1.0,
+      v10: 2.0
+    };
+    
+    // Criar mini-charts
+    VintraDimensionalChart.createMiniChart('radar-chart-1', sessao1);
+    VintraDimensionalChart.createMiniChart('radar-chart-2', sessao2);
+    VintraDimensionalChart.createMiniChart('radar-chart-3', sessao3);
+  });
+</script>
