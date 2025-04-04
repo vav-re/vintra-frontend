@@ -198,6 +198,125 @@ document.addEventListener('DOMContentLoaded', function () {
     // Renderiza a seleção de pacientes no dashboard
     renderPatientSelectionOnDashboard();
 });
+
+// Adicione este código antes da função setupEventListeners()
+
+/** Configura o toggle da sidebar */
+function setupSidebar() {
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.app-sidebar');
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('expanded');
+            document.body.classList.toggle('sidebar-expanded', sidebar.classList.contains('expanded'));
+        });
+    }
+}
+
+/** Configura o menu mobile */
+function setupMobileMenu() {
+    const openBtn = document.getElementById('mobileMenuBtn');
+    const closeBtn = document.querySelector('.mobile-menu-close');
+    const backdrop = document.getElementById('mobileMenuBackdrop');
+    const menu = document.getElementById('mobileMenu');
+
+    if (!openBtn || !closeBtn || !backdrop || !menu) {
+        console.error("Elementos do menu mobile não encontrados.");
+        return;
+    }
+
+    openBtn.addEventListener('click', openMobileMenu);
+    closeBtn.addEventListener('click', closeMobileMenu);
+    backdrop.addEventListener('click', closeMobileMenu);
+}
+
+/** Abre o menu mobile */
+function openMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('mobileMenuBackdrop');
+    if (menu && backdrop) {
+        backdrop.classList.add('open');
+        menu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+/** Fecha o menu mobile */
+function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('mobileMenuBackdrop');
+    if (menu && menu.classList.contains('open') && backdrop) {
+        menu.classList.remove('open');
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
+
+/** Configura as abas do painel de paciente */
+function setupPatientTabs() {
+    const tabsContainer = document.querySelector('#patient-view .patient-tabs');
+    if (!tabsContainer) return;
+
+    tabsContainer.addEventListener('click', function(e) {
+        const tab = e.target.closest('.patient-tab');
+        if (tab && tab.dataset.panel && !tab.classList.contains('active')) {
+            activatePatientTab(tab.dataset.panel);
+        }
+    });
+    // Botão Voltar
+    document.getElementById('backToDashboardBtn')?.addEventListener('click', goBack);
+}
+
+/** Configura a visualização dimensional modal */
+function setupDimensionalVisualizations() {
+    const openModalBtn = document.querySelector('.activate-dimensional-space');
+    const openModalBtnPatient = document.querySelector('#patient-view .dimensional-summary .btn');
+    const modalOverlay = document.getElementById('dimensionalModal');
+    const closeBtn = document.getElementById('dimensionalModalClose');
+    const tabsContainer = modalOverlay?.querySelector('.dimensional-tabs');
+
+    openModalBtn?.addEventListener('click', showDimensionalModal);
+    openModalBtnPatient?.addEventListener('click', showDimensionalModal);
+    closeBtn?.addEventListener('click', hideDimensionalModal);
+}
+
+/** Configura o sistema de edição de documentos (Modal) */
+function setupDocumentEditing() {
+    const modalOverlay = document.getElementById('editDocumentModal');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const saveEditBtn = document.getElementById('saveEditBtn');
+    const editModalClose = document.getElementById('editModalClose');
+
+    cancelEditBtn?.addEventListener('click', closeDocumentEditor);
+    saveEditBtn?.addEventListener('click', saveDocumentEdit);
+    editModalClose?.addEventListener('click', closeDocumentEditor);
+}
+
+// Funções adicionais que podem ser necessárias
+function showDimensionalModal() {
+    console.log("Modal dimensional acionado");
+}
+
+function hideDimensionalModal() {
+    console.log("Modal dimensional fechado");
+}
+
+function closeDocumentEditor() {
+    console.log("Editor de documento fechado");
+}
+
+function saveDocumentEdit() {
+    console.log("Documento salvo");
+}
+
+function goBack() {
+    console.log("Voltando");
+}
+
+function activatePatientTab(panelId) {
+    console.log("Aba de paciente ativada: " + panelId);
+}
+
 /** Configura todos os event listeners da aplicação */
 function setupEventListeners() {
     var _a, _b, _c, _d, _e, _f, _g, _h;
