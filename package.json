@@ -17,4 +17,20 @@
     "serve": "^14.2.1",
     "uglify-js": "^3.19.3"
   }
+  {
+    "hosting": {
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
 }
