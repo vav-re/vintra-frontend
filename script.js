@@ -77,6 +77,37 @@ var state = {
     orientacoesText: "# Orienta\u00E7\u00F5es - Maria Silva (04/04/2025)\n\n1.  **Medica\u00E7\u00E3o:** Continue...\n\n... (restante das orienta\u00E7\u00F5es)"
 };
 // --- Inicialização ---
+/** Configura os links de navegação (header, sidebar, mobile) */
+function setupNavigation(): void {
+    document.body.addEventListener('click', (e: MouseEvent) => {
+        const link = (e.target as Element)?.closest<HTMLElement>('[data-target]');
+
+        if (link?.dataset.target) {
+            e.preventDefault(); // Previne comportamento padrão para todos os links tratados
+            const targetView = link.dataset.target;
+
+            switch (targetView) {
+                case 'perfil':
+                case 'preferencias':
+                    showToast('info', 'Funcionalidade Futura', `${targetView.charAt(0).toUpperCase() + targetView.slice(1)} ainda não implementado.`);
+                    closeMobileMenu();
+                    break;
+                case 'sair':
+                    logout();
+                    break;
+                default:
+                    // Troca de view normal
+                    if (state.currentView !== targetView) {
+                        window.switchView(targetView);
+                    } else {
+                        // Se clicou no link da view atual, apenas fecha o menu mobile
+                        closeMobileMenu();
+                    }
+                    break;
+            }
+        }
+    });
+}
 document.addEventListener('DOMContentLoaded', function () {
     console.log("VINTRA Inicializando...");
     loadDemoData();
