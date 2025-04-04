@@ -727,6 +727,65 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+        <script>
+// Função auxiliar para verificar se funções existem e criá-las se necessário
+function ensureFunctionExists(funcName, implementation) {
+    if (typeof window[funcName] !== 'function') {
+        console.log(`Criando função auxiliar: ${funcName}`);
+        window[funcName] = implementation || function() {
+            console.log(`Função ${funcName} chamada (implementação vazia)`);
+        };
+    }
+}
+
+// Verificar as funções necessárias
+document.addEventListener('DOMContentLoaded', function() {
+    // Lista de funções essenciais
+    const requiredFunctions = [
+        'setupLogin', 'setupNavigation', 'setupSidebar', 'setupMobileMenu',
+        'setupPatientTabs', 'setupDimensionalVisualizations', 'setupDocumentEditing',
+        'setupNewDocumentTabs', 'setupRecorder', 'setupUpload', 'setupTranscriptionInput',
+        'setupProcessing', 'setupResultsView', 'setupDocumentLibrary', 'setupGenericModal',
+        'showDimensionalModal', 'hideDimensionalModal', 'openMobileMenu', 'closeMobileMenu',
+        'goBack', 'activatePatientTab', 'closeDocumentEditor', 'saveDocumentEdit'
+    ];
+
+    requiredFunctions.forEach(function(funcName) {
+        ensureFunctionExists(funcName);
+    });
+
+    // Se setupEventListeners existir, tente executá-lo
+    if (typeof setupEventListeners === 'function') {
+        try {
+            setupEventListeners();
+            console.log("Setup de eventos realizado com sucesso!");
+        } catch (e) {
+            console.error("Erro ao configurar eventos:", e);
+        }
+    }
+
+    // Forçar exibição do dashboard após login
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            if (document.getElementById('password').value === '123') {
+                setTimeout(function() {
+                    const dashboardView = document.getElementById('dashboard-view');
+                    const appContainer = document.getElementById('appContainer');
+                    const loginScreen = document.getElementById('loginScreen');
+                    
+                    if (dashboardView && appContainer && loginScreen) {
+                        loginScreen.style.display = 'none';
+                        appContainer.style.display = 'flex';
+                        dashboardView.style.display = 'block';
+                        dashboardView.classList.add('active');
+                    }
+                }, 1000);
+            }
+        });
+    }
+});
+</script>
 </script>
 </body>
 </html>
