@@ -1,70 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VINTRA | Visualização INtegrativa TRAjetorial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINTRA | Visualização INtegrativa TRAjetorial</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 
-  <style>
-    /* Garante que o botão hamburger só apareça em mobile */
-    #mobileMenuBtn {
-        display: none; /* Escondido por padrão */
-    }
-    .activate-dimensional-space {
-        display: inline-flex; /* Visível por padrão (desktop) */
-    }
-
-    @media (max-width: 768px) {
+    <style>
+        /* Garante que o botão hamburger só apareça em mobile */
         #mobileMenuBtn {
-            display: block; /* Mostra em mobile */
-        }
-        .app-nav { /* Esconde a navegação principal do header em mobile */
-             display: none;
+            display: none; /* Escondido por padrão */
         }
         .activate-dimensional-space {
-            display: none; /* Esconde botão dimensional em mobile */
+            display: inline-flex; /* Visível por padrão (desktop) */
         }
-    }
-  </style>
+
+        @media (max-width: 768px) {
+            #mobileMenuBtn {
+                display: block; /* Mostra em mobile */
+            }
+            .app-nav { /* Esconde a navegação principal do header em mobile */
+                 display: none;
+            }
+            .activate-dimensional-space {
+                display: none; /* Esconde botão dimensional em mobile */
+            }
+        }
+
+        /* Ensure login screen is visible by default if no JS handles it */
+        /* You might need to adjust this based on your script.js logic */
+        #loginScreen {
+             display: flex; /* Or block, depending on your layout */
+        }
+        #appContainer {
+             display: none; /* Hidden initially, shown after login */
+        }
+    </style>
 </head>
 <body>
-    <div id="splashScreen">
-        <div id="logo-container">
-            <div class="background-glow"></div>
-            <svg id="vintra-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <filter id="glow" x="-50%" y="-50%" width="250%" height="250%">
-                  <feGaussianBlur stdDeviation="2" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <g transform="translate(0,450) scale(0.06,-0.06)" fill="none">
-                <path class="logo-path" id="path1" d="M3300 5974 c0 -15 372 -666 385 -674 8 -6 76 103 151 240 75 138 161 293 192 345 l56 95 -392 0 c-216 0 -392 -3 -392 -6z"/>
-                <path class="logo-path" id="path2" d="M4027 5539 l-243 -440 279 -495 c153 -272 311 -559 352 -639 88 -170 85 -169 138 -60 23 47 290 530 594 1073 304 544 553 992 553 995 0 30 -277 3 -289 -28 -22 -59 -900 -1643 -911 -1644 -9 0 -169 290 -288 520 l-37 73 255 458 c140 252 277 496 304 543 l50 85 -257 0 -257 -1 -243 -440z"/>
-                <path class="logo-path" id="path3" d="M4668 5434 l-302 -544 62 -115 c34 -63 67 -115 72 -114 6 0 100 163 210 362 110 200 274 494 365 655 91 160 165 293 165 296 0 3 -61 6 -135 5 l-135 0 -302 -545z"/>
-                <path class="logo-path" id="path4" d="M2851 3190 c60 -127 109 -240 109 -252 0 -11 23 -18 51 -14 43 5 66 40 160 244 128 279 122 256 57 248 -45 -5 -62 -30 -123 -181 -88 -214 -80 -214 -173 5 -70 166 -80 180 -133 180 l-56 0 108 -230z"/>
-                <path class="logo-path" id="path5" d="M3480 3170 l0 -250 50 0 50 0 0 250 0 250 -50 0 -50 0 0 -250z"/>
-                <path class="logo-path" id="path6" d="M3840 3170 l0 -250 49 0 c48 0 50 4 55 169 l6 169 137 -169 c196 -243 213 -236 213 81 l0 250 -53 0 -53 0 12 -170 c15 -206 27 -206 -139 0 -204 253 -227 245 -227 -80z"/>
-                <path class="logo-path" id="path7" d="M4520 3380 c0 -34 13 -40 90 -40 l90 0 0 -210 0 -210 50 0 50 0 0 210 0 210 90 0 c77 0 90 6 90 40 0 38 -13 40 -230 40 -217 0 -230 -2 -230 -40z"/>
-                <path class="logo-path" id="path8" d="M5200 3170 l0 -250 50 0 c45 0 50 8 50 80 0 77 2 80 67 80 56 0 77 -14 123 -80 44 -63 68 -80 115 -80 l60 0 -72 87 -71 87 59 44 c164 121 44 282 -210 282 l-171 0 0 -250z m329 126 c50 -73 1 -125 -126 -132 l-103 -6 0 91 0 91 99 0 c79 0 105 -9 130 -44z"/>
-                <path class="logo-path" id="path9" d="M6031 3316 c-26 -58 -75 -168 -109 -243 -74 -164 -73 -153 -14 -153 35 0 54 16 69 60 20 58 25 60 150 60 124 0 129 -2 153 -60 18 -43 38 -60 72 -60 60 0 67 -29 -62 251 -136 296 -180 321 -259 145z m188 -201 c0 -8 -39 -15 -89 -15 -104 0 -105 2 -47 132 l44 98 45 -100 c25 -55 46 -107 47 -115z"/>
-              </g>
-            </svg>
-        </div>
-    </div>
-
     <div id="loginScreen">
         <div class="login-container">
             <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iNDUwLjAwMDAwMHB0IiBoZWlnaHQ9IjQ1MC4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDQ1MC4wMDAwMDAgNDUwLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjEwLCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxMQo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCw0NTAuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiPgo8cGF0aCBkPSJNMjUwIDM4MjkgYzAgLTYgNDMgLTg4IDk2IC0xODMgODUgLTE1MCA0MTkgLTc0NyA1MDAgLTg5MyAxNiAtMjkgMzMKLTUxIDM3IC01MCA1IDEgNDQgNjUgODYgMTQyIDM2NSA2NTUgNTQxIDk3NiA1NDEgOTg1IDAgNyAtMjA0IDEwIC02MzAgMTAKLTQ1NiAwIC02MzAgLTMgLTYzMCAtMTF6Ii8+CjxwYXRoIGQ9Ik0xODMyIDM4MjggYy01IC03IC03NCAtMTMwIC0xNTIgLTI3MyAtNzkgLTE0MyAtMjA5IC0zNzkgLTI5MCAtNTI1Ci0yNzcgLTUwMCAtMzQzIC02MjIgLTM0MyAtNjM0IDAgLTYgOTIgLTE3MyAyMDMgLTM3MSAxMTEgLTE5OCAyOTkgLTUzMyA0MTcKLTc0NSAxMTkgLTIxMiAyNTkgLTQ2NCAzMTMgLTU2MCA1NCAtOTYgMTI2IC0yMjggMTYxIC0yOTIgMzUgLTY1IDY3IC0xMTcgNzEKLTExOCA4IDAgMTMgOSAzOTYgNjk1IDQ0NyA4MDIgNTYxIDEwMDUgNjg3IDEyMzAgNjUgMTE2IDI0MCA0MzEgMzkwIDcwMCAxNTAKMjcwIDMyMyA1ODAgMzg0IDY5MCA2MSAxMDkgMTExIDIwMyAxMTEgMjA3IDAgNCAtOTYgOCAtMjE0IDggbC0yMTUgMCAtNjkKLTEyMiBjLTM4IC02OCAtMjI3IC00MDYgLTQxOSAtNzUzIC02MTUgLTExMDYgLTY5MiAtMTI0NCAtODY1IC0xNTUyIC05MyAtMTY3Ci0xNzQgLTMwNSAtMTc4IC0zMDggLTUgLTMgLTE2IDUgLTI0IDE3IC0zNCA1MyAtNTE2IDkyMSAtNTE2IDkyOSAwIDggNzUwCjEzNjIgOTEwIDE2NDIgMzggNjggNzAgMTI5IDcwIDEzNSAwIDE4IC04MTMgMTcgLTgyOCAweiIvPgo8cGF0aCBkPSJNMjk3MiAzODA4IGMtMTEgLTE4IC0xMDIgLTE4MSAtMjAyIC0zNjMgLTEwMCAtMTgxIC0yMjQgLTQwNCAtMjc1Ci00OTUgLTQ2MCAtODI0IC00OTUgLTg4NyAtNDk1IC05MDAgMCAtMjAgMjEzIC0zOTEgMjIwIC0zODMgNCA0IDExMyAxOTkgMjQyCjQzMyAyMjIgNDAwIDMzMCA1OTUgNzc1IDEzOTQgMTAxIDE4MiAxODMgMzMzIDE4MyAzMzggMCA0IC05NiA4IC0yMTQgOCBsLTIxNAowIC0yMCAtMzJ6Ii8+CjwvZz4KPC9zdmc+Cg==" alt="VINTRA Logo" class="logo">
@@ -78,10 +62,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-full">Entrar</button>
             </form>
-      </div>
+        </div>
     </div>
 
-    <div id="appContainer" style="display: none;"> <header class="app-header">
+    <div id="appContainer" style="display: none;">
+        <header class="app-header">
             <button id="mobileMenuBtn" class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -95,7 +80,7 @@
                 <button class="btn btn-secondary activate-dimensional-space" onclick="showDimensionalModal()">
                     <i class="fas fa-brain btn-icon"></i> Ativar Espaço Multidimensional
                 </button>
-            </nav>
+                </nav>
 
             <div class="user-menu">
                 <div class="user-avatar">D</div> <div class="user-dropdown">
@@ -172,14 +157,14 @@
                 </div>
             </div>
 
-            <div class="dashboard workspace active" id="dashboard-view"> <div class="dashboard-header">
+            <div class="dashboard workspace active" id="dashboard-view">
+                 <div class="dashboard-header">
                     <h1 class="dashboard-title">Dashboard</h1>
                     <p class="dashboard-subtitle">Bem-vindo ao VINTRA! Veja seus documentos recentes ou crie um novo.</p>
                 </div>
                 <div class="welcome-message glow-effect">
                     <div class="welcome-text">
-                        <h2>Olá, Dr. Santos!</h2>
-                        <p>Crie uma nova gravação ou faça upload de um arquivo para começar a usar o VINTRA.</p>
+                        <h2>Olá, Dr. Santos!</h2> <p>Crie uma nova gravação ou faça upload de um arquivo para começar a usar o VINTRA.</p>
                         <button class="btn btn-primary" onclick="switchView('new')">
                             <i class="fas fa-plus btn-icon"></i> Novo Documento
                         </button>
@@ -191,7 +176,8 @@
                     <a href="#todos-documentos" class="nav-item" onclick="switchView('library')">Ver Todos</a>
                 </div>
                 <div class="recent-items" id="recentDocuments">
-                    <p>Nenhum documento recente encontrado.</p> </div>
+                    <p>Nenhum documento recente encontrado.</p>
+                 </div>
             </div>
 
             <div class="workspace" id="agenda-view" style="display: none;">
@@ -203,12 +189,11 @@
                     <div class="agenda-date">
                         <div class="date-selector">
                             <button class="date-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                            <div class="current-date">Segunda-feira, 4 de Abril, 2025</div>
-                            <button class="date-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                            <div class="current-date">Segunda-feira, 4 de Abril, 2025</div> <button class="date-nav-btn"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
                     <div class="appointments">
-                         <p>Nenhum compromisso para hoje.</p> </div>
+                        <p>Nenhum compromisso para hoje.</p> </div>
                 </div>
                 <p style="text-align: center; margin-top: 20px;">(Implementação completa da agenda aqui)</p>
             </div>
@@ -282,8 +267,7 @@
                             </div>
                         </div>
                         <div class="document-toolbar-actions">
-                            <div class="library-filters">
-                                <button class="library-filter active" data-new-tab="record">Gravar</button>
+                            <div class="library-filters"> <button class="library-filter active" data-new-tab="record">Gravar</button>
                                 <button class="library-filter" data-new-tab="upload">Upload</button>
                                 <button class="library-filter" data-new-tab="transcribe">Transcrição</button>
                             </div>
@@ -450,21 +434,19 @@
                 </div>
             </div>
 
-             <div class="workspace" id="processing-view" style="display: none;">
-                 <div class="document-workspace" style="width: 100%;">
+            <div class="workspace" id="processing-view" style="display: none;">
+                <div class="document-workspace" style="width: 100%;">
                     <div class="document-toolbar">
                         <div class="document-info-header">
                             <div class="document-info-icon"> <i class="fas fa-cogs"></i> </div>
                             <div class="document-info-details">
                                 <h2>Processar Documento</h2>
-                                <div class="document-info-meta"> <span id="processingDocumentTitle">Transcrição.txt</span> </div>
-                            </div>
+                                <div class="document-info-meta"> <span id="processingDocumentTitle">Transcrição.txt</span> </div> </div>
                         </div>
-                    </div>
-                    <button class="focus-mode-btn" id="focusModeToggleProcessing" title="Alternar Modo Foco"> <i class="fas fa-expand-alt"></i> </button>
+                        </div>
+                     <button class="focus-mode-btn" id="focusModeToggleProcessing" title="Alternar Modo Foco"> <i class="fas fa-expand-alt"></i> </button>
                     <div class="document-content">
-                        <div class="upload-module glow-effect">
-                            <div class="upload-header">
+                        <div class="upload-module glow-effect"> <div class="upload-header">
                                 <h2 class="upload-title">Processamento VINTRA</h2>
                                 <p class="upload-subtitle">Selecione os formatos que deseja gerar</p>
                             </div>
@@ -509,13 +491,12 @@
                             <div class="document-info-icon"> <i class="fas fa-file-alt"></i> </div>
                             <div class="document-info-details">
                                 <h2>Resultados do Processamento</h2>
-                                <div class="document-info-meta"> <span id="resultsDocumentTitle">Transcrição.txt</span> </div>
-                            </div>
+                                <div class="document-info-meta"> <span id="resultsDocumentTitle">Transcrição.txt</span> </div> </div>
                         </div>
                         <div class="document-toolbar-actions">
                             <button class="toolbar-btn" onclick="switchView('library')"> <i class="fas fa-folder-open"></i> Biblioteca </button>
                             <button class="toolbar-btn primary" id="downloadResultsBtn"> <i class="fas fa-download"></i> Download </button>
-                        </div>
+                            </div>
                     </div>
                     <div class="document-tabs">
                         <button class="document-tab active" data-panel="transcription-panel">Transcrição</button>
@@ -551,12 +532,9 @@
             <div class="patient-panel workspace" id="patient-view" style="display: none;">
                  <div class="patient-header">
                     <div class="patient-info">
-                        <h2 class="patient-name">Maria Silva</h2>
-                        <div class="patient-details">38 anos • Feminino • Prontuário #12345</div>
-                    </div>
+                        <h2 class="patient-name">Maria Silva</h2> <div class="patient-details">38 anos • Feminino • Prontuário #12345</div> </div>
                     <div class="patient-actions">
-                        <button class="btn btn-secondary" onclick="goBack()">
-                            <i class="fas fa-arrow-left btn-icon"></i> Voltar
+                        <button class="btn btn-secondary" onclick="goBack()"> <i class="fas fa-arrow-left btn-icon"></i> Voltar
                         </button>
                     </div>
                 </div>
@@ -577,11 +555,9 @@
                                     </button>
                                 </div>
                                 <div class="dimensional-chart-container">
-                                    <canvas id="dimensionalRadarChart"></canvas>
-                                </div>
+                                    <canvas id="dimensionalRadarChart"></canvas> </div>
                                 <div class="dimension-details">
-                                     <p>Detalhes das dimensões aqui...</p>
-                                </div>
+                                    <p>Detalhes das dimensões aqui...</p> </div>
                             </div>
                             <div class="trajectory-summary">
                                 <div class="section-header"> <h3 class="section-title">Trajetória</h3> </div>
@@ -594,7 +570,7 @@
                         </div>
                     </div>
                     <div class="patient-tab-panel" id="consultation-panel">
-                        <div class="tab-content">
+                         <div class="tab-content">
                             <div class="consultation-header">
                                 <h3>Nova Consulta</h3>
                                 <p>Use a seção "Novo Documento" para gravar ou fazer upload.</p>
@@ -607,11 +583,11 @@
                             <div class="processing-header">
                                 <h3>Processamento Dimensional</h3>
                                 <p>Use a seção "Processar Documento" após criar ou selecionar uma transcrição.</p>
-                            </div>
+                                </div>
                         </div>
                     </div>
                     <div class="patient-tab-panel" id="repository-panel">
-                        <div class="tab-content">
+                         <div class="tab-content">
                             <div class="repository-header">
                                 <h3>Repositório de Documentos</h3>
                                 <p>Acesse a Biblioteca para ver todos os documentos, incluindo os deste paciente.</p>
@@ -623,7 +599,8 @@
                     </div>
                 </div>
             </div>
-            </main>
+
+        </main>
     </div>
 
     <div class="modal-overlay" id="dimensionalModal" style="display: none;">
@@ -669,12 +646,14 @@
             </div>
             <div class="modal-body" id="genericModalBody"> </div>
             <div class="modal-footer" id="genericModalFooter">
-                <button class="btn btn-secondary" id="genericModalCancelBtn">Fechar</button>
-                </div>
+                 <button class="btn btn-secondary" id="genericModalCancelBtn">Fechar</button>
+                 </div>
         </div>
     </div>
 
-    <div class="toast-container" id="toastContainer"> </div>
+    <div class="toast-container" id="toastContainer">
+        </div>
 
-    <script src="script.js"></script> </body>
+    <script src="script.js"></script>
+</body>
 </html>
