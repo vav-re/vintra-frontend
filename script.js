@@ -752,19 +752,24 @@ function setupLogin(): void {
                         onComplete: () => {
                             state.currentView = null; // Força a renderização inicial
                             window.switchView('dashboard');
-                        }
-                    });
-                }
-            });
-        } else {
-            passwordError.style.display = 'block';
-            gsap.fromTo(loginForm, { x: 0 }, { x: 10, duration: 0.05, repeat: 5, yoyo: true, ease: "power1.inOut", clearProps: "x" });
-            passwordInput.focus();
-            passwordInput.select();
-        }
-    });
-}
-
+                        // ADICIONE ESTAS LINHAS
+                        setTimeout(() => {
+                            const dashboardView = document.getElementById('dashboard-view');
+                            if (dashboardView) {
+                                dashboardView.style.display = 'block';
+                                dashboardView.classList.add('active');
+                                renderPatientSelectionOnDashboard();
+                            }
+                        }, 500);
+                    }
+                });
+            }
+        });
+    } else {
+        // código existente para senha incorreta
+    }
+});
+    
 /** Simula o logout do usuário */
 function logout(): void {
     const loginScreen = document.getElementById('loginScreen');
@@ -901,7 +906,7 @@ function closeMobileMenu(): void {
  * @param viewId - O ID da view de destino (sem o sufixo '-view').
  * @param force - Força a troca mesmo que já esteja na mesma view (opcional).
  */
-window.switchView = function(viewId: string, force: boolean = false): void {
+window.switchView = function(viewId, force = false) {
     const newViewElem = document.getElementById(`${viewId}-view`);
     if (!newViewElem) {
         console.error(`View não encontrada: ${viewId}-view`);
@@ -909,6 +914,36 @@ window.switchView = function(viewId: string, force: boolean = false): void {
         return;
     }
 
+    console.log(`Trocando para view: ${viewId}`);
+    
+    // Desativa todas as views primeiro
+    document.querySelectorAll('.workspace').forEach(view => {
+        view.style.display = 'none';
+        view.classList.remove('active');
+    });
+    // Define a exibição baseada no tipo de view
+    const newViewDisplayStyle = (viewId === 'library' || viewId === 'patient' || viewId === 'results' || viewId === 'processing') ? 'flex' : 'block';
+    
+    // Configura e exibe a nova view
+    newViewElem.style.display = newViewDisplayStyle;
+    newViewElem.classList.add('active');
+    newViewElem.scrollTop = 0;
+    
+    // Atualiza o estado e executa lógica específica
+    state.currentView = viewId;
+    updateNavigation(viewId);
+    
+    // Executa lógica específica para cada view
+    if (viewId === 'dashboard') {
+        renderPatientSelectionOnDashboard();
+    } else if (viewId === 'library') {
+        renderDocumentLibrary();
+        if (state.currentDocumentId) {
+            viewDocumentInWorkspace(state.currentDocumentId);
+        } else {
+            showEmptyDocumentView();
+        }
+    }
     if (state.currentView === viewId && !force) {
         console.log(`Já está na view: ${viewId}`);
         closeMobileMenu();
