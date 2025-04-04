@@ -657,232 +657,85 @@
 
     </div>
 <script>
-// ADICIONE ESTE SCRIPT ANTES DO SEU script.js
-(function() {
-    console.log("🛠️ VINTRA Inicializador - Criando funções auxiliares...");
-    
-    // Lista de todas as possíveis funções que podem ser chamadas
-    const possibleFunctions = [
-        // Funções de setup
-        'setupLogin', 'setupNavigation', 'setupSidebar', 'setupMobileMenu',
-        'setupPatientTabs', 'setupDimensionalVisualizations', 'setupDocumentEditing',
-        'setupNewDocumentTabs', 'setupRecorder', 'setupUpload', 'setupTranscriptionInput',
-        'setupProcessing', 'setupResultsView', 'setupDocumentLibrary', 'setupGenericModal',
-        
-        // Funções auxiliares e handlers
-        'showDimensionalModal', 'hideDimensionalModal', 'openMobileMenu', 'closeMobileMenu',
-        'goBack', 'activatePatientTab', 'closeDocumentEditor', 'saveDocumentEdit',
-        'activateNewDocumentTab', 'resetRecording', 'startRecording', 'stopRecording',
-        'resetUpload', 'simulateProcessing', 'simulateGeneration', 'viewTranscription',
-        'processTranscription', 'addProcessedDocument', 'addGeneratedDocument',
-        'updateStepProgress', 'updateProgressBar', 'renderPatientSelectionOnDashboard',
-        'renderDocumentLibrary', 'showToast', 'removeToast', 'viewDocumentInWorkspace',
-        'showEmptyDocumentView', 'updateUIRecordingState', 'startTimer', 'stopTimer',
-        'startVisualizer', 'stopVisualizer', 'resetRecordingVisuals', 'handleFiles',
-        'preventDefaults', 'activateResultsTab', 'setActiveDocumentItem', 'updateNavigation',
-        'renderRecentDocuments', 'renderPatientDocuments', 'updateDimensionalChart',
-        'updateModalDimensionalChart', 'setProcessingState', 'downloadDocument',
-        'editDocument', 'viewDocument', 'startProcessingDocument', 'parseDate',
-        'escapeHtml', 'getDocumentContent', 'debounce'
-    ];
-    
-    // Criar implementações vazias para todas as funções
-    possibleFunctions.forEach(function(funcName) {
-        if (typeof window[funcName] !== 'function') {
-            window[funcName] = function() {
-                console.log(`📢 Função ${funcName} chamada com argumentos:`, Array.from(arguments));
-                return null; // Retornar null como valor padrão
-            };
-            console.log(`✅ Criada função auxiliar: ${funcName}`);
-        }
-    });
-    
-    // Implementar window.switchView - função crítica para a navegação
-    window.switchView = function(viewId) {
-        console.log(`🔄 Alterando para view: ${viewId}`);
-        
-        // Esconder todas as views
-        document.querySelectorAll('.workspace').forEach(function(view) {
-            view.style.display = 'none';
-            view.classList.remove('active');
-        });
-        
-        // Mostrar a view solicitada
-        const viewToShow = document.getElementById(viewId + '-view');
-        if (viewToShow) {
-            viewToShow.style.display = viewId === 'library' ? 'flex' : 'block';
-            viewToShow.classList.add('active');
-            
-            // Se for dashboard, forçar a renderização
-            if (viewId === 'dashboard') {
-                const dashboardView = document.getElementById('dashboard-view');
-                if (dashboardView) {
-                    setTimeout(function() {
-                        console.log("🏠 Forçando exibição do dashboard...");
-                        dashboardView.style.display = 'block';
-                        dashboardView.classList.add('active');
-                    }, 100);
-                }
-            }
-        }
-    };
-    
-    // Implementação especial para login
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("🚀 VINTRA Inicializador pronto, registrando handler de login...");
-        
-        const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-            // Adicionar um handler direto de login
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const password = document.getElementById('password');
-                if (password && password.value === '123') {
-                    console.log("🔓 Login bem-sucedido!");
-                    
-                    // Transição visual
-                    const loginScreen = document.getElementById('loginScreen');
-                    const appContainer = document.getElementById('appContainer');
-                    
-                    if (loginScreen && appContainer) {
-                        loginScreen.style.opacity = '0';
-                        setTimeout(function() {
-                            loginScreen.style.display = 'none';
-                            appContainer.style.display = 'flex';
-                            appContainer.style.opacity = '1';
-                            
-                            // Mostrar dashboard
-                            setTimeout(function() {
-                                window.switchView('dashboard');
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    
-    <!-- Script para correções adicionais -->
-    <script>
-        /**
-         * Correções para bugs de interface VINTRA
-         */
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificação básica para garantir que o dashboard seja exibido
-            const checkDashboardVisibility = function() {
-                const dashboardView = document.getElementById('dashboard-view');
-                if (dashboardView && dashboardView.classList.contains('active') && 
-                    (dashboardView.style.display === 'none' || getComputedStyle(dashboardView).display === 'none')) {
-                    dashboardView.style.display = 'block';
-                    console.log("Corrigida visibilidade do dashboard");
-                }
-            };
-            
-            // Executar após carregar e depois de um breve delay para garantir
-            checkDashboardVisibility();
-            setTimeout(checkDashboardVisibility, 500);
-            
-            // Ajuste de altura da sidebar
-            const updateSidebarHeight = function() {
-                const appMain = document.querySelector('.app-main');
-                const appHeader = document.querySelector('.app-header');
-                if (appMain && appHeader) {
-                    const headerHeight = appHeader.offsetHeight;
-                    appMain.style.height = `calc(100vh - ${headerHeight}px)`;
-                    console.log("Altura da área principal ajustada");
-                }
-            };
-            
-            updateSidebarHeight();
-            window.addEventListener('resize', updateSidebarHeight);
-        });
-    </script>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Verificador VINTRA iniciando...');
-    
-    // Verificar elementos críticos
-    const elements = {
-        dashboard: document.getElementById('dashboard-view'),
-        splashScreen: document.getElementById('splashScreen'),
-        loginScreen: document.getElementById('loginScreen'),
-        appContainer: document.getElementById('appContainer')
-    };
-    
-    for (const [name, element] of Object.entries(elements)) {
-        console.log(`Elemento ${name}: ${element ? 'Encontrado ✓' : 'FALTANDO ✗'}`);
-    }
-    
-    // Corrigir página inicial após login
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            console.log('Login submetido, preparando para exibir dashboard...');
-            setTimeout(() => {
-                const dashboardView = document.getElementById('dashboard-view');
-                if (dashboardView) {
-                    console.log('Forçando exibição do dashboard...');
-                    dashboardView.style.display = 'block';
-                    dashboardView.classList.add('active');
-                }
-            }, 1000);
-        });
-    }
-});
-        <script>
-// Função auxiliar para verificar se funções existem e criá-las se necessário
-function ensureFunctionExists(funcName, implementation) {
-    if (typeof window[funcName] !== 'function') {
-        console.log(`Criando função auxiliar: ${funcName}`);
-        window[funcName] = implementation || function() {
-            console.log(`Função ${funcName} chamada (implementação vazia)`);
+    // VINTRA Core Initialization
+    (function() {
+        const VINTRA = {
+            initialized: false,
+            debug: true
         };
-    }
-}
 
-// Verificar as funções necessárias
-document.addEventListener('DOMContentLoaded', function() {
-    // Lista de funções essenciais
-    const requiredFunctions = [
-        'setupLogin', 'setupNavigation', 'setupSidebar', 'setupMobileMenu',
-        'setupPatientTabs', 'setupDimensionalVisualizations', 'setupDocumentEditing',
-        'setupNewDocumentTabs', 'setupRecorder', 'setupUpload', 'setupTranscriptionInput',
-        'setupProcessing', 'setupResultsView', 'setupDocumentLibrary', 'setupGenericModal',
-        'showDimensionalModal', 'hideDimensionalModal', 'openMobileMenu', 'closeMobileMenu',
-        'goBack', 'activatePatientTab', 'closeDocumentEditor', 'saveDocumentEdit'
-    ];
+        // Core initialization
+        function initializeVINTRA() {
+            if (VINTRA.initialized) return;
 
-    requiredFunctions.forEach(function(funcName) {
-        ensureFunctionExists(funcName);
-    });
-
-    // Se setupEventListeners existir, tente executá-lo
-    if (typeof setupEventListeners === 'function') {
-        try {
-            setupEventListeners();
-            console.log("Setup de eventos realizado com sucesso!");
-        } catch (e) {
-            console.error("Erro ao configurar eventos:", e);
-        }
-    }
-
-    // Forçar exibição do dashboard após login
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            if (document.getElementById('password').value === '123') {
-                setTimeout(function() {
-                    const dashboardView = document.getElementById('dashboard-view');
-                    const appContainer = document.getElementById('appContainer');
-                    const loginScreen = document.getElementById('loginScreen');
-                    
-                    if (dashboardView && appContainer && loginScreen) {
-                        loginScreen.style.display = 'none';
-                        appContainer.style.display = 'flex';
-                        dashboardView.style.display = 'block';
-                        dashboardView.classList.add('active');
-                    }
-                }, 1000);
+            try {
+                setupEventListeners();
+                initializeUIState();
+                VINTRA.initialized = true;
+                console.log('VINTRA initialized successfully');
+            } catch (error) {
+                console.error('VINTRA initialization failed:', error);
             }
-        });
-    }
-});
-</script>
+        }
+
+        // Event listener setup
+        function setupEventListeners() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', handleLogin);
+            }
+
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+        }
+
+        // Login handler
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('password');
+            if (password && password.value === '123') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'block';
+                switchView('dashboard');
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+            }
+        }
+
+        // UI state initialization
+        function initializeUIState() {
+            const views = document.querySelectorAll('.workspace');
+            views.forEach(view => view.style.display = 'none');
+            const loginScreen = document.getElementById('loginScreen');
+            if (loginScreen) loginScreen.style.display = 'flex';
+        }
+
+        // View switching
+        window.switchView = function(viewId) {
+            if (!viewId) return;
+
+            try {
+                const views = document.querySelectorAll('.workspace');
+                views.forEach(view => {
+                    view.style.display = 'none';
+                    view.classList.remove('active');
+                });
+
+                const targetView = document.getElementById(`${viewId}-view`);
+                if (targetView) {
+                    targetView.style.display = viewId === 'library' ? 'flex' : 'block';
+                    targetView.classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error switching view:', error);
+            }
+        };
+
+        // Initialize on DOM content loaded
+        document.addEventListener('DOMContentLoaded', initializeVINTRA);
+    })();
 </script>
 </body>
 </html>
