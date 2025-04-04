@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VINTRA | Login</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card fade-in-up">
+      <div class="login-logo">
+        <svg width="60" height="60" viewBox="0 0 450 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- SVG do logo VINTRA -->
+          <path d="M225 50L50 350H150L225 200L300 350H400L225 50Z" fill="url(#gradient)" stroke="#0A1D2E" stroke-width="2"/>
+          <defs>
+            <linearGradient id="gradient" x1="225" y1="50" x2="225" y2="350" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#7ED6E8"/>
+              <stop offset="1" stop-color="#40B4C6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1 class="text-primary font-semibold">VINTRA</h1>
+      </div>
+      
+      <div class="login-title">Acesso ao Sistema</div>
+      <div class="login-subtitle">Entre com suas credenciais para continuar</div>
+      
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="Seu email">
+        </div>
+        
+        <div class="form-group">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" id="password" class="form-input" placeholder="Sua senha">
+        </div>
+        
+        <a href="#forgot-password" class="forgot-password">Esqueceu a senha?</a>
+        
+        <button type="submit" class="btn btn-primary w-full">Entrar</button>
+      </form>
+      
+      <div class="login-footer">
+        Não tem uma conta? <a href="#signup">Solicitar acesso</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="/js/login.js"></script>
+</body>
+</html>
