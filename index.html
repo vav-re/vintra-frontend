@@ -695,5 +695,38 @@
             window.addEventListener('resize', updateSidebarHeight);
         });
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Verificador VINTRA iniciando...');
+    
+    // Verificar elementos críticos
+    const elements = {
+        dashboard: document.getElementById('dashboard-view'),
+        splashScreen: document.getElementById('splashScreen'),
+        loginScreen: document.getElementById('loginScreen'),
+        appContainer: document.getElementById('appContainer')
+    };
+    
+    for (const [name, element] of Object.entries(elements)) {
+        console.log(`Elemento ${name}: ${element ? 'Encontrado ✓' : 'FALTANDO ✗'}`);
+    }
+    
+    // Corrigir página inicial após login
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            console.log('Login submetido, preparando para exibir dashboard...');
+            setTimeout(() => {
+                const dashboardView = document.getElementById('dashboard-view');
+                if (dashboardView) {
+                    console.log('Forçando exibição do dashboard...');
+                    dashboardView.style.display = 'block';
+                    dashboardView.classList.add('active');
+                }
+            }, 1000);
+        });
+    }
+});
+</script>
 </body>
 </html>
