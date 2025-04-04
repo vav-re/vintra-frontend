@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VINTRA | Visualização INtegrativa TRAjetorial</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Chart.js para visualizações dimensionais -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!-- Loading/Splash Screen -->
+  <div id="splashScreen" class="splash-screen">
+    <div class="splash-logo">
+      <svg class="vintra-logo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+        <!-- Logo VINTRA - Versão animada durante loading -->
+        <path class="logo-path" d="M200 50 L50 350 L350 350 Z" fill="url(#logoGradient)" stroke="#40B4C6" stroke-width="0"></path>
+        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0A1D2E" />
+          <stop offset="100%" stop-color="#7ED6E8" />
+        </linearGradient>
+      </svg>
+      <h1 class="splash-title">VINTRA</h1>
+    </div>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-container">
+      <div class="login-logo">
+        <svg class="vintra-logo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+          <path d="M200 50 L50 350 L350 350 Z" fill="url(#logoGradient)" stroke="#40B4C6" stroke-width="1"></path>
+        </svg>
+        <h1 class="logo-title">VINTRA</h1>
+      </div>
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="Seu email" required>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" id="password" class="form-input" placeholder="Sua senha" required>
+          <div class="form-help">
+            <a href="#forgot-password" class="form-link">Esqueceu sua senha?</a>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+        <div class="login-footer">
+          <p>Não tem uma conta? <a href="#signup" class="form-link">Cadastre-se</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main App Container -->
+  <div id="appContainer" class="app-container">
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <button id="sidebarToggle" class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="app-logo">
+          <svg class="vintra-logo-small" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+            <path d="M200 50 L50 350 L350 350 Z" fill="url(#logoGradient)" stroke="#40B4C6" stroke-width="0"></path>
+          </svg>
+          <h1 class="app-title">VINTRA</h1>
+        </div>
+      </div>
+      <nav class="app-nav">
+        <a href="#dashboard" class="nav-item active" data-target="dashboard">Dashboard</a>
+        <a href="#pacientes" class="nav-item" data-target="patients">Pacientes</a>
+        <a href="#biblioteca" class="nav-item" data-target="library">Biblioteca</a>
+      </nav>
+      <div class="header-right">
+        <div class="user-menu">
+          <div class="user-avatar">D</div>
+          <div class="user-dropdown">
+            <a href="#perfil" class="user-dropdown-item">
+              <i class="fas fa-user"></i>
+              Meu Perfil
+            </a>
+            <a href="#preferencias" class="user-dropdown-item">
+              <i class="fas fa-cog"></i>
+              Preferências
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <a href="#sair" class="user-dropdown-item" id="logoutBtn">
+              <i class="fas fa-sign-out-alt"></i>
+              Sair
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- App Main Content -->
+    <main class="app-main">
+      <!-- Sidebar -->
+      <div class="app-sidebar">
+        <div class="sidebar-menu">
+          <a href="#dashboard" class="sidebar-link active" data-target="dashboard">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="#pacientes" class="sidebar-link" data-target="patients">
+            <i class="fas fa-user-friends"></i>
+            <span>Pacientes</span>
+          </a>
+          <a href="#novo" class="sidebar-link" data-target="new">
+            <i class="fas fa-plus"></i>
+            <span>Nova Sessão</span>
+          </a>
+          <a href="#biblioteca" class="sidebar-link" data-target="library">
+            <i class="fas fa-folder"></i>
+            <span>Biblioteca</span>
+          </a>
+          <a href="#relatorios" class="sidebar-link" data-target="reports">
+            <i class="fas fa-chart-bar"></i>
+            <span>Relatórios</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Dashboard View -->
+        <div class="dashboard-view view active" id="dashboard-view">
+          <div class="dashboard-header">
+            <h1 class="dashboard-title">Dashboard</h1>
+            <p class="dashboard-subtitle">Bem-vindo ao VINTRA! Veja seus pacientes e sessões recentes.</p>
+          </div>
+
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value">24</h3>
+                <p class="stat-label">Pacientes Ativos</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value">12</h3>
+                <p class="stat-label">Sessões esta Semana</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value">3</h3>
+                <p class="stat-label">Horas Hoje</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <h2 class="section-title">Pacientes Recentes</h2>
+            <a href="#todos-pacientes" class="section-link" data-target="patients">Ver Todos</a>
+          </div>
+
+          <div class="recent-patients">
+            <!-- Pacientes Recentes serão inseridos via JavaScript -->
+          </div>
+
+          <div class="section-header">
+            <h2 class="section-title">Próximas Sessões</h2>
+            <a href="#agenda" class="section-link">Ver Agenda</a>
+          </div>
+
+          <div class="upcoming-sessions">
+            <!-- Próximas Sessões serão inseridas via JavaScript -->
+          </div>
+        </div>
+
+        <!-- Patients View -->
+        <div class="patients-view view" id="patients-view">
+          <div class="view-header">
+            <h1 class="view-title">Pacientes</h1>
+            <div class="view-actions">
+              <div class="search-container">
+                <input type="text" class="search-input" placeholder="Buscar pacientes...">
+                <i class="fas fa-search search-icon"></i>
+              </div>
+              <button class="btn btn-primary" id="addPatientBtn">
+                <i class="fas fa-plus"></i>
+                Novo Paciente
+              </button>
+            </div>
+          </div>
+
+          <div class="patients-list">
+            <!-- Lista de Pacientes será inserida via JavaScript -->
+          </div>
+        </div>
+
+        <!-- Patient Detail View -->
+        <div class="patient-detail-view view" id="patient-detail-view">
+          <div class="view-header">
+            <button class="btn btn-back" data-target="patients">
+              <i class="fas fa-arrow-left"></i>
+              Voltar
+            </button>
+            <h1 class="view-title">Detalhes do Paciente</h1>
+            <div class="view-actions">
+              <button class="btn btn-secondary" id="editPatientBtn">
+                <i class="fas fa-edit"></i>
+                Editar
+              </button>
+              <button class="btn btn-primary" id="newSessionBtn">
+                <i class="fas fa-plus"></i>
+                Nova Sessão
+              </button>
+            </div>
+          </div>
+
+          <div class="patient-profile">
+            <div class="patient-header">
+              <div class="patient-avatar">
+                <img src="https://via.placeholder.com/100" alt="Avatar do Paciente">
+              </div>
+              <div class="patient-info">
+                <h2 class="patient-name">João Silva</h2>
+                <p class="patient-meta">48 anos • joao.silva@email.com</p>
+                <p class="patient-meta">Tel: 41 99876-5432</p>
+              </div>
+            </div>
+
+            <div class="patient-tabs">
+              <button class="tab-button active" data-tab="sessions">Sessões</button>
+              <button class="tab-button" data-tab="evolution">Evolução</button>
+              <button class="tab-button" data-tab="documents">Documentos</button>
+              <button class="tab-button" data-tab="notes">Notas</button>
+            </div>
+
+            <div class="tab-content active" id="sessions-tab">
+              <div class="session-cards">
+                <!-- Cartões de sessão serão inseridos via JavaScript -->
+                <div class="session-card">
+                  <div class="session-date">
+                    <h3>6 de maio de 2024</h3>
+                    <p>10:00</p>
+                  </div>
+                  <div class="session-content">
+                    <div class="session-tag">Ansiedade generalizada</div>
+                    <div class="dimensional-chart-small">
+                      <!-- Canvas para gráfico dimensional -->
+                      <canvas id="dimensionalChart1"></canvas>
+                    </div>
+                  </div>
+                  <div class="session-actions">
+                    <button class="btn btn-link">Ver Sessão</button>
+                  </div>
+                </div>
+
+                <div class="session-card">
+                  <div class="session-date">
+                    <h3>28 de abril de 2024</h3>
+                    <p>15:30</p>
+                  </div>
+                  <div class="session-content">
+                    <div class="session-tag">Insônia persistente</div>
+                    <div class="dimensional-chart-small">
+                      <!-- Canvas para gráfico dimensional -->
+                      <canvas id="dimensionalChart2"></canvas>
+                    </div>
+                  </div>
+                  <div class="session-actions">
+                    <button class="btn btn-link">Ver Sessão</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="evolution-tab">
+              <div class="evolution-view">
+                <div class="chart-container">
+                  <canvas id="evolutionChart"></canvas>
+                </div>
+                <div class="dimension-toggles">
+                  <button class="dimension-toggle active" data-dimension="emotional">Dimensão Emocional</button>
+                  <button class="dimension-toggle" data-dimension="cognitive">Dimensão Cognitiva</button>
+                  <button class="dimension-toggle" data-dimension="autonomy">Dimensão Autonomia</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="documents-tab">
+              <div class="documents-list">
+                <!-- Documentos serão inseridos via JavaScript -->
+              </div>
+            </div>
+
+            <div class="tab-content" id="notes-tab">
+              <div class="notes-container">
+                <textarea class="notes-editor" placeholder="Adicione suas notas sobre o paciente aqui..."></textarea>
+                <button class="btn btn-primary">Salvar Notas</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- New Session View -->
+        <div class="new-session-view view" id="new-view">
+          <div class="view-header">
+            <button class="btn btn-back" data-target="patient-detail">
+              <i class="fas fa-arrow-left"></i>
+              Voltar ao Paciente
+            </button>
+            <h1 class="view-title">Nova Sessão</h1>
+          </div>
+
+          <div class="session-tabs">
+            <button class="tab-button active" data-tab="record">Gravar</button>
+            <button class="tab-button" data-tab="upload">Upload</button>
+            <button class="tab-button" data-tab="transcribe">Transcrever</button>
+          </div>
+
+          <div class="tab-content active" id="record-tab">
+            <div class="recording-module">
+              <div class="recording-header">
+                <h2 class="recording-title">Gravação de Áudio</h2>
+                <p class="recording-subtitle">Grave uma sessão para transcrição automática</p>
+              </div>
+              <div class="recording-controls">
+                <button class="recording-btn recording-btn-start" id="startRecordingBtn">
+                  <i class="fas fa-microphone"></i>
+                </button>
+                <button class="recording-btn recording-btn-stop hidden" id="stopRecordingBtn">
+                  <i class="fas fa-stop"></i>
+                </button>
+                <button class="recording-btn recording-btn-pause hidden" id="pauseRecordingBtn">
+                  <i class="fas fa-pause"></i>
+                </button>
+              </div>
+              <div class="recording-timer">
+                <div class="recording-time" id="recordingTime">00:00:00</div>
+                <div class="recording-status" id="recordingStatus">Pronto para gravar</div>
+              </div>
+              <div class="recording-visualizer">
+                <div class="visualizer-bars" id="visualizerBars">
+                  <!-- Barras serão adicionadas dinamicamente -->
+                </div>
+              </div>
+              <div class="diarization-option">
+                <input type="checkbox" id="diarizationCheckbox" class="diarization-checkbox" checked>
+                <label for="diarizationCheckbox" class="diarization-label">
+                  Habilitar Diarização (Identificação de Falantes)
+                </label>
+              </div>
+
+              <div class="recording-preview" id="recordingPreview">
+                <div class="preview-icon">
+                  <i class="fas fa-file-audio"></i>
+                </div>
+                <div class="preview-info">
+                  <div class="preview-name" id="recordingFileName">Gravação_20240506.mp3</div>
+                  <div class="preview-meta" id="recordingFileMeta">15.3 MB • 28:45</div>
+                </div>
+                <button class="preview-remove" id="recordingRemoveBtn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+
+              <div class="recording-actions">
+                <button class="btn btn-primary" id="processRecordingBtn">
+                  <i class="fas fa-play"></i>
+                  Iniciar Transcrição
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="upload-tab">
+            <div class="upload-module">
+              <div class="upload-header">
+                <h2 class="upload-title">Upload de Arquivo</h2>
+                <p class="upload-subtitle">Carregue um arquivo de áudio ou documento de texto</p>
+              </div>
+              <div class="upload-area" id="uploadArea">
+                <input type="file" id="uploadInput" class="upload-input" accept="audio/*,.txt,.md,.doc,.docx">
+                <div class="upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-message">Arraste arquivos aqui ou clique para selecionar</div>
+                <div class="upload-hint">Suporta arquivos de áudio (MP3, WAV, M4A) e documentos (TXT, DOC, DOCX)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="transcribe-tab">
+            <div class="transcribe-module">
+              <div class="transcribe-header">
+                <h2 class="transcribe-title">Transcrição Manual</h2>
+                <p class="transcribe-subtitle">Digite ou cole a transcrição da consulta</p>
+              </div>
+              <textarea class="transcribe-editor" id="transcriptionText" placeholder="Digite ou cole o texto da transcrição aqui..."></textarea>
+              <div class="transcribe-actions">
+                <button class="btn btn-primary" id="processTranscriptionBtn">
+                  <i class="fas fa-cogs"></i>
+                  Processar Transcrição
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Session Detail View -->
+        <div class="session-detail-view view" id="session-detail-view">
+          <div class="view-header">
+            <button class="btn btn-back" data-target="patient-detail">
+              <i class="fas fa-arrow-left"></i>
+              Voltar ao Paciente
+            </button>
+            <h1 class="view-title">Detalhes da Sessão</h1>
+            <div class="view-actions">
+              <button class="btn btn-secondary" id="exportSessionBtn">
+                <i class="fas fa-download"></i>
+                Exportar
+              </button>
+            </div>
+          </div>
+
+          <div class="session-details">
+            <div class="session-header">
+              <div class="session-date-large">
+                <h2>6 de maio de 2024</h2>
+                <p>10:00 - 11:00</p>
+              </div>
+              <div class="session-tag-large">Ansiedade generalizada</div>
+            </div>
+
+            <div class="session-tabs">
+              <button class="tab-button active" data-tab="dimensional">Análise Dimensional</button>
+              <button class="tab-button" data-tab="transcription">Transcrição</button>
+              <button class="tab-button" data-tab="vintra">VINTRA</button>
+              <button class="tab-button" data-tab="soap">SOAP</button>
+            </div>
+
+            <div class="tab-content active" id="dimensional-tab">
+              <div class="dimensional-analysis">
+                <div class="dimensional-chart-container">
+                  <canvas id="sessionDimensionalChart"></canvas>
+                </div>
+                <div class="dimensional-legend">
+                  <div class="legend-group emotional">
+                    <div class="legend-color"></div>
+                    <div class="legend-label">Dimensões Emocionais</div>
+                  </div>
+                  <div class="legend-group cognitive">
+                    <div class="legend-color"></div>
+                    <div class="legend-label">Dimensões Cognitivas</div>
+                  </div>
+                  <div class="legend-group autonomy">
+                    <div class="legend-color"></div>
+                    <div class="legend-label">Dimensões de Autonomia</div>
+                  </div>
+                </div>
+
+                <div class="dimension-details">
+                  <div class="dimension-group">
+                    <h3 class="dimension-group-title">Dimensões Emocionais</h3>
+                    <div class="dimension-items">
+                      <div class="dimension-item">
+                        <div class="dimension-label">Valência Emocional</div>
+                        <div class="dimension-value">-2.5</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 25%; background-color: var(--emotional-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Excitação Emocional</div>
+                        <div class="dimension-value">7.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 70%; background-color: var(--emotional-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Dominância Emocional</div>
+                        <div class="dimension-value">3.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 30%; background-color: var(--emotional-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Intensidade Afetiva</div>
+                        <div class="dimension-value">8.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 80%; background-color: var(--emotional-color);"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dimension-group">
+                    <h3 class="dimension-group-title">Dimensões Cognitivas</h3>
+                    <div class="dimension-items">
+                      <div class="dimension-item">
+                        <div class="dimension-label">Complexidade Sintática</div>
+                        <div class="dimension-value">6.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 60%; background-color: var(--cognitive-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Coerência Narrativa</div>
+                        <div class="dimension-value">5.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 50%; background-color: var(--cognitive-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Flexibilidade Cognitiva</div>
+                        <div class="dimension-value">4.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 40%; background-color: var(--cognitive-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Dissonância Cognitiva</div>
+                        <div class="dimension-value">7.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 70%; background-color: var(--cognitive-color);"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dimension-group">
+                    <h3 class="dimension-group-title">Dimensões de Autonomia</h3>
+                    <div class="dimension-items">
+                      <div class="dimension-item">
+                        <div class="dimension-label">Perspectiva Temporal - Passado</div>
+                        <div class="dimension-value">7.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 70%; background-color: var(--autonomy-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Perspectiva Temporal - Presente</div>
+                        <div class="dimension-value">3.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 30%; background-color: var(--autonomy-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Perspectiva Temporal - Futuro</div>
+                        <div class="dimension-value">2.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 20%; background-color: var(--autonomy-color);"></div>
+                        </div>
+                      </div>
+                      <div class="dimension-item">
+                        <div class="dimension-label">Autocontrole</div>
+                        <div class="dimension-value">4.0</div>
+                        <div class="dimension-bar">
+                          <div class="dimension-fill" style="width: 40%; background-color: var(--autonomy-color);"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="transcription-tab">
+              <div class="transcription-view">
+                <div class="transcription-content" id="transcriptionContent">
+                  <!-- Conteúdo da transcrição será inserido via JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="vintra-tab">
+              <div class="vintra-format-view">
+                <div class="vintra-content" id="vintraContent">
+                  <!-- Conteúdo VINTRA será inserido via JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="soap-tab">
+              <div class="soap-format-view">
+                <div class="soap-content" id="soapContent">
+                  <!-- Conteúdo SOAP será inserido via JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal" id="patientModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Novo Paciente</h3>
+        <button class="modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="patientForm">
+          <div class="form-group">
+            <label for="patientName" class="form-label">Nome Completo</label>
+            <input type="text" id="patientName" class="form-input" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-group-half">
+              <label for="patientBirthDate" class="form-label">Data de Nascimento</label>
+              <input type="date" id="patientBirthDate" class="form-input">
+            </div>
+            <div class="form-group form-group-half">
+              <label for="patientGender" class="form-label">Gênero</label>
+              <select id="patientGender" class="form-select">
+                <option value="">Selecionar</option>
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+                <option value="other">Outro</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="patientEmail" class="form-label">Email</label>
+            <input type="email" id="patientEmail" class="form-input">
+          </div>
+          <div class="form-group">
+            <label for="patientPhone" class="form-label">Telefone</label>
+            <input type="tel" id="patientPhone" class="form-input">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelPatientBtn">Cancelar</button>
+        <button class="btn btn-primary" id="savePatientBtn">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toastContainer">
+    <!-- Toasts will be added dynamically -->
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
