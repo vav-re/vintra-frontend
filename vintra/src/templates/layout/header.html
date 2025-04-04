@@ -1,0 +1,40 @@
+<!-- Header -->
+<header class="app-header">
+  <button class="header-icon-btn menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <h1 class="header-title">Dashboard</h1>
+  
+  <div class="header-actions">
+    <button class="header-icon-btn">
+      <i class="fas fa-bell"></i>
+    </button>
+    
+    <div class="user-menu">
+      <div class="user-btn" id="userMenuBtn">
+        <div class="user-avatar">DS</div>
+        <div class="user-info">
+          <div class="user-name">Dr. Santos</div>
+          <div class="user-role">Psiquiatra</div>
+        </div>
+      </div>
+      
+      <div class="user-menu-dropdown" id="userMenuDropdown">
+        <a href="/profile" class="user-menu-item">
+          <i class="fas fa-user"></i>
+          Meu Perfil
+        </a>
+        <a href="/settings" class="user-menu-item">
+          <i class="fas fa-cog"></i>
+          Configurações
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="/logout" class="user-menu-item danger">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
