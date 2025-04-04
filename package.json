@@ -1,0 +1,20 @@
+{
+  "name": "vintra-frontend",
+  "version": "1.0.0",
+  "description": "VINTRA - Visualização INtegrativa TRAjetorial",
+  "main": "script.js",
+  "scripts": {
+    "build": "node build.js",
+    "start": "serve dist"
+  },
+  "dependencies": {
+    "chart.js": "^3.9.1",
+    "gsap": "^3.12.3"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.2",
+    "html-minifier": "^4.0.0",
+    "serve": "^14.2.1",
+    "uglify-js": "^3.17.4"
+  }
+}

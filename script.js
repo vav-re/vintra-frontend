@@ -1,133 +1,135 @@
-// Estado global
-const state = {
-    currentView: null,
-    currentPatientId: null,
-    currentDocumentId: null,
-    documents: [],
-    recentPatients: []
+// Namespace VINTRA para evitar conflitos globais
+window.VINTRA = {
+    state: {
+        currentView: null,
+        currentPatientId: null,
+        currentDocumentId: null,
+        documents: [],
+        recentPatients: [],
+        isInitialized: false
+    },
+    init: function() {
+        if (this.state.isInitialized) return;
+        
+        // Garantir que o DOM está pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initialize());
+        } else {
+            this.initialize();
+        }
+    },
+    initialize: function() {
+        console.log("VINTRA Inicializando...");
+        this.loadDemoData();
+        this.setupEventListeners();
+        this.state.isInitialized = true;
+        
+        // Garantir estado inicial correto
+        const loginScreen = document.getElementById('loginScreen');
+        const appContainer = document.getElementById('appContainer');
+        
+        if (loginScreen && appContainer) {
+            loginScreen.classList.add('visible');
+            appContainer.style.display = 'none';
+        }
+    },
+    loadDemoData: function() {
+        // Pacientes recentes
+        this.state.recentPatients = [
+            { id: 'patient-1', name: 'Maria Silva', age: 38, gender: 'Feminino', lastVisit: '28/03/2025', status: 'Em tratamento' },
+            { id: 'patient-2', name: 'João Santos', age: 42, gender: 'Masculino', lastVisit: '25/03/2025', status: 'Primeira consulta' },
+            { id: 'patient-3', name: 'Ana Oliveira', age: 29, gender: 'Feminino', lastVisit: '20/03/2025', status: 'Em tratamento' },
+            { id: 'patient-4', name: 'Carlos Pereira', age: 55, gender: 'Masculino', lastVisit: '15/03/2025', status: 'Retorno' }
+        ];
+        
+        // Documentos de exemplo
+        this.state.documents = [
+            // Docs Paciente 1
+            { id: 'doc1', patientId: 'patient-1', title: 'Entrevista_Maria_2503.mp3', type: 'audio', date: '25/03/2025', time: '10:30', icon: 'fas fa-microphone', color: 'var(--accent-vivid)', size: '15.3 MB', duration: '28:45' },
+            { id: 'doc2', patientId: 'patient-1', title: 'Transcrição_Maria_2503.txt', type: 'transcription', date: '25/03/2025', time: '10:35', icon: 'fas fa-file-alt', color: 'var(--accent)', size: '5 KB' },
+            // Outros documentos...
+        ];
+        console.log("Dados de demonstração carregados.");
+    },
+    setupEventListeners: function() {
+        this.setupLogin();
+        this.setupNavigation();
+        
+        // Adicionar listeners para botões
+        document.querySelectorAll('[data-target]').forEach(element => {
+            element.addEventListener('click', function() {
+                const viewId = this.dataset.target;
+                window.switchView(viewId);
+            });
+        });
+    },
+    setupLogin: function() {
+        const loginForm = document.getElementById('loginForm');
+        const passwordInput = document.getElementById('password');
+        const passwordError = document.getElementById('passwordError');
+        const loginScreen = document.getElementById('loginScreen');
+        const appContainer = document.getElementById('appContainer');
+    
+        if (loginForm && passwordInput && passwordError && loginScreen && appContainer) {
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const password = passwordInput.value;
+                
+                if (password === "123") { // Senha de demonstração
+                    passwordError.style.display = 'none';
+                    showToast('success', 'Login bem-sucedido', 'Bem-vindo ao VINTRA!');
+                    
+                    // Transição visual
+                    loginScreen.style.opacity = '0';
+                    setTimeout(function() {
+                        loginScreen.style.display = 'none';
+                        appContainer.style.display = 'flex';
+                        appContainer.style.opacity = '1';
+                        
+                        // Mostrar dashboard
+                        VINTRA.state.currentView = null; // Força nova renderização
+                        window.switchView('dashboard');
+                        
+                        // Garantir que o dashboard apareça
+                        setTimeout(function() {
+                            const dashboardView = document.getElementById('dashboard-view');
+                            if (dashboardView) {
+                                dashboardView.style.display = 'block';
+                                dashboardView.classList.add('active');
+                                renderPatientSelectionOnDashboard();
+                            }
+                        }, 300);
+                    }, 600);
+                } else {
+                    passwordError.style.display = 'block';
+                    passwordInput.focus();
+                    passwordInput.select();
+                }
+            });
+        } else {
+            console.error("Elementos de login não encontrados");
+        }
+    },
+    setupNavigation: function() {
+        document.body.addEventListener('click', function(e) {
+            const link = e.target.closest('[data-target]');
+            
+            if (link?.dataset.target) {
+                e.preventDefault();
+                const targetView = link.dataset.target;
+                
+                if (targetView === 'sair') {
+                    logout();
+                } else if (VINTRA.state.currentView !== targetView) {
+                    window.switchView(targetView);
+                }
+            }
+        });
+    }
 };
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("VINTRA Inicializando...");
-    loadDemoData();
-    setupEventListeners();
-    
-    // Estado inicial: Login visível
-    const loginScreen = document.getElementById('loginScreen');
-    const appContainer = document.getElementById('appContainer');
-    
-    if (loginScreen && appContainer) {
-        loginScreen.style.display = 'flex';
-        appContainer.style.display = 'none';
-    } else {
-        console.warn("Elementos básicos não encontrados");
-    }
-
-    // Renderiza a seleção de pacientes no dashboard
-    renderPatientSelectionOnDashboard();
-});
-
-// Carregamento de dados demo
-function loadDemoData() {
-    // Pacientes recentes
-    state.recentPatients = [
-        { id: 'patient-1', name: 'Maria Silva', age: 38, gender: 'Feminino', lastVisit: '28/03/2025', status: 'Em tratamento' },
-        { id: 'patient-2', name: 'João Santos', age: 42, gender: 'Masculino', lastVisit: '25/03/2025', status: 'Primeira consulta' },
-        { id: 'patient-3', name: 'Ana Oliveira', age: 29, gender: 'Feminino', lastVisit: '20/03/2025', status: 'Em tratamento' },
-        { id: 'patient-4', name: 'Carlos Pereira', age: 55, gender: 'Masculino', lastVisit: '15/03/2025', status: 'Retorno' }
-    ];
-    
-    // Documentos de exemplo
-    state.documents = [
-        // Docs Paciente 1
-        { id: 'doc1', patientId: 'patient-1', title: 'Entrevista_Maria_2503.mp3', type: 'audio', date: '25/03/2025', time: '10:30', icon: 'fas fa-microphone', color: 'var(--accent-vivid)', size: '15.3 MB', duration: '28:45' },
-        { id: 'doc2', patientId: 'patient-1', title: 'Transcrição_Maria_2503.txt', type: 'transcription', date: '25/03/2025', time: '10:35', icon: 'fas fa-file-alt', color: 'var(--accent)', size: '5 KB' },
-        // Outros documentos...
-    ];
-    console.log("Dados de demonstração carregados.");
-}
-
-// Setup de eventos
-function setupEventListeners() {
-    setupLogin();
-    setupNavigation();
-    
-    // Adicionar listeners para botões
-    document.querySelectorAll('[data-target]').forEach(element => {
-        element.addEventListener('click', function() {
-            const viewId = this.dataset.target;
-            window.switchView(viewId);
-        });
-    });
-}
-
-// Login
-function setupLogin() {
-    const loginForm = document.getElementById('loginForm');
-    const passwordInput = document.getElementById('password');
-    const passwordError = document.getElementById('passwordError');
-    const loginScreen = document.getElementById('loginScreen');
-    const appContainer = document.getElementById('appContainer');
-
-    if (loginForm && passwordInput && passwordError && loginScreen && appContainer) {
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const password = passwordInput.value;
-            
-            if (password === "123") { // Senha de demonstração
-                passwordError.style.display = 'none';
-                showToast('success', 'Login bem-sucedido', 'Bem-vindo ao VINTRA!');
-                
-                // Transição visual
-                loginScreen.style.opacity = '0';
-                setTimeout(function() {
-                    loginScreen.style.display = 'none';
-                    appContainer.style.display = 'flex';
-                    appContainer.style.opacity = '1';
-                    
-                    // Mostrar dashboard
-                    state.currentView = null; // Força nova renderização
-                    window.switchView('dashboard');
-                    
-                    // Garantir que o dashboard apareça
-                    setTimeout(function() {
-                        const dashboardView = document.getElementById('dashboard-view');
-                        if (dashboardView) {
-                            dashboardView.style.display = 'block';
-                            dashboardView.classList.add('active');
-                            renderPatientSelectionOnDashboard();
-                        }
-                    }, 300);
-                }, 600);
-            } else {
-                passwordError.style.display = 'block';
-                passwordInput.focus();
-                passwordInput.select();
-            }
-        });
-    } else {
-        console.error("Elementos de login não encontrados");
-    }
-}
-
-// Navegação
-function setupNavigation() {
-    document.body.addEventListener('click', function(e) {
-        const link = e.target.closest('[data-target]');
-        
-        if (link?.dataset.target) {
-            e.preventDefault();
-            const targetView = link.dataset.target;
-            
-            if (targetView === 'sair') {
-                logout();
-            } else if (state.currentView !== targetView) {
-                window.switchView(targetView);
-            }
-        }
-    });
-}
+// Auto-inicialização
+VINTRA.init();
 
 // Logout
 function logout() {
@@ -143,9 +145,9 @@ function logout() {
             loginScreen.style.opacity = '1';
             if (passwordInput) passwordInput.value = '';
             
-            state.currentView = null;
-            state.currentPatientId = null;
-            state.currentDocumentId = null;
+            VINTRA.state.currentView = null;
+            VINTRA.state.currentPatientId = null;
+            VINTRA.state.currentDocumentId = null;
         }, 600);
     }
 }
@@ -178,7 +180,7 @@ window.switchView = function(viewId) {
     }
     
     // Atualizar estado
-    state.currentView = viewId;
+    VINTRA.state.currentView = viewId;
     updateNavigation(viewId);
 };
 
@@ -236,7 +238,7 @@ function renderPatientList(searchTerm = '') {
     
     patientListDiv.innerHTML = '';
     
-    const filteredPatients = state.recentPatients.filter(p => 
+    const filteredPatients = VINTRA.state.recentPatients.filter(p => 
         !searchTerm || 
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.id.includes(searchTerm)
@@ -279,14 +281,14 @@ function renderPatientList(searchTerm = '') {
 
 // Abre o painel do paciente
 function openPatientPanel(patientId) {
-    const patient = state.recentPatients.find(p => p.id === patientId);
+    const patient = VINTRA.state.recentPatients.find(p => p.id === patientId);
     if (!patient) {
         showToast('error', 'Erro', 'Paciente não encontrado.');
         return;
     }
     
     console.log(`Abrindo painel para paciente: ${patient.name} (ID: ${patientId})`);
-    state.currentPatientId = patientId;
+    VINTRA.state.currentPatientId = patientId;
     
     // Atualiza informações do paciente
     const nameElem = document.querySelector('#patient-view .patient-name');
