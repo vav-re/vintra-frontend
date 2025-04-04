@@ -656,7 +656,104 @@
         <div class="toast-container" id="toastContainer"></div>
 
     </div>
-
+<script>
+// ADICIONE ESTE SCRIPT ANTES DO SEU script.js
+(function() {
+    console.log("🛠️ VINTRA Inicializador - Criando funções auxiliares...");
+    
+    // Lista de todas as possíveis funções que podem ser chamadas
+    const possibleFunctions = [
+        // Funções de setup
+        'setupLogin', 'setupNavigation', 'setupSidebar', 'setupMobileMenu',
+        'setupPatientTabs', 'setupDimensionalVisualizations', 'setupDocumentEditing',
+        'setupNewDocumentTabs', 'setupRecorder', 'setupUpload', 'setupTranscriptionInput',
+        'setupProcessing', 'setupResultsView', 'setupDocumentLibrary', 'setupGenericModal',
+        
+        // Funções auxiliares e handlers
+        'showDimensionalModal', 'hideDimensionalModal', 'openMobileMenu', 'closeMobileMenu',
+        'goBack', 'activatePatientTab', 'closeDocumentEditor', 'saveDocumentEdit',
+        'activateNewDocumentTab', 'resetRecording', 'startRecording', 'stopRecording',
+        'resetUpload', 'simulateProcessing', 'simulateGeneration', 'viewTranscription',
+        'processTranscription', 'addProcessedDocument', 'addGeneratedDocument',
+        'updateStepProgress', 'updateProgressBar', 'renderPatientSelectionOnDashboard',
+        'renderDocumentLibrary', 'showToast', 'removeToast', 'viewDocumentInWorkspace',
+        'showEmptyDocumentView', 'updateUIRecordingState', 'startTimer', 'stopTimer',
+        'startVisualizer', 'stopVisualizer', 'resetRecordingVisuals', 'handleFiles',
+        'preventDefaults', 'activateResultsTab', 'setActiveDocumentItem', 'updateNavigation',
+        'renderRecentDocuments', 'renderPatientDocuments', 'updateDimensionalChart',
+        'updateModalDimensionalChart', 'setProcessingState', 'downloadDocument',
+        'editDocument', 'viewDocument', 'startProcessingDocument', 'parseDate',
+        'escapeHtml', 'getDocumentContent', 'debounce'
+    ];
+    
+    // Criar implementações vazias para todas as funções
+    possibleFunctions.forEach(function(funcName) {
+        if (typeof window[funcName] !== 'function') {
+            window[funcName] = function() {
+                console.log(`📢 Função ${funcName} chamada com argumentos:`, Array.from(arguments));
+                return null; // Retornar null como valor padrão
+            };
+            console.log(`✅ Criada função auxiliar: ${funcName}`);
+        }
+    });
+    
+    // Implementar window.switchView - função crítica para a navegação
+    window.switchView = function(viewId) {
+        console.log(`🔄 Alterando para view: ${viewId}`);
+        
+        // Esconder todas as views
+        document.querySelectorAll('.workspace').forEach(function(view) {
+            view.style.display = 'none';
+            view.classList.remove('active');
+        });
+        
+        // Mostrar a view solicitada
+        const viewToShow = document.getElementById(viewId + '-view');
+        if (viewToShow) {
+            viewToShow.style.display = viewId === 'library' ? 'flex' : 'block';
+            viewToShow.classList.add('active');
+            
+            // Se for dashboard, forçar a renderização
+            if (viewId === 'dashboard') {
+                const dashboardView = document.getElementById('dashboard-view');
+                if (dashboardView) {
+                    setTimeout(function() {
+                        console.log("🏠 Forçando exibição do dashboard...");
+                        dashboardView.style.display = 'block';
+                        dashboardView.classList.add('active');
+                    }, 100);
+                }
+            }
+        }
+    };
+    
+    // Implementação especial para login
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("🚀 VINTRA Inicializador pronto, registrando handler de login...");
+        
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            // Adicionar um handler direto de login
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const password = document.getElementById('password');
+                if (password && password.value === '123') {
+                    console.log("🔓 Login bem-sucedido!");
+                    
+                    // Transição visual
+                    const loginScreen = document.getElementById('loginScreen');
+                    const appContainer = document.getElementById('appContainer');
+                    
+                    if (loginScreen && appContainer) {
+                        loginScreen.style.opacity = '0';
+                        setTimeout(function() {
+                            loginScreen.style.display = 'none';
+                            appContainer.style.display = 'flex';
+                            appContainer.style.opacity = '1';
+                            
+                            // Mostrar dashboard
+                            setTimeout(function() {
+                                window.switchView('dashboard');
     <!-- Scripts -->
     <script src="script.js"></script>
     
