@@ -51,21 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initCharts(); // Inicializa estruturas de gráficos (serão atualizados quando visíveis)
     initFluidAnimations(); // Configura efeito ripple
 
-    // Estado inicial: Mostrar Splash brevemente, depois Login
-    const splashScreen = document.getElementById('splashScreen');
-    const loginScreen = document.getElementById('loginScreen');
+@@@@@@@@@@@@@@@@@@@@@
 
-    if (splashScreen && loginScreen) {
-        gsap.set(splashScreen, { display: 'flex', opacity: 1 }); // Garante visibilidade inicial do splash
-
-        // Usando GSAP para a transição Splash -> Login
-        gsap.to(splashScreen, {
-            opacity: 0,
-            duration: 0.5, // Fade out rápido
-            delay: 0.7, // Tempo que o splash fica visível
-            ease: "power1.inOut",
-            onComplete: () => {
-                splashScreen.style.display = 'none';
+    
                 gsap.set(loginScreen, { display: 'flex', opacity: 0 }); // Prepara login
                 loginScreen.classList.add('visible'); // Adiciona classe para estado (se necessário)
                 gsap.to(loginScreen, {
