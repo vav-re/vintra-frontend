@@ -1,0 +1,91 @@
+<main class="app-content">
+  <div class="recording-container fade-in">
+    <div class="section-header">
+      <h1 class="section-title">Nova Gravação</h1>
+      <p class="section-subtitle">Paciente: João Silva</p>
+    </div>
+    
+    <div class="recording-module fade-in-up">
+      <div class="recording-header">
+        <h2 class="recording-title">Gravação de Áudio</h2>
+        <p class="recording-subtitle">Grave a sessão para processamento automático</p>
+      </div>
+      
+      <div class="recording-controls">
+        <button class="recording-btn recording-btn-start" id="startRecordingBtn">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <button class="recording-btn recording-btn-stop hidden" id="stopRecordingBtn">
+          <i class="fas fa-stop"></i>
+        </button>
+        <button class="recording-btn recording-btn-pause hidden" id="pauseRecordingBtn">
+          <i class="fas fa-pause"></i>
+        </button>
+      </div>
+      
+      <div class="recording-timer">
+        <div class="recording-time" id="recordingTime">00:00:00</div>
+        <div class="recording-status" id="recordingStatus">Pronto para gravar</div>
+      </div>
+      
+      <div class="recording-visualizer">
+        <div class="visualizer-bars" id="visualizerBars">
+          <!-- Barras do visualizador serão adicionadas via JavaScript -->
+        </div>
+      </div>
+      
+      <div class="diarization-option">
+        <input type="checkbox" id="diarizationCheckbox" class="diarization-checkbox" checked>
+        <label for="diarizationCheckbox" class="diarization-label">Habilitar Diarização (Identificação de Falantes)</label>
+      </div>
+      
+      <div class="transcription-settings">
+        <h3 class="settings-title">Configurações de Transcrição</h3>
+        
+        <div class="settings-form">
+          <div class="settings-group">
+            <label class="settings-label">Idioma Principal</label>
+            <select class="form-select">
+              <option value="pt-BR" selected>Português (Brasil)</option>
+              <option value="en-US">Inglês (EUA)</option>
+              <option value="es">Espanhol</option>
+            </select>
+          </div>
+          
+          <div class="settings-group">
+            <label class="settings-label">Qualidade da Transcrição</label>
+            <select class="form-select">
+              <option value="standard">Padrão</option>
+              <option value="high" selected>Alta</option>
+              <option value="max">Máxima</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="upload-module fade-in-up" style="animation-delay: 0.2s">
+      <div class="upload-header">
+        <h2 class="upload-title">Ou Faça Upload de um Arquivo</h2>
+        <p class="upload-subtitle">Formatos suportados: MP3, WAV, M4A</p>
+      </div>
+      
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="uploadInput" class="upload-input" accept="audio/mp3,audio/wav,audio/x-m4a">
+        <div class="upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <div class="upload-message">Arraste arquivos aqui ou clique para selecionar</div>
+        <div class="upload-hint">Máximo: 500MB</div>
+      </div>
+    </div>
+    
+    <div class="form-actions fade-in-up" style="animation-delay: 0.3s">
+      <button class="btn btn-secondary">Cancelar</button>
+      <button class="btn btn-primary" id="processRecordingBtn">
+        <i class="fas fa-play btn-icon"></i>
+        Iniciar Processamento
+      </button>
+    </div>
+  </div>
+</main>
