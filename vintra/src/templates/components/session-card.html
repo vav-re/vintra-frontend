@@ -1,0 +1,253 @@
+<main class="app-content">
+  <div class="breadcrumb fade-in">
+    <a href="/patients" class="breadcrumb-item">
+      <i class="fas fa-users"></i>
+      <span>Pacientes</span>
+    </a>
+    <i class="fas fa-chevron-right breadcrumb-separator"></i>
+    <a href="/patients/123" class="breadcrumb-item">João Silva</a>
+    <i class="fas fa-chevron-right breadcrumb-separator"></i>
+    <span class="breadcrumb-item active">Sessão 06/05/2024</span>
+  </div>
+  
+  <div class="session-header fade-in">
+    <div class="session-title">
+      <h1>Sessão: 6 de maio de 2024</h1>
+      <div class="session-badge anxiedade">Ansiedade generalizada</div>
+    </div>
+    
+    <div class="session-actions">
+      <button class="btn btn-secondary">
+        <i class="fas fa-file-export btn-icon"></i>
+        Exportar
+      </button>
+      <button class="btn btn-primary">
+        <i class="fas fa-edit btn-icon"></i>
+        Editar
+      </button>
+    </div>
+  </div>
+  
+  <div class="session-tabs fade-in">
+    <div class="session-tab active">Análise Dimensional</div>
+    <div class="session-tab">Transcrição</div>
+    <div class="session-tab">SOAP</div>
+    <div class="session-tab">Notas</div>
+  </div>
+  
+  <div class="session-content fade-in-up">
+    <!-- Área de visualização dimensional -->
+    <div class="dimensional-visualization-container">
+      <div id="dimensional-chart"></div>
+      
+      <div class="dimensional-details">
+        <div class="details-card">
+          <h3 class="details-title">Análise Emocional</h3>
+          <div class="details-content">
+            <div class="dimension-item">
+              <div class="dimension-label">Valência Emocional</div>
+              <div class="dimension-value negative">-3.5</div>
+              <div class="dimension-bar">
+                <div class="dimension-fill" style="width: 35%; background-color: #40B4C6;"></div>
+              </div>
+            </div>
+            
+            <div class="dimension-item">
+              <div class="dimension-label">Excitação Emocional</div>
+              <div class="dimension-value">8.0</div>
+              <div class="dimension-bar">
+                <div class="dimension-fill" style="width: 80%; background-color: #40B4C6;"></div>
+              </div>
+            </div>
+            
+            <div class="dimension-item">
+              <div class="dimension-label">Dominância</div>
+              <div class="dimension-value">2.0</div>
+              <div class="dimension-bar">
+                <div class="dimension-fill" style="width: 20%; background-color: #40B4C6;"></div>
+              </div>
+            </div>
+            
+            <div class="dimension-item">
+              <div class="dimension-label">Intensidade</div>
+              <div class="dimension-value">7.0</div>
+              <div class="dimension-bar">
+                <div class="dimension-fill" style="width: 70%; background-color: #40B4C6;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="details-card">
+          <h3 class="details-title">Análise Cognitiva</h3>
+          <div class="details-content">
+            <div class="dimension-item">
+              <div class="dimension-label">Complexidade Sintática</div>
+              <div class="dimension-value">6.0</div>
+              <div class="dimension-bar">
+                <div class="dimension-fill" style="width: 60%; background-color: #34D399;"></div>
+              </div>
+            </div>
+            
+            <!-- Demais dimensões cognitivas -->
+          </div>
+        </div>
+        
+        <div class="details-card">
+          <h3 class="details-title">Análise de Autonomia</h3>
+          <div class="details-content">
+            <div class="dimension-item">
+              <div class="dimension-label">Perspectiva Temporal</div>
+              <div class="dimension-value">
+                <span class="sub-value">Passado: 6.0</span>
+                <span class="sub-value">Presente: 3.0</span>
+                <span class="sub-value">Futuro: 1.0</span>
+              </div>
+              <div class="dimension-bars">
+                <div class="sub-bar">
+                  <div class="dimension-fill" style="width: 60%; background-color: #8B5CF6;"></div>
+                </div>
+                <div class="sub-bar">
+                  <div class="dimension-fill" style="width: 30%; background-color: #8B5CF6;"></div>
+                </div>
+                <div class="sub-bar">
+                  <div class="dimension-fill" style="width: 10%; background-color: #8B5CF6;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dimension-item">
+              <div class="dimension-label">Autocontrole</div>
+              <div class="dimension-value">3.0</div>
+              <div class="dimension-bar">
+                <div class="dimension-fill" style="width: 30%; background-color: #8B5CF6;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Formulação Integrativa -->
+    <div class="section-card">
+      <h3 class="section-title">Formulação Integrativa</h3>
+      <div class="section-content">
+        <p>O paciente apresenta um quadro de ansiedade generalizada caracterizado por excitação emocional elevada (8.0) e valência emocional negativa (-3.5). Há um comprometimento significativo no autocontrole (3.0) e forte orientação para o passado (6.0) em detrimento do presente (3.0) e futuro (1.0).</p>
+        
+        <p>A combinação de baixa dominância emocional (2.0) com alta dissonância cognitiva (8.0) sugere um padrão de amplificação de preocupações que dificulta a regulação emocional efetiva. Apesar da complexidade sintática preservada (6.0), há prejuízo na coerência narrativa (4.0) e na flexibilidade cognitiva (3.0).</p>
+        
+        <p>O padrão dimensional sugere um estado de hipervigilância e ruminação que contribui para a manutenção dos sintomas ansiosos, com impacto significativo na capacidade de projeção futura e autorregulação.</p>
+      </div>
+    </div>
+    
+    <!-- Trajetória Dimensional -->
+    <div class="section-card">
+      <div class="section-header">
+        <h3 class="section-title">Evolução Dimensional</h3>
+        <div class="section-actions">
+          <button class="dimension-filter-btn emotional active">Emocional</button>
+          <button class="dimension-filter-btn cognitive active">Cognitiva</button>
+          <button class="dimension-filter-btn autonomy active">Autonomia</button>
+        </div>
+      </div>
+      
+      <div class="section-content">
+        <div id="trajectory-chart"></div>
+      </div>
+    </div>
+    
+    <!-- Recomendações Terapêuticas -->
+    <div class="section-card">
+      <h3 class="section-title">Recomendações Terapêuticas</h3>
+      <div class="section-content">
+        <ul class="recommendation-list">
+          <li class="recommendation-item">
+            <div class="recommendation-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <div class="recommendation-content">
+              <h4 class="recommendation-title">Reestruturação Cognitiva</h4>
+              <p class="recommendation-description">Trabalhar técnicas de reestruturação para reduzir a dissonância cognitiva e melhorar a flexibilidade, focando em pensamentos ansiogênicos recorrentes.</p>
+            </div>
+          </li>
+          
+          <li class="recommendation-item">
+            <div class="recommendation-icon">
+              <i class="fas fa-heart-pulse"></i>
+            </div>
+            <div class="recommendation-content">
+              <h4 class="recommendation-title">Regulação Emocional</h4>
+              <p class="recommendation-description">Implementar técnicas de regulação emocional para aumentar a dominância e reduzir a excitação, incluindo mindfulness e técnicas de respiração diafragmática.</p>
+            </div>
+          </li>
+          
+          <li class="recommendation-item">
+            <div class="recommendation-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="recommendation-content">
+              <h4 class="recommendation-title">Reorientação Temporal</h4>
+              <p class="recommendation-description">Técnicas para equilibrar a perspectiva temporal, reduzindo o foco excessivo no passado e construindo projeções positivas de futuro através de visualização dirigida.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Script para inicializar os gráficos -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Dados dimensionais
+    const sessionData = {
+      v1: -3.5, v2: 8.0, v3: 2.0, v4: 7.0,
+      v5: 6.0, v6: 4.0, v7: 3.0, v8: 8.0,
+      v9_past: 6.0, v9_present: 3.0, v9_future: 1.0,
+      v10: 3.0
+    };
+    
+    // Inicializar gráfico dimensional
+    const dimensionalChart = new VintraDimensionalChart('dimensional-chart', {
+      title: 'Perfil Dimensional VINTRA',
+      showLegend: true
+    });
+    
+    dimensionalChart.loadData(sessionData);
+    
+    // Dados para trajetória
+    const trajectoryData = [
+      {
+        timestamp: '2024-04-01T11:00:00Z',
+        v1: -4.0, v2: 8.5, v3: 1.5, v4: 7.5,
+        v5: 5.0, v6: 3.5, v7: 2.5, v8: 8.5,
+        v9_past: 7.0, v9_present: 2.0, v9_future: 0.5,
+        v10: 2.0
+      },
+      {
+        timestamp: '2024-04-15T09:45:00Z',
+        v1: -4.0, v2: 9.0, v3: 1.0, v4: 8.0,
+        v5: 4.0, v6: 3.0, v7: 2.0, v8: 7.0,
+        v9_past: 7.0, v9_present: 2.0, v9_future: 1.0,
+        v10: 2.0
+      },
+      {
+        timestamp: '2024-04-28T15:30:00Z',
+        v1: -2.0, v2: 7.0, v3: 3.0, v4: 6.0,
+        v5: 5.0, v6: 5.0, v7: 4.0, v8: 6.0,
+        v9_past: 5.0, v9_present: 4.0, v9_future: 2.0,
+        v10: 4.0
+      },
+      {
+        timestamp: '2024-05-06T10:00:00Z',
+        v1: -3.5, v2: 8.0, v3: 2.0, v4: 7.0,
+        v5: 6.0, v6: 4.0, v7: 3.0, v8: 8.0,
+        v9_past: 6.0, v9_present: 3.0, v9_future: 1.0,
+        v10: 3.0
+      }
+    ];
+    
+    // Inicializar gráfico de trajetória (implementação necessária)
+    // Esta parte usaria o componente TrajectoryChart que precisaria ser implementado
+  });
+</script>
