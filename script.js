@@ -78,7 +78,7 @@ var state = {
 };
 // --- Inicialização ---
 /** Configura os links de navegação (header, sidebar, mobile) */
-function setupNavigation(): void {
+function setupNavigation(): void{
     document.body.addEventListener('click', (e: MouseEvent) => {
         const link = (e.target as Element)?.closest<HTMLElement>('[data-target]');
 
