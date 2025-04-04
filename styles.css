@@ -4,6 +4,33 @@
  * Visualização Integrativa Trajetorial
  */
 
+/* Correções críticas para VINTRA */
+#dashboard-view.active {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+.workspace.active {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+#library-view.active {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+/* Ajuste para splash e login iniciais */
+#splashScreen, #loginScreen, #appContainer {
+    display: flex;
+}
+
+#splashScreen:not(.visible),
+#loginScreen:not(.visible) {
+    display: none;
+}
+
 /*--------------------------------*
  * Variáveis e Configurações Raiz *
  *--------------------------------*/
