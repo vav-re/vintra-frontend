@@ -6,37 +6,89 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function fulfilled(value) { try {
+            step(generator.next(value));
+        }
+        catch (e) {
+            reject(e);
+        } }
+        function rejected(value) { try {
+            step(generator["throw"](value));
+        }
+        catch (e) {
+            reject(e);
+        } }
         function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function () { if (t[0] & 1)
+            throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
+        if (f)
+            throw new TypeError("Generator is already executing.");
+        while (_)
+            try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                    return t;
+                if (y = 0, t)
+                    op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0:
+                    case 1:
+                        t = op;
+                        break;
+                    case 4:
+                        _.label++;
+                        return { value: op[1], done: false };
+                    case 5:
+                        _.label++;
+                        y = op[1];
+                        op = [0];
+                        continue;
+                    case 7:
+                        op = _.ops.pop();
+                        _.trys.pop();
+                        continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                            _ = 0;
+                            continue;
+                        }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                            _.label = op[1];
+                            break;
+                        }
+                        if (op[0] === 6 && _.label < t[1]) {
+                            _.label = t[1];
+                            t = op;
+                            break;
+                        }
+                        if (t && _.label < t[2]) {
+                            _.label = t[2];
+                            _.ops.push(op);
+                            break;
+                        }
+                        if (t[2])
+                            _.ops.pop();
+                        _.trys.pop();
+                        continue;
+                }
+                op = body.call(thisArg, _);
             }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+            catch (e) {
+                op = [6, e];
+                y = 0;
+            }
+            finally {
+                f = t = 0;
+            }
+        if (op[0] & 5)
+            throw op[1];
+        return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
 // --- Estado Global ---
@@ -78,18 +130,17 @@ var state = {
 };
 // --- Inicialização ---
 /** Configura os links de navegação (header, sidebar, mobile) */
-function setupNavigation(): void{
-    document.body.addEventListener('click', (e: MouseEvent) => {
-        const link = (e.target as Element)?.closest<HTMLElement>('[data-target]');
-
-        if (link?.dataset.target) {
+function setupNavigation() {
+    document.body.addEventListener('click', function (e) {
+        var _j;
+        var link = (_j = e.target) === null || _j === void 0 ? void 0 : _j.closest('[data-target]');
+        if (link === null || link === void 0 ? void 0 : link.dataset.target) {
             e.preventDefault(); // Previne comportamento padrão para todos os links tratados
-            const targetView = link.dataset.target;
-
+            var targetView = link.dataset.target;
             switch (targetView) {
                 case 'perfil':
                 case 'preferencias':
-                    showToast('info', 'Funcionalidade Futura', `${targetView.charAt(0).toUpperCase() + targetView.slice(1)} ainda não implementado.`);
+                    showToast('info', 'Funcionalidade Futura', "".concat(targetView.charAt(0).toUpperCase() + targetView.slice(1), " ainda n\u00E3o implementado."));
                     closeMobileMenu();
                     break;
                 case 'sair':
@@ -99,7 +150,8 @@ function setupNavigation(): void{
                     // Troca de view normal
                     if (state.currentView !== targetView) {
                         window.switchView(targetView);
-                    } else {
+                    }
+                    else {
                         // Se clicou no link da view atual, apenas fecha o menu mobile
                         closeMobileMenu();
                     }
@@ -245,7 +297,9 @@ function renderPatientSelectionOnDashboard() {
         return;
     }
     var renderList = function (searchTerm) {
-        if (searchTerm === void 0) { searchTerm = ''; }
+        if (searchTerm === void 0) {
+            searchTerm = '';
+        }
         patientListDiv.innerHTML = ''; // Limpa lista
         var normalizedSearch = searchTerm.toLowerCase().trim();
         var filteredPatients = state.recentPatients.filter(function (p) {
@@ -305,8 +359,12 @@ function renderRecentDocuments() {
 /** Renderiza documentos na Biblioteca com base no filtro e busca */
 function renderDocumentLibrary(filter, searchTerm) {
     var _a, _b;
-    if (filter === void 0) { filter = 'all'; }
-    if (searchTerm === void 0) { searchTerm = ''; }
+    if (filter === void 0) {
+        filter = 'all';
+    }
+    if (searchTerm === void 0) {
+        searchTerm = '';
+    }
     var container = document.getElementById('documentList');
     var libraryView = document.getElementById('library-view');
     if (!container || !libraryView)
@@ -705,7 +763,9 @@ function setupLogin() {
      * @param force - Força a troca mesmo que já esteja na mesma view (opcional).
      */
     window.switchView = function (viewId, force) {
-        if (force === void 0) { force = false; }
+        if (force === void 0) {
+            force = false;
+        }
         var newViewElem = document.getElementById("".concat(viewId, "-view"));
         if (!newViewElem) {
             console.error("View n\u00E3o encontrada: ".concat(viewId, "-view"));
@@ -1496,8 +1556,10 @@ function setupLogin() {
                         state.recordingStartTime = Date.now();
                         console.log("MediaRecorder iniciado.");
                         startTimer();
-                        if (!(state.audioContext && state.analyser)) return [3 /*break*/, 5];
-                        if (!(state.audioContext.state === 'suspended')) return [3 /*break*/, 4];
+                        if (!(state.audioContext && state.analyser))
+                            return [3 /*break*/, 5];
+                        if (!(state.audioContext.state === 'suspended'))
+                            return [3 /*break*/, 4];
                         return [4 /*yield*/, state.audioContext.resume()];
                     case 3:
                         _a.sent();
@@ -1961,7 +2023,8 @@ function setupLogin() {
                         i = 0;
                         _c.label = 1;
                     case 1:
-                        if (!(i < steps.length)) return [3 /*break*/, 4];
+                        if (!(i < steps.length))
+                            return [3 /*break*/, 4];
                         return [5 /*yield**/, _loop_1(i)];
                     case 2:
                         _c.sent();
@@ -2053,7 +2116,9 @@ function setupLogin() {
     }
     /** Atualiza a UI dos indicadores de passo */
     function updateStepProgress(stepsContainerId, progressIndicatorId, currentStep, completed) {
-        if (completed === void 0) { completed = false; }
+        if (completed === void 0) {
+            completed = false;
+        }
         var stepsContainer = document.getElementById(stepsContainerId);
         var progressIndicator = document.getElementById(progressIndicatorId);
         if (!stepsContainer || !progressIndicator)
@@ -2150,7 +2215,8 @@ function setupLogin() {
                         _i = 0, formats_1 = formats;
                         _a.label = 1;
                     case 1:
-                        if (!(_i < formats_1.length)) return [3 /*break*/, 4];
+                        if (!(_i < formats_1.length))
+                            return [3 /*break*/, 4];
                         format = formats_1[_i];
                         currentStep++;
                         statusText = "Gerando ".concat(format.charAt(0).toUpperCase() + format.slice(1), "... (").concat(currentStep, "/").concat(totalSteps, ")");
@@ -2439,7 +2505,9 @@ function setupLogin() {
     /** Mostra uma notificação toast */
     function showToast(type, title, message, duration) {
         var _a;
-        if (duration === void 0) { duration = 5000; }
+        if (duration === void 0) {
+            duration = 5000;
+        }
         var container = document.getElementById('toastContainer');
         if (!container)
             return;
@@ -2652,7 +2720,9 @@ function setupLogin() {
         // Sobrescrever a função showToast se necessário para garantir comportamento correto
         if (typeof window.showToast !== 'function') {
             window.showToast = function (type, title, message, duration) {
-                if (duration === void 0) { duration = 5000; }
+                if (duration === void 0) {
+                    duration = 5000;
+                }
                 var toast = document.createElement('div');
                 toast.className = "toast toast-".concat(type);
                 var iconClass = 'fas fa-info-circle';
@@ -2713,7 +2783,9 @@ function setupLogin() {
         var switchView = window.switchView;
         if (typeof switchView === 'function') {
             window.switchView = function (viewId, force) {
-                if (force === void 0) { force = false; }
+                if (force === void 0) {
+                    force = false;
+                }
                 // Chamar função original
                 switchView(viewId, force);
                 // Adicionar verificação extra
