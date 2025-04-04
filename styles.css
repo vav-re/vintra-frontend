@@ -1,13 +1,27 @@
 /*
  * VINTRA - Aplicativo de Análise Dimensional Clínica
- * Arquivo de estilos principal
+ * CSS Refatorado e Otimizado
+ * Visualização Integrativa Trajetorial
  */
 
 /*--------------------------------*
  * Variáveis e Configurações Raiz *
  *--------------------------------*/
 :root {
-    /* Monochromatic Palette - Refined Grays */
+    /* Paleta Monocromática - Baseada no Logo Turquesa */
+    --teal-50: rgba(236, 254, 255, 1);
+    --teal-100: rgba(209, 250, 254, 1);
+    --teal-200: rgba(165, 243, 252, 1);
+    --teal-300: rgba(103, 232, 249, 1);
+    --teal-400: rgba(34, 211, 238, 1);
+    --teal-500: rgba(6, 182, 212, 1);
+    --teal-600: rgba(8, 145, 178, 1);
+    --teal-700: rgba(12, 116, 141, 1);
+    --teal-800: rgba(14, 94, 111, 1);
+    --teal-900: rgba(8, 51, 68, 1);
+    --teal-950: rgba(4, 30, 41, 1);
+
+    /* Tons de Cinza Refinados */
     --gray-50: rgba(250, 250, 252, 1);
     --gray-100: rgba(245, 245, 250, 1);
     --gray-200: rgba(236, 237, 242, 1);
@@ -20,49 +34,57 @@
     --gray-900: rgba(34, 35, 42, 1);
     --gray-950: rgba(24, 25, 30, 1);
 
-    /* Functional Colors */
-    --accent-subtle: rgba(58, 130, 246, 0.08);
-    --accent-light: rgba(58, 130, 246, 0.2);
-    --accent: rgba(58, 130, 246, 0.8);
-    --accent-vivid: rgba(58, 130, 246, 1);
+    /* Cores Funcionais */
+    --accent-subtle: rgba(6, 182, 212, 0.08);
+    --accent-light: rgba(6, 182, 212, 0.2);
+    --accent: rgba(6, 182, 212, 0.9);
+    --accent-vivid: rgba(6, 182, 212, 1);
+    --accent-dark: rgba(8, 51, 68, 1);
 
     --success-subtle: rgba(16, 185, 129, 0.08);
     --success-light: rgba(16, 185, 129, 0.2);
     --success: rgba(16, 185, 129, 0.8);
+    --success-vivid: rgba(16, 185, 129, 1);
 
     --error-subtle: rgba(239, 68, 68, 0.08);
     --error-light: rgba(239, 68, 68, 0.2);
     --error: rgba(239, 68, 68, 0.8);
+    --error-vivid: rgba(239, 68, 68, 1);
 
     --warning-subtle: rgba(245, 158, 11, 0.08);
     --warning-light: rgba(245, 158, 11, 0.2);
     --warning: rgba(245, 158, 11, 0.8);
+    --warning-vivid: rgba(245, 158, 11, 1);
 
-    /* Surface Colors */
+    /* Cores de Superfície */
     --surface-white: rgba(255, 255, 255, 1);
     --surface-hover: rgba(245, 245, 250, 0.7);
     --surface-background: rgba(250, 250, 252, 1);
     --surface-raised: rgba(255, 255, 255, 0.6);
     --surface-overlay: rgba(255, 255, 255, 0.85);
+    --surface-card: rgba(255, 255, 255, 0.7);
+    --surface-modal: rgba(255, 255, 255, 0.9);
 
-    /* Text Colors */
+    /* Cores de Texto */
     --text-primary: rgba(34, 35, 42, 0.95);
     --text-secondary: rgba(85, 88, 105, 0.9);
     --text-tertiary: rgba(119, 123, 146, 0.8);
     --text-disabled: rgba(119, 123, 146, 0.5);
     --text-on-accent: rgba(255, 255, 255, 0.95);
+    --text-on-dark: rgba(255, 255, 255, 0.95);
 
-    /* Visual Effects */
+    /* Efeitos Visuais */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
     --shadow-xl: 0 16px 42px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.05);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 
     --blur-sm: 6px;
     --blur-md: 12px;
     --blur-lg: 24px;
 
-    /* Radii */
+    /* Raios */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
@@ -70,26 +92,33 @@
     --radius-2xl: 24px;
     --radius-full: 9999px;
 
-    /* Subtle OceanThetics Gradients */
+    /* Bordas */
+    --border-color: var(--gray-200);
+    --border-color-light: rgba(209, 211, 222, 0.3);
+
+    /* Gradientes Sutis */
     --gradient-subtle-gray: linear-gradient(120deg, var(--gray-50), var(--gray-100));
     --gradient-glass: linear-gradient(120deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
-    --gradient-light-accent: linear-gradient(120deg, rgba(58, 130, 246, 0.04), rgba(58, 130, 246, 0.01));
+    --gradient-light-accent: linear-gradient(120deg, rgba(6, 182, 212, 0.04), rgba(6, 182, 212, 0.01));
+    --gradient-teal: linear-gradient(135deg, var(--teal-500), var(--teal-700));
+    --gradient-teal-light: linear-gradient(135deg, var(--teal-300), var(--teal-500));
+    --gradient-teal-dark: linear-gradient(135deg, var(--teal-700), var(--teal-900));
 
-    /* Animation Curves */
+    /* Curvas de Animação */
     --ease-in-out: cubic-bezier(0.45, 0, 0.15, 1);
     --ease-out: cubic-bezier(0.17, 0.67, 0.35, 0.99);
     --ease-elastic: cubic-bezier(0.32, 1.75, 0.65, 0.88);
     --ease-bounce: cubic-bezier(0.22, 1.35, 0.32, 1);
     --ease-gentle: cubic-bezier(0.45, 0.05, 0.35, 1);
 
-    /* Animation Durations */
+    /* Durações de Animação */
     --duration-xs: 100ms;
     --duration-sm: 200ms;
     --duration-md: 300ms;
     --duration-lg: 500ms;
     --duration-xl: 800ms;
 
-    /* Component Sizes */
+    /* Tamanhos de Componentes */
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -101,6 +130,10 @@
     --space-12: 48px;
     --space-16: 64px;
     --space-20: 80px;
+
+    /* Fontes */
+    --font-body: 'Manrope', 'Space Grotesk', sans-serif;
+    --font-heading: 'Sora', 'Space Grotesk', sans-serif;
 }
 
 /*-----------------*
@@ -110,20 +143,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Manrope', sans-serif; /* Default font */
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 /* Headings use Sora font */
-h1, h2, h3, h4, h5, h6, .app-title, .dashboard-title, .recording-title, .upload-title, .library-title, .section-title, .login-heading, .modal-title, .patient-name {
-    font-family: 'Sora', sans-serif;
+h1, h2, h3, h4, h5, h6, .app-title, .dashboard-title, .recording-title, .upload-title, 
+.library-title, .section-title, .login-heading, .modal-title, .patient-name {
+    font-family: var(--font-heading);
     letter-spacing: -0.03em;
+    line-height: 1.3;
+    font-weight: 600;
 }
 
 ::selection {
     background: var(--accent-light);
     color: var(--text-primary);
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -135,6 +176,7 @@ body {
     position: relative;
     overflow-x: hidden;
     letter-spacing: -0.01em;
+    line-height: 1.6;
 }
 
 /* Subtle Background Animation */
@@ -147,7 +189,7 @@ body::before {
     bottom: 0;
     background: linear-gradient(120deg,
         rgba(255, 255, 255, 0) 20%,
-        rgba(136, 165, 255, 0.03) 50%,
+        rgba(103, 232, 249, 0.03) 50%,
         rgba(255, 255, 255, 0) 80%);
     opacity: 0.4;
     z-index: -1;
@@ -187,7 +229,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000; /* Black background */
+    background-color: var(--teal-950); /* Background cor do logo */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -209,30 +251,28 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Removed transform for centering */
 }
 
 #vintra-logo {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+    filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.3));
 }
 
 #vintra-logo path { /* Target paths within the SVG */
     fill: none;
-    stroke: rgba(255, 255, 255, 0.9);
+    stroke: rgba(6, 182, 212, 0.9);
     stroke-width: 4;
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: all 1s ease;
-    /* Add stroke-dasharray and stroke-dashoffset for drawing animation if needed */
 }
 
 .background-glow {
     position: absolute;
     width: 85%;
     height: 85%;
-    background: radial-gradient(circle, rgba(50, 50, 50, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
     opacity: 0; /* Start hidden, fade in via JS/GSAP */
 }
 
@@ -245,7 +285,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--surface-white);
+    background-color: var(--surface-background);
     display: flex; /* Use flex by default */
     justify-content: center;
     align-items: center;
@@ -318,11 +358,11 @@ body::before {
     color: var(--text-secondary);
 }
 
-.form-input {
+.form-input, .document-edit, .library-search-input, .search-input {
     width: 100%;
     padding: var(--space-3) var(--space-4);
     background-color: var(--gray-100);
-    border: none;
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     font-size: 0.9375rem;
     color: var(--text-primary);
@@ -330,11 +370,12 @@ body::before {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
-.form-input:focus {
+.form-input:focus, .document-edit:focus, .library-search-input:focus, .search-input:focus {
     outline: none;
     background-color: var(--gray-50);
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02),
                 0 0 0 2px var(--accent-light);
+    border-color: var(--accent);
 }
 
 .error-message {
@@ -351,6 +392,7 @@ body::before {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: var(--space-2);
     padding: var(--space-3) var(--space-6);
     font-size: 0.9375rem;
     font-weight: 500;
@@ -388,13 +430,13 @@ body::before {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--gray-900), var(--gray-800));
-    color: var(--gray-50);
+    background: var(--gradient-teal-dark);
+    color: var(--text-on-accent);
     position: relative;
     z-index: 1;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2), 0 3px 6px -3px rgba(0, 0, 0, 0.1);
 }
@@ -425,12 +467,15 @@ body::before {
     color: var(--text-primary);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--border-color);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 250, 0.7));
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 15px -8px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--gray-300);
+    color: var(--text-primary);
 }
 
 .btn-secondary:active {
@@ -444,6 +489,11 @@ body::before {
 .btn-icon {
     margin-right: var(--space-2);
     font-size: 0.875em; /* Relative to button font size */
+}
+
+.btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.8125rem;
 }
 
 /* Estado de desativado para botões */
@@ -502,6 +552,8 @@ body::before {
     justify-content: space-between;
     align-items: center;
     transition: background var(--duration-lg) var(--ease-gentle);
+    border-bottom: 1px solid var(--border-color-light);
+    flex-shrink: 0;
 }
 
 /* Wavy bottom border */
@@ -514,9 +566,9 @@ body::before {
     height: 2px; /* Increased height for visibility */
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(209, 211, 222, 0.2) 20%,
-        rgba(209, 211, 222, 0.5) 50%,
-        rgba(209, 211, 222, 0.2) 80%,
+        rgba(6, 182, 212, 0.2) 20%,
+        rgba(6, 182, 212, 0.5) 50%,
+        rgba(6, 182, 212, 0.2) 80%,
         transparent 100%);
     opacity: 0.5;
     clip-path: polygon(
@@ -528,6 +580,7 @@ body::before {
     display: flex;
     align-items: center;
     gap: var(--space-3);
+    margin-right: auto; /* Push other items to the right */
 }
 
 .app-logo img {
@@ -607,6 +660,7 @@ body::before {
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-lg);
     transition: all var(--duration-md) var(--ease-gentle);
+    margin-left: var(--space-4);
 }
 
 .user-menu:hover {
@@ -614,11 +668,11 @@ body::before {
 }
 
 .user-avatar {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-full);
-    background-color: var(--gray-900); /* Example background */
-    color: white;
+    background-color: var(--teal-900); /* Background cor do logo */
+    color: var(--text-on-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -646,6 +700,7 @@ body::before {
     overflow: hidden;
     transform-origin: top right;
     animation: dropdownAppear var(--duration-md) var(--ease-out) forwards;
+    padding: var(--space-2) 0;
 }
 
 @keyframes dropdownAppear {
@@ -684,6 +739,10 @@ body::before {
     background-color: var(--gray-100);
 }
 
+.user-dropdown-item:hover i {
+    color: var(--accent);
+}
+
 .user-dropdown-divider {
     height: 1px;
     background: linear-gradient(
@@ -710,9 +769,7 @@ body::before {
  *----------*/
 .app-sidebar {
     width: 60px; /* Collapsed width */
-    background-color: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
+    background-color: var(--teal-950);
     display: flex;
     flex-direction: column;
     transition: all var(--duration-lg) var(--ease-in-out);
@@ -720,6 +777,7 @@ body::before {
     z-index: 5;
     position: relative;
     height: 100%; /* Take full height of parent */
+    flex-shrink: 0;
 }
 
 /* Right border */
@@ -732,9 +790,9 @@ body::before {
     width: 1px;
     background: linear-gradient(to bottom,
         transparent,
-        rgba(209, 211, 222, 0.5),
+        rgba(6, 182, 212, 0.5),
         transparent);
-    opacity: 0.6;
+    opacity: 0.4;
 }
 
 .app-sidebar.expanded {
@@ -747,14 +805,14 @@ body::before {
     justify-content: center;
     height: 48px; /* Fixed height */
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--text-on-dark);
     transition: all var(--duration-md) var(--ease-gentle);
     flex-shrink: 0; /* Prevent shrinking */
 }
 
 .sidebar-toggle:hover {
-    color: var(--text-primary);
-    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--teal-300);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .sidebar-menu {
@@ -772,13 +830,14 @@ body::before {
     align-items: center;
     gap: var(--space-4);
     padding: var(--space-3) var(--space-3);
-    color: var(--text-secondary);
+    color: var(--text-on-dark);
     text-decoration: none;
     transition: all var(--duration-md) var(--ease-gentle);
     white-space: nowrap; /* Prevent text wrapping */
     border-radius: var(--radius-lg);
     position: relative;
     overflow: hidden; /* Clip text when collapsed */
+    opacity: 0.7;
 }
 
 /* Active indicator line */
@@ -789,21 +848,23 @@ body::before {
     left: 0;
     width: 3px;
     height: 100%;
-    background: var(--accent);
+    background: var(--teal-400);
     transform: scaleY(0);
     transition: transform var(--duration-md) var(--ease-gentle);
     opacity: 0;
 }
 
 .sidebar-link:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-on-dark);
+    opacity: 1;
 }
 
 .sidebar-link.active {
-    background-color: var(--accent-subtle);
-    color: var(--text-primary);
+    background-color: rgba(6, 182, 212, 0.15);
+    color: var(--teal-300);
     font-weight: 500;
+    opacity: 1;
 }
 
 .sidebar-link.active::before {
@@ -834,21 +895,63 @@ body::before {
     transform: translateX(0);
 }
 
+.sidebar-link.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.sidebar-link.disabled i {
+    color: var(--text-on-dark);
+}
+
+/* Additional styles for collapsed sidebar hover tooltips */
+.app-sidebar:not(.expanded) .sidebar-link span {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute; /* Prevent taking space */
+    left: 100%;
+    margin-left: var(--space-3);
+    background-color: var(--teal-900);
+    color: white;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    transition-delay: 0.1s; /* Delay hiding */
+    z-index: 10;
+}
+
+.app-sidebar:not(.expanded) .sidebar-link:hover span {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.3s; /* Delay showing tooltip */
+}
+
 /*----------------------------*
  * Workspace & View Container *
  *----------------------------*/
-.workspace {
+.workspace,
+.app-workspace {
     flex: 1; /* Take remaining horizontal space */
     height: 100%; /* Take full height of parent */
     overflow-y: auto; /* Allow scrolling within the view */
     padding: var(--space-6); /* Add padding to content area */
     background-color: var(--surface-background);
+    position: relative; /* For absolute positioned elements within */
     /* Hide inactive views */
     display: none;
 }
 
 .workspace.active {
     display: block; /* Show the active view */
+    animation: fadeInWorkspace 0.5s var(--ease-out) forwards;
+}
+
+@keyframes fadeInWorkspace {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Specific view styles (if needed, otherwise rely on workspace padding) */
@@ -867,6 +970,7 @@ body::before {
 #library-view {
     display: flex; /* Special layout for library */
     padding: 0; /* Remove workspace padding */
+    gap: var(--space-6);
 }
 
 #library-view.active {
@@ -891,8 +995,8 @@ body::before {
 }
 
 .dashboard-title {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.75rem;
+    font-weight: 700;
     margin-bottom: var(--space-2);
     letter-spacing: -0.02em;
     color: var(--text-primary);
@@ -900,7 +1004,7 @@ body::before {
 
 .dashboard-subtitle {
     color: var(--text-secondary);
-    font-size: 0.9375rem;
+    font-size: 1rem;
 }
 
 .welcome-message {
@@ -948,7 +1052,7 @@ body::before {
     height: 2px;
     background: linear-gradient(90deg,
         transparent,
-        rgba(209, 211, 222, 0.3),
+        rgba(6, 182, 212, 0.3),
         transparent);
     opacity: 0.4;
     clip-path: polygon(
@@ -970,7 +1074,42 @@ body::before {
     margin-bottom: var(--space-4);
 }
 
-/* Stat Cards (Example, not in merged HTML currently) */
+/* Estilos para a nova seção de seleção de pacientes */
+.patient-selection-section {
+    margin-bottom: var(--space-8);
+}
+
+.dashboard-search .search-bar { /* Estilo específico para busca no dashboard */
+    max-width: 500px; /* Limitar largura da busca */
+    margin-bottom: var(--space-4);
+}
+
+.patient-card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+}
+
+.dashboard-patient-card { /* Pode herdar de .patient-card ou ter estilos próprios */
+    background: var(--surface-white);
+    border: 1px solid var(--border-color);
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    transition: all var(--duration-md) var(--ease-gentle);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para alinhar botão */
+}
+.dashboard-patient-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--teal-200);
+    transform: translateY(-2px);
+}
+.dashboard-patient-card .patient-card-header { margin-bottom: var(--space-2); }
+.dashboard-patient-card .patient-card-info { margin-bottom: var(--space-3); font-size: 0.8125rem;}
+.dashboard-patient-card .access-patient-btn { margin-top: auto; } /* Empurra botão para baixo */
+
+/* Stat Cards */
 .stat-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -1045,6 +1184,8 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--border-color-light);
 }
 
 .section-title {
@@ -1052,6 +1193,16 @@ body::before {
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: -0.01em;
+}
+
+.section-header .nav-item {
+    font-size: 0.875rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.section-header .nav-item:hover {
+    text-decoration: underline;
 }
 
 /* Recent Items (Documents/Patients) */
@@ -1125,7 +1276,8 @@ body::before {
     width: 48px;
     height: 48px;
     border-radius: var(--radius-lg);
-    background-color: var(--gray-100);
+    background-color: var(--teal-50);
+    color: var(--teal-500);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1138,12 +1290,12 @@ body::before {
     width: 48px; /* Match icon size */
     height: 48px;
     border-radius: 50%;
-    background-color: var(--gray-300); /* Placeholder color */
+    background-color: var(--teal-900); /* Match user-avatar */
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--text-on-dark);
     transition: all var(--duration-md) var(--ease-elastic);
     flex-shrink: 0;
 }
@@ -1210,7 +1362,7 @@ body::before {
  *----------------------------*/
 /* #library-view specific styles */
 .document-library {
-    width: 280px;
+    width: 320px;
     background: rgba(250, 250, 252, 0.4);
     backdrop-filter: blur(var(--blur-sm));
     -webkit-backdrop-filter: blur(var(--blur-sm));
@@ -1221,6 +1373,8 @@ body::before {
     position: relative;
     height: 100%; /* Fill height within #library-view */
     flex-shrink: 0; /* Prevent shrinking */
+    overflow-y: hidden; /* Prevent scroll duplo */
+    border-right: 1px solid var(--border-color);
 }
 
 /* Right border */
@@ -1231,22 +1385,23 @@ body::before {
     right: 0;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--gray-300), transparent);
+    background: linear-gradient(to bottom, transparent, var(--teal-300), transparent);
     opacity: 0.4;
 }
 
 .library-header {
     padding: var(--space-4);
     flex-shrink: 0; /* Prevent shrinking */
+    border-bottom: 1px solid var(--border-color);
 }
 
 .library-title {
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     color: var(--text-secondary);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
 }
 
 .library-actions {
@@ -1314,6 +1469,7 @@ body::before {
 .library-search {
     position: relative;
     margin-top: var(--space-3);
+    margin-bottom: var(--space-3);
 }
 
 .library-search-input {
@@ -1346,8 +1502,9 @@ body::before {
 
 .library-filters {
     display: flex;
-    gap: var(--space-1);
-    margin-top: var(--space-3);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
     overflow-x: auto;
     padding-bottom: var(--space-1);
     -ms-overflow-style: none;
@@ -1359,8 +1516,8 @@ body::before {
 }
 
 .library-filter {
-    padding: var(--space-1) var(--space-2);
-    background: none;
+    padding: var(--space-1) var(--space-3);
+    background: var(--gray-100);
     border: none;
     font-size: 0.75rem;
     color: var(--text-secondary);
@@ -1376,14 +1533,15 @@ body::before {
 }
 
 .library-filter.active {
-    background-color: var(--gray-900);
+    background-color: var(--teal-500);
     color: white;
+    font-weight: 500;
 }
 
 .library-content {
     flex: 1; /* Take remaining vertical space */
     overflow-y: auto;
-    padding: 0 var(--space-2) var(--space-2) var(--space-2); /* Add bottom padding */
+    padding: var(--space-4); /* Add bottom padding */
 }
 
 .library-section {
@@ -1422,13 +1580,14 @@ body::before {
 .document-item {
     display: flex;
     align-items: center;
-    padding: var(--space-3) var(--space-2);
+    padding: var(--space-3);
     cursor: pointer;
     transition: all var(--duration-md) cubic-bezier(0.2, 0.85, 0.3, 1);
-    border-radius: var(--radius-xl);
-    margin-bottom: var(--space-1);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-2);
     position: relative;
     overflow: hidden;
+    border: 1px solid transparent;
 }
 
 /* Active indicator line */
@@ -1438,55 +1597,34 @@ body::before {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 2px;
+    width: 0;
     height: 0;
-    background: linear-gradient(to bottom, var(--accent-light), var(--accent));
+    background: linear-gradient(to bottom, var(--teal-300), var(--teal-500));
     border-radius: 0 var(--radius-full) var(--radius-full) 0;
     transition: all var(--duration-md) var(--ease-out);
     opacity: 0;
-    box-shadow: 0 0 10px rgba(58, 130, 246, 0.3);
-}
-
-/* Hover gradient overlay */
-.document-item::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6));
-    opacity: 0;
-    transition: opacity var(--duration-lg) var(--ease-gentle);
-    z-index: -1;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
 }
 
 .document-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateX(3px) scale(1.01);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    background-color: var(--gray-50);
+    transform: translateX(3px);
 }
 
 .document-item:hover::before {
+    width: 2px;
     height: 60%;
-    opacity: 1;
-    transform: translateY(-50%) scaleY(1.1);
-}
-
-.document-item:hover::after {
-    opacity: 0.3;
+    opacity: 0.6;
 }
 
 .document-item.active {
-    background-color: rgba(58, 130, 246, 0.05);
-    box-shadow: 0 3px 15px rgba(58, 130, 246, 0.1);
+    background-color: var(--accent-subtle);
+    border-color: var(--accent-light);
 }
 
 .document-item.active::before {
-    height: 80%;
-    opacity: 1;
     width: 3px;
-}
-
-.document-item.active::after {
-    background: linear-gradient(90deg, rgba(58, 130, 246, 0.02), rgba(255, 255, 255, 0.1));
+    height: 80%;
     opacity: 1;
 }
 
@@ -1497,8 +1635,9 @@ body::before {
     align-items: center;
     justify-content: center;
     margin-right: var(--space-3);
+    border-radius: var(--radius-md);
+    background-color: var(--gray-100);
     font-size: 1rem;
-    color: var(--text-secondary);
     transition: transform var(--duration-md) var(--ease-out);
     flex-shrink: 0; /* Prevent shrinking */
 }
@@ -1508,13 +1647,13 @@ body::before {
 }
 
 /* Color coding icons based on type */
-.document-item.audio .document-icon { color: #8B5CF6; } /* Purple */
-.document-item.transcription .document-icon { color: #6366F1; } /* Indigo */
-.document-item.vintra .document-icon { color: #0EA5E9; } /* Sky */
-.document-item.soap .document-icon { color: #10B981; } /* Emerald */
-.document-item.narrative .document-icon { color: #F59E0B; } /* Amber */
-.document-item.ipissima .document-icon { color: #EC4899; } /* Pink */
-.document-item.orientacoes .document-icon { color: #8B5CF6; } /* Purple */
+.document-audio .document-icon { background-color: #fbcfe8; color: #be185d; } /* Rosa */
+.document-transcription .document-icon { background-color: #dbeafe; color: #2563eb; } /* Azul */
+.document-vintra .document-icon { background-color: #ccfbf1; color: #0f766e; } /* Ciano */
+.document-soap .document-icon { background-color: #dcfce7; color: #16a34a; } /* Verde */
+.document-narrative .document-icon { background-color: #fef3c7; color: #b45309; } /* Amarelo */
+.document-ipissima .document-icon { background-color: #fae8ff; color: #a21caf; } /* Roxo */
+.document-orientacoes .document-icon { background-color: #e0e7ff; color: #4f46e5; } /* Índigo */
 
 .document-info {
     flex: 1;
@@ -1542,29 +1681,31 @@ body::before {
     transition: opacity var(--duration-md) var(--ease-gentle);
     display: flex; /* Ensure actions are inline */
     gap: var(--space-1);
+    margin-left: var(--space-3);
 }
 
-.document-item:hover .document-actions {
+.document-item:hover .document-actions,
+.document-item.active .document-actions {
     opacity: 1;
 }
 
 .document-action-btn {
+    width: 28px;
+    height: 28px;
     background: none;
     border: none;
     color: var(--text-secondary);
     cursor: pointer;
     font-size: 0.875rem;
-    width: 24px;
-    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     transition: all var(--duration-md) var(--ease-gentle);
 }
 
 .document-action-btn:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--gray-200);
     color: var(--text-primary);
 }
 
@@ -1573,10 +1714,12 @@ body::before {
     flex: 1; /* Take remaining space */
     display: flex;
     flex-direction: column;
-    background-color: var(--surface-background);
+    background-color: var(--surface-white);
     transition: all var(--duration-lg) var(--ease-in-out);
     height: 100%; /* Fill height */
     overflow: hidden; /* Prevent double scroll */
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Focus Mode Styles */
@@ -1604,7 +1747,7 @@ body::before {
 .focus-mode-btn:hover {
     background-color: rgba(255, 255, 255, 0.95);
     transform: scale(1.1);
-    color: var(--text-primary);
+    color: var(--accent);
     box-shadow: var(--shadow-md);
 }
 
@@ -1695,13 +1838,15 @@ body::before {
     justify-content: space-between;
     align-items: center;
     padding: var(--space-3) var(--space-5);
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--gray-50);
     backdrop-filter: blur(var(--blur-sm));
     -webkit-backdrop-filter: blur(var(--blur-sm));
     transition: all var(--duration-md) var(--ease-gentle);
     position: relative; /* For pseudo-element */
     z-index: 2;
     flex-shrink: 0; /* Prevent shrinking */
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 /* Wavy bottom border */
@@ -1714,9 +1859,9 @@ body::before {
     height: 2px;
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(209, 211, 222, 0.2) 20%,
-        rgba(209, 211, 222, 0.4) 50%,
-        rgba(209, 211, 222, 0.2) 80%,
+        rgba(6, 182, 212, 0.2) 20%,
+        rgba(6, 182, 212, 0.4) 50%,
+        rgba(6, 182, 212, 0.2) 80%,
         transparent 100%);
     opacity: 0.3;
     clip-path: polygon(
@@ -1734,8 +1879,8 @@ body::before {
 }
 
 .document-info-icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1743,6 +1888,7 @@ body::before {
     color: var(--text-secondary);
     transition: transform var(--duration-md) var(--ease-out);
     flex-shrink: 0;
+    border-radius: var(--radius-md);
 }
 
 .document-toolbar:hover .document-info-icon {
@@ -1750,17 +1896,17 @@ body::before {
 }
 
 /* Color coding icons based on type */
-.document-audio .document-info-icon { color: #8B5CF6; }
-.document-transcription .document-info-icon { color: #6366F1; }
-.document-vintra .document-info-icon { color: #0EA5E9; }
-.document-soap .document-info-icon { color: #10B981; }
-.document-narrative .document-info-icon { color: #F59E0B; }
-.document-ipissima .document-info-icon { color: #EC4899; }
-.document-orientacoes .document-info-icon { color: #8B5CF6; }
+.document-audio .document-info-icon { background-color: #fbcfe8; color: #be185d; } /* Rosa */
+.document-transcription .document-info-icon { background-color: #dbeafe; color: #2563eb; } /* Azul */
+.document-vintra .document-info-icon { background-color: #ccfbf1; color: #0f766e; } /* Ciano */
+.document-soap .document-info-icon { background-color: #dcfce7; color: #16a34a; } /* Verde */
+.document-narrative .document-info-icon { background-color: #fef3c7; color: #b45309; } /* Amarelo */
+.document-ipissima .document-info-icon { background-color: #fae8ff; color: #a21caf; } /* Roxo */
+.document-orientacoes .document-info-icon { background-color: #e0e7ff; color: #4f46e5; } /* Índigo */
 /* Add icons for new/processing views */
-#new-view .document-info-icon { color: var(--accent); }
-#processing-view .document-info-icon { color: var(--warning); }
-#results-view .document-info-icon { color: var(--success); }
+#new-view .document-info-icon { background-color: #dbeafe; color: #2563eb; } /* Azul */
+#processing-view .document-info-icon { background-color: #fef3c7; color: #b45309; } /* Amarelo */
+#results-view .document-info-icon { background-color: #dcfce7; color: #16a34a; } /* Verde */
 
 
 .document-info-details {
@@ -1768,7 +1914,7 @@ body::before {
 }
 
 .document-info-details h2 {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: var(--space-1);
     color: var(--text-primary);
@@ -1779,7 +1925,7 @@ body::before {
 }
 
 .document-info-meta {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--text-tertiary);
     display: flex;
     align-items: center;
@@ -1790,9 +1936,9 @@ body::before {
 }
 
 .document-info-meta-divider {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
+    display: inline-block;
+    width: 1px;
+    height: 10px;
     background-color: var(--gray-400);
     flex-shrink: 0;
 }
@@ -1808,7 +1954,7 @@ body::before {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
     border: none;
     border-radius: var(--radius-xl);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     display: flex;
     align-items: center;
     gap: var(--space-2);
@@ -1849,12 +1995,14 @@ body::before {
 }
 
 .toolbar-btn.primary {
-    background-color: var(--gray-900);
+    background-color: var(--teal-500);
+    background-image: var(--gradient-teal);
     color: white;
 }
 
 .toolbar-btn.primary:hover {
-    background-color: var(--gray-800);
+    background-color: var(--teal-600);
+    background-image: var(--gradient-teal-dark);
 }
 
 .toolbar-btn i {
@@ -1868,6 +2016,7 @@ body::before {
     background-color: var(--surface-background);
     padding: var(--space-5);
     transition: all var(--duration-md) var(--ease-gentle);
+    position: relative;
 }
 
 .document-container {
@@ -1881,6 +2030,7 @@ body::before {
     min-height: 100%; /* Ensure it fills height */
     transition: all var(--duration-lg) var(--ease-gentle);
     overflow: hidden; /* Clip content */
+    padding: var(--space-6);
 }
 
 .document-container:hover {
@@ -1888,11 +2038,16 @@ body::before {
 }
 
 .document-view { /* For displaying formatted text */
-    padding: var(--space-8);
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    line-height: 1.6;
+    line-height: 1.7;
     font-size: 0.9375rem;
     color: var(--text-primary);
+    font-family: 'Menlo', 'Consolas', monospace; /* Fonte monoespaçada para <pre> */
+}
+
+.document-view pre {
+    white-space: pre-wrap; /* Quebra linha no <pre> */
+    word-wrap: break-word;
 }
 
 .document-edit { /* For textarea editing */
@@ -1902,7 +2057,7 @@ body::before {
     padding: var(--space-8);
     border: none;
     resize: none;
-    font-family: 'Manrope', sans-serif; /* Use default font */
+    font-family: var(--font-body);
     font-size: 0.9375rem;
     line-height: 1.6;
     background: transparent;
@@ -1937,9 +2092,9 @@ body::before {
     height: 2px;
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(209, 211, 222, 0.2) 20%,
-        rgba(209, 211, 222, 0.4) 50%,
-        rgba(209, 211, 222, 0.2) 80%,
+        rgba(6, 182, 212, 0.2) 20%,
+        rgba(6, 182, 212, 0.4) 50%,
+        rgba(6, 182, 212, 0.2) 80%,
         transparent 100%);
     opacity: 0.3;
     clip-path: polygon(
@@ -1992,22 +2147,22 @@ body::before {
     -webkit-backdrop-filter: blur(var(--blur-sm));
     border-radius: var(--radius-xl);
     transition: all var(--duration-lg) var(--ease-gentle);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
     max-width: 700px; /* Limit width */
     margin: 0 auto; /* Center */
 }
 
 .recording-module:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-xl);
 }
 
 .recording-header {
     text-align: center;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
 }
 
 .recording-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: var(--space-2);
     color: var(--text-primary);
@@ -2022,7 +2177,7 @@ body::before {
 .recording-controls {
     display: flex;
     justify-content: center;
-    gap: var(--space-6);
+    gap: var(--space-4);
     margin-bottom: var(--space-6);
 }
 
@@ -2050,14 +2205,26 @@ body::before {
     color: white;
 }
 
+.recording-btn-start:hover {
+    background-color: var(--error-vivid);
+}
+
 .recording-btn-stop {
-    background-color: var(--gray-900);
+    background-color: var(--teal-700);
     color: white;
+}
+
+.recording-btn-stop:hover {
+    background-color: var(--teal-600);
 }
 
 .recording-btn-pause {
     background-color: var(--warning);
     color: white;
+}
+
+.recording-btn-pause:hover {
+    background-color: var(--warning-vivid);
 }
 
 .recording-timer {
@@ -2067,20 +2234,20 @@ body::before {
 
 .recording-time {
     font-size: 2.5rem;
-    font-weight: 500;
+    font-weight: 300;
     font-family: monospace; /* Monospace for timer */
     margin-bottom: var(--space-2);
     color: var(--text-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: 0.05em;
 }
 
 .recording-status {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     color: var(--text-secondary);
 }
 
 .recording-visualizer {
-    height: 100px;
+    height: 60px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
     backdrop-filter: blur(var(--blur-sm));
     -webkit-backdrop-filter: blur(var(--blur-sm));
@@ -2089,68 +2256,41 @@ body::before {
     overflow: hidden;
     position: relative;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.visualizer-bars {
     display: flex;
-    align-items: flex-end; /* Bars grow from bottom */
-    height: 100%;
+    align-items: flex-end;
+    justify-content: center;
     gap: 2px;
-    padding: 0 var(--space-4);
+    opacity: 0.3;
+    transition: opacity var(--duration-md) var(--ease-out);
 }
 
 .visualizer-bar {
     width: 4px;
-    background: linear-gradient(to top, var(--accent), rgba(58, 130, 246, 0.3));
+    background: linear-gradient(to top, var(--teal-500), rgba(6, 182, 212, 0.3));
     border-radius: var(--radius-full);
-    transition: height 0.1s var(--ease-out); /* Smooth height changes */
-    height: 0%; /* Start at 0 height */
+    transition: height 0.1s linear; /* Smooth height changes */
 }
 
-/*-------------------------*
- * Progress and Loading    *
- *-------------------------*/
-.progress-container {
+.diarization-option {
+    margin-top: var(--space-4);
     margin-bottom: var(--space-6);
-    margin-top: var(--space-6); /* Add margin top */
-}
-
-.progress-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-2);
+    align-items: center;
+    gap: var(--space-2);
+    justify-content: center; /* Center the option */
 }
 
-.progress-title {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-primary);
+.diarization-checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--teal-500); /* Style checkbox color */
+    cursor: pointer;
 }
 
-.progress-percentage {
+.diarization-label {
     font-size: 0.875rem;
     color: var(--text-secondary);
-}
-
-.progress-bar {
-    height: 6px;
-    background-color: var(--gray-200);
-    border-radius: var(--radius-full);
-    overflow: hidden;
-    margin-bottom: var(--space-2);
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-light), var(--accent));
-    width: 0%; /* Controlled by JS */
-    transition: width 0.6s var(--ease-out);
-    border-radius: var(--radius-full);
-}
-
-.progress-status {
-    font-size: 0.75rem;
-    color: var(--text-tertiary);
+    cursor: pointer;
 }
 
 /*-----------------*
@@ -2163,13 +2303,13 @@ body::before {
     -webkit-backdrop-filter: blur(var(--blur-sm));
     border-radius: var(--radius-xl);
     transition: all var(--duration-lg) var(--ease-gentle);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-lg);
     max-width: 700px; /* Limit width */
     margin: 0 auto; /* Center */
 }
 
 .upload-module:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-xl);
 }
 
 .upload-header {
@@ -2178,7 +2318,7 @@ body::before {
 }
 
 .upload-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: var(--space-2);
     color: var(--text-primary);
@@ -2193,7 +2333,7 @@ body::before {
 .upload-area {
     border: 2px dashed var(--gray-300);
     border-radius: var(--radius-xl);
-    padding: var(--space-12) var(--space-8);
+    padding: var(--space-10) var(--space-6);
     text-align: center;
     cursor: pointer;
     transition: all var(--duration-md) var(--ease-out);
@@ -2202,15 +2342,15 @@ body::before {
 }
 
 .upload-area:hover, .upload-area.dragover {
-    border-color: var(--accent);
-    background: linear-gradient(135deg, rgba(58, 130, 246, 0.05), rgba(58, 130, 246, 0.02));
+    border-color: var(--teal-400);
+    background-color: var(--teal-50);
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
 }
 
 .upload-icon {
-    font-size: 3rem;
-    color: var(--accent);
+    font-size: 2.5rem;
+    color: var(--teal-400);
     margin-bottom: var(--space-4);
     transition: transform var(--duration-md) var(--ease-elastic);
 }
@@ -2220,7 +2360,6 @@ body::before {
 }
 
 .upload-message {
-    font-size: 1.125rem;
     font-weight: 500;
     margin-bottom: var(--space-2);
     color: var(--text-primary);
@@ -2228,8 +2367,8 @@ body::before {
 }
 
 .upload-hint {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
     /* margin-bottom: var(--space-4); Removed margin */
 }
 
@@ -2238,16 +2377,14 @@ body::before {
 }
 
 .upload-preview {
-    padding: var(--space-4);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
+    padding: var(--space-3);
+    background-color: var(--gray-50);
     border-radius: var(--radius-lg);
     display: flex; /* Use flex by default, controlled by JS */
     align-items: center;
-    margin-bottom: var(--space-6);
+    margin-top: var(--space-4);
     /* display: none; */ /* Initially hidden, controlled by JS */
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
 }
 
 .upload-preview.visible {
@@ -2256,8 +2393,8 @@ body::before {
 
 .upload-preview-icon {
     font-size: 1.5rem;
-    color: var(--accent);
-    margin-right: var(--space-4);
+    color: var(--teal-500);
+    margin-right: var(--space-3);
     flex-shrink: 0;
 }
 
@@ -2291,1581 +2428,1275 @@ body::before {
     padding: var(--space-1); /* Add padding for easier clicking */
     margin-left: var(--space-2); /* Space from info */
     flex-shrink: 0;
-}
-
-.upload-preview-remove:hover {
-    transform: scale(1.1);
-}
-
-/* Diarization Checkbox */
-.diarization-option {
-    margin-top: var(--space-4); /* Space after upload area/preview */
-    margin-bottom: var(--space-6); /* Space before progress/button */
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    justify-content: center; /* Center the option */
-}
-
-.diarization-checkbox {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--accent); /* Style checkbox color */
-    cursor: pointer;
-}
-
-.diarization-label {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-}
-
-/* Additional formatting options for document processing */
-/* Used in #processing-view and #patient-view */
-.processing-container {
-    margin-bottom: var(--space-6);
-}
-
-.document-format-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-4);
-    justify-content: center; /* Center options */
-}
-
-.document-format-option {
-    padding: var(--space-2) var(--space-3);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    border-radius: var(--radius-lg);
-    border: none; /* Ensure no border */
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all var(--duration-md) var(--ease-out);
-    box-shadow: var(--shadow-sm);
-    color: var(--text-primary); /* Default text color */
-}
-
-.document-format-option:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-}
-
-.document-format-option.active {
-    background-color: var(--gray-900);
-    color: white;
-    font-weight: 500; /* Make active text bolder */
-}
-
-/*----------------*
- * Results Tabs   *
- *----------------*/
-/* Used in #results-view */
-.document-tabs {
-    display: flex;
-    gap: var(--space-1);
-    padding: var(--space-2) var(--space-5);
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0; /* Top corners rounded */
-    overflow-x: auto; /* Allow horizontal scrolling on small screens */
-    scrollbar-width: none; /* Hide scrollbar (Firefox) */
-    -ms-overflow-style: none; /* Hide scrollbar (IE/Edge) */
-    flex-shrink: 0; /* Prevent shrinking */
-}
-
-.document-tabs::-webkit-scrollbar {
-    display: none; /* Hide scrollbar (Chrome/Safari) */
-}
-
-.document-tab {
-    padding: var(--space-2) var(--space-3);
-    font-size: 0.875rem;
-    white-space: nowrap;
-    color: var(--text-secondary);
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    transition: all var(--duration-md) var(--ease-gentle);
-    border: none;
-    background: transparent;
-}
-
-.document-tab:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: var(--text-primary);
-}
-
-.document-tab.active {
-    background-color: var(--gray-900);
-    color: white;
-    font-weight: 500;
-}
-
-.document-tab-panels {
-    position: relative; /* Needed for absolute positioning of panels */
-    flex: 1; /* Take remaining space */
-    overflow: hidden; /* Clip panels */
-}
-
-.document-tab-panel {
-    position: absolute; /* Overlap panels */
-    inset: 0; /* Fill parent */
-    overflow-y: auto; /* Allow scrolling within panel */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--duration-md) var(--ease-gentle),
-                visibility var(--duration-md) var(--ease-gentle);
-    /* Add padding inside the panel's content if needed, not here */
-    /* Example: .document-tab-panel .document-content { padding: var(--space-6); } */
-}
-
-.document-tab-panel.active {
-    opacity: 1;
-    visibility: visible;
-    position: relative; /* Make active panel take space */
-}
-
-/*------------------------*
- * Toast Notifications    *
- *------------------------*/
-.toast-container {
-    position: fixed;
-    bottom: var(--space-6);
-    right: var(--space-6);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    max-width: 100%;
-    pointer-events: none; /* Allow clicks through container */
-}
-
-.toast {
-    padding: var(--space-4);
-    border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(var(--blur-md));
-    -webkit-backdrop-filter: blur(var(--blur-md));
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    align-items: center;
-    min-width: 300px;
-    max-width: 100%;
-    transform-origin: right bottom;
-    pointer-events: auto; /* Allow interaction with toast */
-    animation: toast-enter var(--duration-md) var(--ease-bounce) forwards;
-}
-
-@keyframes toast-enter {
-    0% {
-        transform: translateY(20px) scale(0.8);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-}
-
-.toast.exit {
-    animation: toast-exit var(--duration-md) var(--ease-out) forwards;
-}
-
-@keyframes toast-exit {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(20px) scale(0.8);
-        opacity: 0;
-    }
-}
-
-.toast-icon {
-    margin-right: var(--space-3);
-    font-size: 1.25rem;
-    flex-shrink: 0;
-}
-
-.toast-icon.success { color: var(--success); }
-.toast-icon.error { color: var(--error); }
-.toast-icon.warning { color: var(--warning); }
-.toast-icon.info { color: var(--accent); }
-
-.toast-content {
-    flex: 1;
-    min-width: 0; /* Prevent overflow */
-}
-
-.toast-title {
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: var(--space-1);
-    color: var(--text-primary);
-}
-
-.toast-message {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-.toast-close {
-    background: none;
-    border: none;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    font-size: 1rem;
-    padding: var(--space-1);
-    margin-left: var(--space-2);
-    border-radius: var(--radius-sm);
-    transition: all var(--duration-md) var(--ease-gentle);
-    flex-shrink: 0;
-}
-
-.toast-close:hover {
-    color: var(--text-primary);
-    background-color: var(--gray-100);
-}
-
-/*---------------*
- * Modal Styles  *
- *---------------*/
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(34, 35, 42, 0.3); /* Semi-transparent background */
-    display: flex; /* Use flex for centering */
-    justify-content: center;
-    align-items: center;
-    z-index: 2000; /* High z-index */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--duration-lg) var(--ease-gentle),
-                visibility var(--duration-lg) var(--ease-gentle);
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    /* display: none; */ /* Controlled by JS */
-}
-
-.modal-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(var(--blur-md));
-    -webkit-backdrop-filter: blur(var(--blur-md));
-    border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-xl);
-    width: 90%; /* Responsive width */
-    max-width: 600px; /* Max width */
-    max-height: 90vh; /* Max height */
-    display: flex;
-    flex-direction: column;
-    transform: translateY(40px); /* Start slightly lower */
-    transition: transform var(--duration-lg) var(--ease-elastic);
-    overflow: hidden; /* Prevent content spill */
-}
-
-.modal-overlay.show .modal-container {
-    transform: translateY(0); /* Animate into view */
-}
-
-.modal-header {
-    padding: var(--space-5) var(--space-6);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative; /* For pseudo-element */
-    flex-shrink: 0; /* Prevent shrinking */
-}
-
-/* Wavy bottom border */
-.modal-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: var(--space-6);
-    right: var(--space-6);
-    height: 2px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(209, 211, 222, 0.2) 20%,
-        rgba(209, 211, 222, 0.4) 50%,
-        rgba(209, 211, 222, 0.2) 80%,
-        transparent 100%);
-    opacity: 0.3;
-    clip-path: polygon(
-        0% 0%, 10% 40%, 20% 0%, 30% 50%, 40% 10%, 50% 40%, 60% 0%, 70% 50%, 80% 20%, 90% 50%, 100% 0%, 100% 100%, 0% 100%
-    );
-    transform: scaleY(0.7);
-}
-
-.modal-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.125rem;
-    color: var(--text-tertiary);
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-full);
-    transition: all var(--duration-md) var(--ease-gentle);
-    flex-shrink: 0;
-}
-
-.modal-close:hover {
-    color: var(--text-primary);
-    background-color: var(--gray-100);
-}
-
-.modal-body {
-    padding: var(--space-6);
-    overflow-y: auto; /* Scrollable body */
-    flex: 1; /* Take available space */
-    color: var(--text-primary);
-}
-
-.modal-form-group { /* Example form group inside modal */
-    margin-bottom: var(--space-5);
-}
-
-.modal-label { /* Example label inside modal */
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: var(--space-2);
-    color: var(--text-secondary);
-}
-
-.modal-input { /* Example input inside modal */
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
-    background-color: var(--gray-100);
-    border: none;
-    border-radius: var(--radius-lg);
-    font-size: 0.9375rem;
-    color: var(--text-primary);
-    transition: all var(--duration-md) var(--ease-gentle);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
-}
-
-.modal-input:focus {
-    outline: none;
-    background-color: var(--gray-50);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02),
-                0 0 0 2px var(--accent-light);
-}
-
-.modal-footer {
-    padding: var(--space-5) var(--space-6);
-    display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    gap: var(--space-4);
-    position: relative; /* For pseudo-element */
-    flex-shrink: 0; /* Prevent shrinking */
-}
-
-/* Top border */
-.modal-footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: var(--space-6);
-    right: var(--space-6);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gray-300), transparent);
-    opacity: 0.4;
-}
-
-/*------------------------------------------*
- * Fluid Animations - Additional Effects    *
- *------------------------------------------*/
-.floating-effect {
-    transition: transform var(--duration-md) var(--ease-out);
-}
-
-.floating-effect:hover {
-    transform: translateY(-3px);
-}
-
-/* Water-like ripple effect for buttons */
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(0);
-    opacity: 0;
-    pointer-events: none; /* Don't interfere with clicks */
-}
-
-.ripple-animation {
-    animation: ripple-effect 0.8s var(--ease-out);
-}
-
-@keyframes ripple-effect {
-    0% { transform: scale(0); opacity: 0.4; }
-    100% { transform: scale(2.5); opacity: 0; }
-}
-
-/* Float animations for cards */
-@keyframes float-subtle {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
-    100% { transform: translateY(0); }
-}
-
-/* Soft glow effect */
-.glow-effect {
-    position: relative;
-    overflow: hidden;
-}
-
-.glow-effect::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-        circle at center,
-        rgba(255, 255, 255, 0.3) 0%,
-        transparent 70%
-    );
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity var(--duration-lg) var(--ease-gentle),
-                transform var(--duration-lg) var(--ease-gentle);
-    pointer-events: none;
-    z-index: 0; /* Behind content */
-}
-
-.glow-effect:hover::after {
-    opacity: 0.6;
-    transform: scale(1);
-}
-
-/*--------------------------------*
- * Post-transcription flow styles *
- *--------------------------------*/
-.transcription-completed-panel {
-    display: none; /* Hidden by default, shown via JS */
-    flex-direction: column;
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-    box-shadow: var(--shadow-md);
-    margin-top: var(--space-6);
-    align-items: center;
-    text-align: center;
-}
-
-.transcription-completed-icon {
-    font-size: 3rem;
-    color: var(--success);
-    margin-bottom: var(--space-4);
-}
-
-.transcription-completed-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--space-2);
-    color: var(--text-primary);
-}
-
-.transcription-completed-text {
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-6);
-    max-width: 400px;
-}
-
-.transcription-completed-actions {
-    display: flex;
-    gap: var(--space-4);
-}
-
-.transcription-completed-panel.active { /* Class added by JS */
-    display: flex;
-    animation: fadeSlideIn 0.8s var(--ease-out) forwards;
-}
-
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/*----------------------------------------*
- * Enhanced progress steps for feedback   *
- *----------------------------------------*/
-.transcription-steps {
-    margin: var(--space-6) 0;
-    position: relative;
-}
-
-.transcription-steps-line {
-    position: absolute;
-    top: 15px; /* Vertically center with circle */
-    left: 30px; /* Start after first circle */
-    right: 30px; /* End before last circle */
-    height: 2px;
-    background-color: var(--gray-300);
-    z-index: 1;
-}
-
-.transcription-steps-progress {
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-light), var(--accent));
-    z-index: 2;
-    width: 0%; /* Controlled by JS */
-    transition: width 0.5s var(--ease-out);
-    border-radius: var(--radius-full); /* Rounded ends */
-}
-
-.transcription-steps-list {
-    display: flex;
-    justify-content: space-between;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    position: relative; /* Ensure circles are above lines */
-    z-index: 3;
-}
-
-.transcription-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%; /* Equal width for 4 steps */
-    text-align: center; /* Center label */
-}
-
-.transcription-step-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--gray-200);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--space-2);
-    color: var(--text-secondary);
-    font-weight: 500;
-    transition: all 0.3s var(--ease-out);
-    position: relative; /* For pulse animation */
-    z-index: 4; /* Above lines */
-}
-
-.transcription-step-label {
-    font-size: 0.75rem;
-    color: var(--text-tertiary);
-    transition: all 0.3s var(--ease-out);
-}
-
-/* Active Step */
-.transcription-step.active .transcription-step-circle {
-    background-color: var(--accent);
-    color: white;
-    box-shadow: 0 0 0 4px var(--accent-subtle);
-    animation: pulse-step 2s infinite; /* Pulse animation */
-}
-
-.transcription-step.active .transcription-step-label {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-/* Completed Step */
-.transcription-step.completed .transcription-step-circle {
-    background-color: var(--success);
-    color: white;
-    animation: complete-step 0.5s var(--ease-elastic); /* Completion animation */
-}
-
-.transcription-step.completed .transcription-step-label {
-    color: var(--text-primary);
-}
-
-/* Pulse animation for active step */
-@keyframes pulse-step {
-    0% { box-shadow: 0 0 0 0 rgba(58, 130, 246, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(58, 130, 246, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(58, 130, 246, 0); }
-}
-
-/* Animation for steps being completed */
-@keyframes complete-step {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-/* Live transcription preview */
-.live-transcription-preview {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
-    border-radius: var(--radius-lg);
-    padding: var(--space-4);
-    margin-top: var(--space-6);
-    max-height: 200px;
-    overflow-y: auto;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    display: none; /* Hidden by default */
-}
-
-.live-transcription-preview.active { /* Class added by JS */
-    display: block;
-    animation: fadeSlideUp 0.5s var(--ease-out) forwards;
-}
-
-.live-transcription-preview p {
-    margin-bottom: var(--space-2);
-}
-
-.live-transcription-preview .typing { /* Typing indicator */
-    display: inline-block;
-    width: 0.5em;
-    height: 1em;
-    background-color: var(--accent);
-    margin-left: 0.3em;
-    animation: typing-cursor 0.8s infinite;
-    vertical-align: text-bottom; /* Align with text */
-}
-
-@keyframes typing-cursor {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes fadeSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/*----------------------------------------*
- * Styles from Original File 1 (MVP)      *
- * Integrated and adapted                 *
- *----------------------------------------*/
-
-/* Search Bar (Used in #patients-view) */
-.search-container {
-    margin-bottom: var(--space-6);
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: var(--radius-lg);
-    padding: var(--space-2) var(--space-4);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--duration-md) var(--ease-gentle);
-}
-
-.search-bar:focus-within {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: var(--shadow-md);
-}
-
-.search-icon {
-    color: var(--text-tertiary);
-    margin-right: var(--space-2);
-}
-
-.search-input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-size: 0.9375rem;
-    color: var(--text-primary);
-    padding: var(--space-2) 0;
-}
-
-.search-input:focus {
-    outline: none;
-}
-
-/* Agenda Preview (Used in #agenda-view) */
-.agenda-preview {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    border-radius: var(--radius-xl);
-    padding: var(--space-4);
-    margin-bottom: var(--space-8);
-    transition: all var(--duration-md) cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: var(--shadow-sm);
-}
-
-.agenda-preview:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-}
-
-.agenda-date {
-    margin-bottom: var(--space-4);
-    border-bottom: 1px solid rgba(209, 211, 222, 0.3);
-    padding-bottom: var(--space-3);
-}
-
-.date-selector {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.date-nav-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all var(--duration-md) var(--ease-gentle);
-}
-
-.date-nav-btn:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: var(--text-primary);
-}
-
-.current-date {
-    font-weight: 500;
-    color: var(--text-primary);
-    font-size: 0.9375rem;
-}
-
-.appointments {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
-
-.appointment-item {
-    display: flex;
-    align-items: center;
-    padding: var(--space-3);
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: var(--radius-lg);
-    transition: all var(--duration-md) var(--ease-gentle);
-}
-
-.appointment-item:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-    transform: translateX(3px);
-}
-
-.appointment-time {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 1rem;
-    width: 60px;
-    flex-shrink: 0;
-}
-
-.appointment-details {
-    flex: 1;
-    margin-left: var(--space-4);
-    min-width: 0; /* Prevent overflow */
-}
-
-.appointment-patient {
-    font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: var(--space-1);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.appointment-type {
-    font-size: 0.75rem;
-    color: var(--text-tertiary);
-}
-
-.appointment-action {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all var(--duration-md) var(--ease-gentle);
-    flex-shrink: 0;
-}
-
-.appointment-action:hover {
-    background-color: var(--gray-900);
-    color: white;
-}
-
-/* Patient Panel (#patient-view) */
-.patient-panel {
-    flex: 1; /* Take remaining space in main */
-    display: flex;
-    flex-direction: column;
-    background-color: var(--surface-background);
-    height: 100%; /* Ensure it fills parent height */
-    overflow: hidden; /* Prevent double scroll */
-}
-
-.patient-header {
-    padding: var(--space-4) var(--space-6);
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(var(--blur-md));
-    -webkit-backdrop-filter: blur(var(--blur-md));
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(209, 211, 222, 0.3);
-    flex-shrink: 0; /* Prevent shrinking */
-}
-
-.patient-info {
-    min-width: 0; /* Prevent overflow */
-}
-
-.patient-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--space-1);
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.patient-details {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.patient-actions {
-    display: flex;
-    gap: var(--space-2);
-    flex-shrink: 0;
-}
-
-.patient-tabs {
-    display: flex;
-    border-bottom: 1px solid rgba(209, 211, 222, 0.3);
-    background-color: rgba(255, 255, 255, 0.5);
-    overflow-x: auto; /* Allow scrolling */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    flex-shrink: 0; /* Prevent shrinking */
-}
-.patient-tabs::-webkit-scrollbar { display: none; }
-
-.patient-tab {
-    padding: var(--space-4) var(--space-5);
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: all var(--duration-md) var(--ease-gentle);
-    border-bottom: 2px solid transparent;
-    white-space: nowrap; /* Prevent wrapping */
-    flex-shrink: 0;
-}
-
-.patient-tab i {
-    font-size: 1em; /* Match text size */
-}
-
-.patient-tab:hover {
-    color: var(--text-primary);
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.patient-tab.active {
-    color: var(--text-primary);
-    font-weight: 500;
-    border-bottom-color: var(--accent);
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.patient-tab-panels {
-    flex: 1; /* Take remaining space */
-    position: relative;
-    overflow: hidden; /* Clip panels */
-}
-
-.patient-tab-panel {
-    position: absolute;
-    inset: 0;
-    overflow-y: auto; /* Scroll within panel */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--duration-md) var(--ease-gentle),
-                visibility var(--duration-md) var(--ease-gentle);
-}
-
-.patient-tab-panel.active {
-    opacity: 1;
-    visibility: visible;
-    position: relative; /* Take space when active */
-}
-
-.tab-content { /* Padding for content within tabs */
-    padding: var(--space-6);
-}
-
-/* Dimensional Summary (inside patient panel) */
-.dimensional-summary {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    border-radius: var(--radius-xl);
-    padding: var(--space-5);
-    margin-bottom: var(--space-6);
-    box-shadow: var(--shadow-sm);
-}
-
-.dimensional-chart-container {
-    height: 300px;
-    width: 100%;
-    max-width: 500px; /* Limit chart size */
-    margin: 0 auto var(--space-5) auto; /* Center chart */
-}
-
-.dimension-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-5);
-}
-
-.dimension-group h4 {
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: var(--space-3);
-    color: var(--text-primary);
-}
-
-.dimension-item {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid rgba(209, 211, 222, 0.3);
-}
-
-.dimension-name {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-}
-
-.dimension-value {
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.dimension-value.negative { color: var(--error); }
-.dimension-value.positive { color: var(--success); }
-
-/* Trajectory Summary (inside patient panel) */
-.trajectory-summary {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    border-radius: var(--radius-xl);
-    padding: var(--space-5);
-    margin-bottom: var(--space-6);
-    box-shadow: var(--shadow-sm);
-}
-
-.trajectory-chart-container {
-    height: 250px;
-    width: 100%;
-    /* Placeholder - needs chart implementation */
-    display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);
-}
-
-/* Observations Summary (inside patient panel) */
-.observations-summary {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    border-radius: var(--radius-xl);
-    padding: var(--space-5);
-    box-shadow: var(--shadow-sm);
-}
-
-.observation-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    /* Placeholder */
-    color: var(--text-tertiary);
-}
-
-/* Consultation/Processing/Repository Panels (Simplified content) */
-.consultation-header, .processing-header, .repository-header {
-    text-align: center;
-}
-.consultation-header h3, .processing-header h3, .repository-header h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: var(--space-2);
-}
-.consultation-header p, .processing-header p, .repository-header p {
-    color: var(--text-secondary);
-    margin-bottom: var(--space-4);
-}
-.consultation-header button, .repository-header button {
-    margin-top: var(--space-2);
-}
-
-
-/* Repository Panel Specifics (Example, if showing documents here) */
-.repository-search { /* Used in patient panel repository tab */
-    position: relative;
-    width: 100%; /* Full width in tab */
-    max-width: 400px; /* Limit width */
-    margin: 0 auto var(--space-4) auto; /* Center */
-}
-
-.repository-search-input {
-    width: 100%;
-    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-8);
-    background-color: rgba(255, 255, 255, 0.6);
-    border: none;
-    border-radius: var(--radius-lg);
-    font-size: 0.8125rem;
-    color: var(--text-primary);
-    transition: all var(--duration-md) var(--ease-gentle);
-    box-shadow: var(--shadow-sm);
-}
-.repository-search-input:focus { outline: none; }
-
-.repository-search i {
-    position: absolute;
-    left: var(--space-3);
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-tertiary);
-    font-size: 0.75rem;
-    pointer-events: none;
-}
-
-.document-filters { /* Used in patient panel repository tab */
-    display: flex;
-    gap: var(--space-1);
-    margin-bottom: var(--space-4);
-    overflow-x: auto;
-    padding-bottom: var(--space-1);
-    justify-content: center; /* Center filters */
-}
-.document-filters::-webkit-scrollbar { display: none; }
-
-.document-filter {
-    padding: var(--space-1) var(--space-3);
-    background: none;
-    border: none;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all var(--duration-md) var(--ease-gentle);
-}
-.document-filter:hover { background-color: var(--gray-200); }
-.document-filter.active { background-color: var(--gray-900); color: white; }
-
-.documents-list { /* Used in patient panel repository tab */
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    margin-bottom: var(--space-5);
-    /* Needs specific document item styling if used here */
-}
-
-/* Dimensional Modal */
-.dimensional-modal { /* Specific class for this modal */
-    max-width: 800px;
-    width: 90%;
-    max-height: 90vh;
-}
-
-.dimensional-tabs {
-    display: flex;
-    gap: var(--space-2);
-    margin-bottom: var(--space-4);
-    border-bottom: 1px solid rgba(209, 211, 222, 0.3);
-    padding-bottom: var(--space-2);
-}
-
-.dimensional-tab {
-    padding: var(--space-2) var(--space-4);
-    background: none;
-    border: none;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    transition: all var(--duration-md) var(--ease-gentle);
-}
-
-.dimensional-tab:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: var(--text-primary);
-}
-
-.dimensional-tab.active {
-    background-color: var(--gray-900);
-    color: white;
-    font-weight: 500;
-}
-
-.dimensional-views {
-    position: relative;
-    height: 400px; /* Fixed height for chart views */
-}
-
-.dimensional-view {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--duration-md) var(--ease-gentle),
-                visibility var(--duration-md) var(--ease-gentle);
-    display: flex; /* Center content */
-    align-items: center;
-    justify-content: center;
-}
-
-.dimensional-view.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Canvas elements need specific sizing */
-#dimensionalRadarChart, #modalRadarChart {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-/* Document Editor Modal */
-.document-editor { /* Textarea inside edit modal */
-    width: 100%;
-    height: 400px; /* Fixed height */
-    padding: var(--space-4);
-    border: 1px solid var(--gray-300); /* Add border */
-    border-radius: var(--radius-md);
-    background-color: rgba(255, 255, 255, 0.8);
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--text-primary);
-    resize: vertical; /* Allow vertical resize */
-}
-
-.document-editor:focus {
-    outline: none;
-    border-color: var(--accent-light);
-    box-shadow: 0 0 0 2px var(--accent-subtle);
-}
-
-/*------------------*
- * Responsiveness   *
- *------------------*/
-@media (max-width: 1024px) {
-    .app-main {
-        flex-direction: column; /* Stack sidebar and content */
-        height: auto; /* Allow content to determine height */
-    }
-
-    .app-sidebar {
-        width: 100%; /* Full width */
-        height: auto; /* Auto height */
-        flex-direction: row; /* Horizontal layout */
-        align-items: center; /* Center items vertically */
-        padding: 0 var(--space-4); /* Horizontal padding */
-        overflow-x: auto; /* Allow horizontal scroll */
-        overflow-y: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-    .app-sidebar::-webkit-scrollbar { display: none; }
-
-    .app-sidebar::after { display: none; } /* Hide vertical border */
-    .app-sidebar::before { /* Add bottom border */
-        content: "";
-        position: absolute;
-        bottom: 0; left: 0; right: 0; height: 1px;
-        background: linear-gradient(to right, transparent, var(--gray-300), transparent);
-        opacity: 0.4;
-    }
-
-
-    .sidebar-toggle { display: none; } /* Hide toggle button */
-
-    .sidebar-menu {
-        flex-direction: row; /* Horizontal links */
-        padding: var(--space-2) 0;
-        gap: var(--space-2);
-        flex: 1; /* Allow menu to take space */
-    }
-
-    .sidebar-link {
-        flex-shrink: 0; /* Prevent shrinking */
-        padding: var(--space-2) var(--space-3);
-        gap: var(--space-2);
-    }
-    .sidebar-link span { display: inline; opacity: 1; transform: none; } /* Always show text */
-    .sidebar-link::before { /* Indicator below text */
-        width: 100%; height: 3px; top: auto; bottom: -5px; left: 0;
-        transform-origin: center;
-    }
-    .sidebar-link.active::before { transform: scaleX(0.6); }
-
-    .workspace {
-        height: auto; /* Adjust height */
-    }
-
-    #library-view {
-        flex-direction: column; /* Stack library list and view */
-        height: auto;
-    }
-
-    .document-library {
-        width: 100%;
-        height: 300px; /* Fixed height for list */
-        min-height: 300px;
-        border-bottom: 1px solid var(--gray-300); /* Separator */
-    }
-     .document-library::after { display: none; } /* Hide side border */
-
-    .document-workspace {
-        height: auto; /* Adjust height */
-    }
-}
-
-@media (max-width: 768px) {
-    /* Show mobile menu button, hide desktop nav/sidebar */
-    .mobile-menu-btn { display: block; }
-    .app-sidebar { display: none; }
-    .app-nav { display: none; }
-
-    .app-header { padding: var(--space-3) var(--space-4); }
-
-    /* Adjust dashboard */
-    .dashboard { padding: var(--space-4); }
-    .dashboard-header { margin-bottom: var(--space-6); }
-    .welcome-message {
-        flex-direction: column; text-align: center; gap: var(--space-4);
-        align-items: center; padding: var(--space-4); margin-bottom: var(--space-6);
-    }
-    .welcome-message img { margin-top: var(--space-4); height: 80px; }
-    .recent-items, .recent-patients { grid-template-columns: 1fr; } /* Single column */
-
-    /* Adjust library view */
-    .document-library { height: 250px; min-height: 250px; }
-
-    /* Adjust document workspace */
-    .document-workspace { width: 100%; }
-    .document-toolbar {
-        flex-direction: column; gap: var(--space-3); align-items: flex-start;
-        padding: var(--space-3);
-    }
-    .document-toolbar-actions { width: 100%; justify-content: space-between; }
-    .document-content { padding: var(--space-4); }
-    .document-view, .document-edit { padding: var(--space-4); font-size: 0.875rem; }
-
-    /* Adjust new/processing views */
-    .recording-module, .upload-module { padding: var(--space-6); }
-    .recording-controls { gap: var(--space-3); }
-    .recording-btn { width: 56px; height: 56px; font-size: 1.25rem; }
-    .recording-time { font-size: 2rem; }
-    .upload-area { padding: var(--space-8) var(--space-4); }
-    .transcription-steps-list { flex-wrap: wrap; justify-content: space-around; }
-    .transcription-step { width: 45%; margin-bottom: var(--space-4); }
-    .transcription-step-label { font-size: 0.65rem; }
-    .transcription-completed-actions { flex-direction: column; width: 100%; gap: var(--space-3); }
-
-    /* Adjust patient panel */
-    .patient-header { padding: var(--space-3) var(--space-4); flex-direction: column; align-items: flex-start; gap: var(--space-2); }
-    .patient-actions { width: 100%; justify-content: flex-end; }
-    .patient-tab { padding: var(--space-3) var(--space-4); }
-    .tab-content { padding: var(--space-4); }
-    .dimensional-chart-container { height: 250px; }
-    .dimension-details { grid-template-columns: 1fr; }
-
-    /* Adjust modals */
-    .modal-container { width: 95%; }
-    .modal-header, .modal-body, .modal-footer { padding: var(--space-4); }
-    .dimensional-modal .dimensional-views { height: 300px; }
-
-    /* Adjust focus mode */
-    .focus-mode-btn { width: 32px; height: 32px; top: var(--space-3); right: var(--space-3); }
-    .focus-mode .document-toolbar { opacity: 0.4; }
-    .focus-mode .document-toolbar:hover { opacity: 1; }
-    .focus-mode .document-content { padding: var(--space-3); }
-
-    /* Adjust toast */
-    .toast-container { bottom: var(--space-3); right: var(--space-3); left: var(--space-3); }
-    .toast { min-width: auto; width: 100%; }
-}
-
-/*-------------*
- * Mobile Menu *
- *-------------*/
-.mobile-menu-btn {
-    /* display: none; */ /* Controlled by media query */
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text-primary);
-    cursor: pointer;
-    margin-right: var(--space-3);
-    padding: var(--space-1); /* Easier to tap */
-}
-
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: 0; /* Slides in from right */
-    width: 85%;
-    max-width: 300px;
-    height: 100vh;
-    background: var(--surface-white);
-    box-shadow: var(--shadow-xl);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(100%); /* Start off-screen */
-    transition: transform 0.3s var(--ease-out);
-}
-
-.mobile-menu.open {
-    transform: translateX(0); /* Slide in */
-}
-
-.mobile-menu-header {
-    padding: var(--space-4);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--gray-200);
-    flex-shrink: 0;
-}
-
-.mobile-logo {
-    height: 32px;
-}
-
-.mobile-menu-close {
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    color: var(--text-primary);
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%; /* Make it round */
-}
-.mobile-menu-close:hover {
-    background-color: var(--gray-100);
-}
-
-.mobile-menu-content {
-    flex: 1; /* Take remaining space */
-    overflow-y: auto;
-    padding: var(--space-4) 0;
-}
-
-.mobile-menu-footer {
-    padding: var(--space-4) 0;
-    border-top: 1px solid var(--gray-200);
-    flex-shrink: 0;
-}
-
-.mobile-menu-item {
-    display: flex;
-    align-items: center;
-    padding: var(--space-3) var(--space-4);
-    text-decoration: none;
-    color: var(--text-secondary);
-    transition: all var(--duration-md) var(--ease-gentle);
-}
-
-.mobile-menu-item i {
-    margin-right: var(--space-3);
-    font-size: 1.25rem;
-    width: 24px;
-    text-align: center;
-    color: var(--text-tertiary); /* Icon color */
-}
-
-.mobile-menu-item.active {
-    color: var(--text-primary);
-    background-color: var(--accent-subtle);
-}
-.mobile-menu-item.active i {
-    color: var(--accent); /* Active icon color */
-}
-
-
-.mobile-menu-item:hover {
-    background-color: var(--gray-100);
-    color: var(--text-primary);
-}
-.mobile-menu-item:hover i {
-    color: var(--text-primary);
-}
-
-
-.mobile-menu-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    z-index: 999; /* Below menu */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s var(--ease-out), visibility 0.3s var(--ease-out);
-}
-
-.mobile-menu-backdrop.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-/*--------------------*
- * Text Editor Styles *
- *--------------------*/
-/* Example styles if using a rich text editor */
-.editor-toolbar {
-    display: flex;
-    gap: var(--space-1);
-    padding: var(--space-2);
-    background: var(--gray-100);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    flex-wrap: wrap;
-}
-
-.editor-btn {
     width: 28px;
     height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
-    border-radius: var(--radius-md);
-    transition: all var(--duration-md) var(--ease-gentle);
-    color: var(--text-secondary);
-    cursor: pointer;
+    border-radius: 50%;
 }
 
-.editor-btn:hover {
-    background: var(--gray-200);
-    color: var(--text-primary);
+.upload-preview-remove:hover {
+    transform: scale(1.1);
+    background-color: var(--gray-ording(); // Reseta se algo deu errado
+    }
 }
 
-.editor-btn.active {
-    background: var(--accent-subtle);
-    color: var(--accent-vivid);
+
+/** Reseta o estado da gravação e a UI */
+function resetRecording(): void {
+    console.log("Resetando gravação.");
+    if (state.isRecording) {
+        // Tenta parar o MediaRecorder se estiver ativo, mas evita chamar stopRecording() recursivamente
+        if (state.mediaRecorder && state.mediaRecorder.state === 'recording') {
+             try {
+                 state.mediaRecorder.stop();
+             } catch (e) {
+                 console.error("Erro ao tentar parar mediaRecorder no reset:", e);
+             }
+        }
+        state.isRecording = false; // Força o estado
+    }
+    stopTimer();
+    stopVisualizer();
+    resetRecordingVisuals();
+    state.audioChunks = [];
+    state.processedAudioBlob = null;
+    state.recordingStartTime = null;
+    // Garante que o stream seja parado
+    if (state.visualizerSource?.mediaStream) {
+       state.visualizerSource.mediaStream.getTracks().forEach(track => track.stop());
+    }
+    state.visualizerSource?.disconnect(); // Desconecta a fonte do analyser
+    state.visualizerSource = null;
+    state.mediaRecorder = null; // Limpa a referência
 }
 
-.editor-divider {
-    width: 1px;
-    height: 24px;
-    background: var(--gray-300);
-    margin: 0 var(--space-1);
+/** Reseta apenas os elementos visuais da gravação */
+function resetRecordingVisuals(): void {
+    document.getElementById('startRecordingBtn')?.classList.remove('hidden');
+    document.getElementById('stopRecordingBtn')?.classList.add('hidden');
+    document.getElementById('recordingPreview')?.style.display = 'none';
+    document.getElementById('processRecordingBtn')?.style.display = 'none';
+    document.getElementById('recordingProgress')?.style.display = 'none';
+    document.getElementById('recordingTranscriptionSteps')?.style.display = 'none';
+    document.getElementById('liveTranscriptionPreview')?.style.display = 'none';
+    document.getElementById('recordingCompletedPanel')?.style.display = 'none';
+
+    const timeEl = document.getElementById('recordingTime');
+    if(timeEl) timeEl.textContent = '00:00:00';
+    const statusEl = document.getElementById('recordingStatus');
+    if(statusEl) statusEl.textContent = 'Pronto para gravar';
+
+    const visualizer = document.querySelector<HTMLElement>('.recording-visualizer');
+    if(visualizer) visualizer.style.opacity = '0.3';
+    const barsContainer = document.getElementById('visualizerBars');
+    if (barsContainer) barsContainer.innerHTML = ''; // Limpa barras
 }
 
-/*------------------*
- * Saving Animation *
- *------------------*/
-@keyframes saving-pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
+
+/** Atualiza a visibilidade dos botões de gravação */
+function updateUIRecordingState(isRecording: boolean): void {
+    document.getElementById('startRecordingBtn')?.classList.toggle('hidden', isRecording);
+    document.getElementById('stopRecordingBtn')?.classList.toggle('hidden', !isRecording);
 }
 
-/* Apply to .document-status when saving */
-/* .document-status.saving { animation: saving-pulse 1.5s infinite; } */
+/** Inicia o timer da gravação */
+function startTimer(): void {
+    if (state.recordingInterval) clearInterval(state.recordingInterval); // Limpa timer anterior
+    const timerElement = document.getElementById('recordingTime');
+    if(!timerElement) return;
 
-.saving-indicator { /* Optional fixed indicator */
+    state.recordingInterval = window.setInterval(() => { // Usar window.setInterval para tipo number
+        if (!state.recordingStartTime) return;
+        const elapsedSeconds = Math.floor((Date.now() - state.recordingStartTime) / 1000);
+        const hours = Math.floor(elapsedSeconds / 3600);
+        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+        const seconds = elapsedSeconds % 60;
+        timerElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }, 1000);
+}
+
+/** Para o timer da gravação */
+function stopTimer(): void {
+    if (state.recordingInterval) {
+        clearInterval(state.recordingInterval);
+        state.recordingInterval = null;
+    }
+}
+
+/** Inicia o visualizador de áudio */
+function startVisualizer(): void {
+    if (!state.analyser || !state.audioContext || state.audioContext.state === 'suspended' || !state.visualizerSource) {
+        console.warn("AudioContext/Analyser/Source não disponível/pronto, não iniciando visualizador.");
+        return;
+    }
+
+    const visualizerBars = document.getElementById('visualizerBars');
+    if (!visualizerBars) return;
+    visualizerBars.innerHTML = ''; // Limpa barras antigas
+
+    const bufferLength = state.analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    const barCount = 30;
+
+    for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'visualizer-bar';
+        visualizerBars.appendChild(bar);
+    }
+    const bars = visualizerBars.childNodes as NodeListOf<HTMLDivElement>;
+
+    const draw = () => {
+        // Verifica se ainda deve desenhar
+        if (!state.isRecording || !state.analyser) {
+             stopVisualizer(); // Para o loop se a gravação parou ou analyser sumiu
+             return;
+        }
+
+        state.visualizerRafId = requestAnimationFrame(draw);
+        state.analyser.getByteFrequencyData(dataArray);
+
+        const barHeightMultiplier = visualizerBars.clientHeight / 128;
+        const step = Math.floor(bufferLength / barCount);
+
+        for (let i = 0; i < barCount; i++) {
+            let sum = 0;
+            for (let j = 0; j < step; j++) {
+                sum += dataArray[i * step + j];
+            }
+            let avg = sum / step || 0; // Evita NaN
+            let barHeight = Math.max(1, Math.min(avg * barHeightMultiplier * 1.5, visualizerBars.clientHeight));
+            if (bars[i]) {
+                bars[i].style.height = `${barHeight}px`;
+            }
+        }
+    };
+
+    // Reinicia o RAF ID antes de chamar draw
+    if(state.visualizerRafId) cancelAnimationFrame(state.visualizerRafId);
+    state.visualizerRafId = null;
+    draw();
+}
+
+/** Para o visualizador de áudio */
+function stopVisualizer(): void {
+    if (state.visualizerRafId) {
+        cancelAnimationFrame(state.visualizerRafId);
+        state.visualizerRafId = null;
+    }
+    // Não desconectar a source aqui, pois ela pode ser necessária para parar o stream
+    // A desconexão e parada do stream ocorrem em stopRecording ou resetRecording
+
+    const visualizerBars = document.getElementById('visualizerBars');
+    if (visualizerBars) {
+        gsap.to(".visualizer-bar", { height: 1, duration: 0.3, ease: 'power1.out', stagger: 0.01 });
+    }
+    console.log("Visualizador parado.");
+}
+
+
+// --- Upload de Arquivo ---
+
+/** Configura o módulo de upload de arquivos */
+function setupUpload(): void {
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadInput = document.getElementById('uploadInput') as HTMLInputElement | null;
+    const removeBtn = document.getElementById('uploadRemoveBtn');
+    const processBtn = document.getElementById('processUploadBtn');
+
+    if (!uploadArea || !uploadInput || !removeBtn || !processBtn) {
+        console.error("Elementos de upload não encontrados.");
+        return;
+    }
+
+    uploadArea.addEventListener('click', () => uploadInput.click());
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, () => uploadArea.classList.remove('dragover'), false);
+    });
+
+    uploadArea.addEventListener('drop', (e: DragEvent) => {
+        const dt = e.dataTransfer;
+        const files = dt?.files;
+        if (files?.length) {
+            handleFiles(files);
+        }
+    }, false);
+
+    uploadInput.addEventListener('change', (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        if (target.files?.length) {
+            handleFiles(target.files);
+        }
+    });
+
+    removeBtn.addEventListener('click', resetUpload);
+
+    processBtn.addEventListener('click', () => {
+        if (state.uploadedFile) {
+            simulateProcessing('upload');
+        } else {
+            showToast('error', 'Erro', 'Nenhum arquivo selecionado para processar.');
+        }
+    });
+}
+
+/** Impede comportamentos padrão de drag & drop */
+function preventDefaults(e: Event): void {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+/** Lida com os arquivos selecionados/soltos */
+function handleFiles(files: FileList): void {
+    if (files.length > 1) {
+        showToast('warning', 'Apenas um arquivo', 'Por favor, envie apenas um arquivo por vez.');
+        return;
+    }
+    const file = files[0];
+    // TODO: Validação de tipo de arquivo (ex: audio/*, text/plain)
+    if (!file.type.startsWith('audio/') && file.type !== 'text/plain') {
+         showToast('warning', 'Tipo Inválido', 'Apenas arquivos de áudio ou texto plano são suportados.');
+         resetUpload(); // Limpa se o tipo for inválido
+         return;
+    }
+    console.log("Arquivo selecionado:", file.name, file.size, file.type);
+
+    state.uploadedFile = file;
+
+    const preview = document.getElementById('uploadPreview');
+    const fileNameEl = document.getElementById('uploadFileName');
+    const fileMetaEl = document.getElementById('uploadFileMeta');
+    const processBtn = document.getElementById('processUploadBtn');
+    const iconEl = preview?.querySelector<HTMLElement>('.upload-preview-icon i');
+
+    if (preview && fileNameEl && fileMetaEl && processBtn && iconEl) {
+        fileNameEl.textContent = escapeHtml(file.name);
+        fileMetaEl.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
+
+        if (file.type.startsWith('audio/')) {
+            iconEl.className = 'fas fa-file-audio';
+        } else if (file.type === 'text/plain') {
+            iconEl.className = 'fas fa-file-alt';
+        } else {
+            iconEl.className = 'fas fa-file'; // Fallback
+        }
+
+        gsap.to(preview, { display: 'flex', opacity: 1, duration: 0.3 });
+        gsap.to(processBtn, { display: 'inline-flex', opacity: 1, duration: 0.3 });
+        // document.getElementById('uploadArea')?.style.display = 'none'; // Opcional
+    }
+    // Limpa o input para permitir selecionar o mesmo arquivo novamente
+    const uploadInput = document.getElementById('uploadInput') as HTMLInputElement | null;
+    if(uploadInput) uploadInput.value = '';
+}
+
+/** Reseta o estado do upload e a UI */
+function resetUpload(): void {
+    console.log("Resetando upload.");
+    state.uploadedFile = null;
+    const preview = document.getElementById('uploadPreview');
+    const processBtn = document.getElementById('processUploadBtn');
+    const uploadProgress = document.getElementById('uploadProgress');
+    const uploadSteps = document.getElementById('uploadTranscriptionSteps');
+    const uploadCompleted = document.getElementById('uploadCompletedPanel');
+    const uploadInput = document.getElementById('uploadInput') as HTMLInputElement | null;
+
+    if (preview) gsap.to(preview, { opacity: 0, duration: 0.2, onComplete: () => preview.style.display = 'none' });
+    if (processBtn) gsap.to(processBtn, { opacity: 0, duration: 0.2, onComplete: () => processBtn.style.display = 'none' });
+    if (uploadProgress) uploadProgress.style.display = 'none';
+    if (uploadSteps) uploadSteps.style.display = 'none';
+    if (uploadCompleted) uploadCompleted.style.display = 'none';
+    if (uploadInput) uploadInput.value = '';
+    // document.getElementById('uploadArea')?.style.display = 'block'; // Opcional
+}
+
+
+// --- Transcrição Manual ---
+
+/** Configura a aba de transcrição manual */
+function setupTranscriptionInput(): void {
+    const processBtn = document.getElementById('processManualTranscriptionBtn');
+    const textarea = document.getElementById('transcriptionText') as HTMLTextAreaElement | null;
+
+    if (processBtn && textarea) {
+        processBtn.addEventListener('click', () => {
+            const text = textarea.value.trim();
+            if (text) {
+                // Salva a transcrição manual no estado para uso posterior
+                state.transcriptionText = text;
+                simulateProcessing('manual');
+            } else {
+                showToast('warning', 'Texto Vazio', 'Por favor, digite ou cole a transcrição.');
+                textarea.focus();
+            }
+        });
+    }
+}
+
+// --- Simulação de Processamento e Geração ---
+
+/** Define o estado de processamento e atualiza a UI globalmente */
+function setProcessingState(isProcessing: boolean): void {
+    state.isProcessing = isProcessing;
+    const elementsToToggle = document.querySelectorAll<HTMLButtonElement | HTMLAnchorElement | HTMLInputElement | HTMLTextAreaElement>(`
+        .sidebar-link, .mobile-menu-item, #sidebarToggle, #mobileMenuBtn,
+        .library-btn, .document-item, .toolbar-btn, .patient-tab,
+        #startRecordingBtn, #stopRecordingBtn, #processRecordingBtn,
+        #uploadArea, #uploadInput, #processUploadBtn,
+        #processManualTranscriptionBtn, #startProcessingBtn,
+        .document-format-option, .dimensional-tab, .modal-close, .modal-footer button,
+        .document-action-btn, .nav-item
+    `); // Seletores mais abrangentes
+    elementsToToggle.forEach(el => {
+        el.disabled = isProcessing;
+        el.classList.toggle('disabled', isProcessing);
+    });
+    console.log(`Estado de processamento: ${isProcessing}`);
+}
+
+/**
+ * Simula o processamento de um documento (gravação, upload, manual).
+ * @param type - O tipo de origem.
+ */
+async function simulateProcessing(type: 'recording' | 'upload' | 'manual'): Promise<void> {
+    if (state.isProcessing) return;
+    setProcessingState(true);
+    console.log(`Simulando processamento para: ${type}`);
+
+    // Seleciona os elementos corretos
+    const progressContainerId = `${type}Progress`;
+    const stepsContainerId = `${type}TranscriptionSteps`;
+    const stepsProgressId = `${type}TranscriptionStepsProgress`;
+    const completedPanelId = `${type}CompletedPanel`;
+    const progressBarId = `${type}ProgressBar`;
+    const percentageId = `${type}ProgressPercentage`;
+    const statusId = `${type}ProgressStatus`;
+    const previewId = `${type}Preview`;
+    const actionButtonId = type === 'recording' ? 'processRecordingBtn' : (type === 'upload' ? 'processUploadBtn' : 'processManualTranscriptionBtn');
+    const livePreviewId = 'liveTranscriptionPreview'; // ID unificado para gravação/upload
+
+    const progressContainer = document.getElementById(progressContainerId);
+    const stepsContainer = document.getElementById(stepsContainerId);
+    const completedPanel = document.getElementById(completedPanelId);
+    const previewContainer = document.getElementById(previewId);
+    const actionButton = document.getElementById(actionButtonId);
+    const livePreview = document.getElementById(livePreviewId);
+    const manualTextarea = document.getElementById('transcriptionText') as HTMLTextAreaElement | null;
+
+    // Esconde botão de ação e preview (se aplicável)
+    if (actionButton) gsap.to(actionButton, { opacity: 0, duration: 0.2, onComplete: () => actionButton.style.display = 'none' });
+    if (previewContainer && type !== 'manual') gsap.to(previewContainer, { opacity: 0, duration: 0.2, onComplete: () => previewContainer.style.display = 'none' });
+    if (type === 'manual' && manualTextarea) manualTextarea.disabled = true;
+
+    // Mostra indicadores de progresso
+    if (progressContainer) progressContainer.style.display = 'block';
+    if (stepsContainer) stepsContainer.style.display = 'block';
+    if (livePreview && (type === 'recording' || type === 'upload')) {
+         livePreview.style.display = 'block';
+         livePreview.innerHTML = '<p><i>Iniciando análise...</i><span class="typing"></span></p>';
+    }
+
+    // Simulação dos passos
+    const steps = [
+        { name: type === 'upload' ? 'Upload' : (type === 'manual' ? 'Validação' : 'Processando Áudio'), duration: 1000, text: 'Analisando dados...' },
+        { name: type === 'manual' ? 'Processamento' : 'Transcrição', duration: 2000, text: 'Realizando transcrição...' },
+        { name: type === 'manual' ? 'Análise' : 'Diarização', duration: 1500, text: 'Identificando segmentos...' },
+        { name: 'Finalização', duration: 500, text: 'Gerando documento...' }
+    ];
+
+    let totalDuration = steps.reduce((sum, step) => sum + step.duration, 0);
+    let elapsed = 0;
+
+    // Simula a transcrição (usando texto de exemplo)
+    const simulatedTranscription = state.transcriptionText || `Transcrição simulada para ${type} - ${new Date().toLocaleTimeString()}. Médico: ... Paciente: ...`;
+    state.transcriptionText = simulatedTranscription; // Atualiza o estado com a transcrição (simulada ou manual)
+
+    for (let i = 0; i < steps.length; i++) {
+        const step = steps[i];
+        updateStepProgress(stepsContainerId, stepsProgressId, i + 1);
+        updateProgressBar(progressBarId, percentageId, statusId, (elapsed / totalDuration) * 100, step.name);
+        if (livePreview && (type === 'recording' || type === 'upload')) {
+            livePreview.innerHTML = `<p><i>${step.text}</i><span class="typing"></span></p>`;
+            livePreview.scrollTop = livePreview.scrollHeight;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, step.duration));
+        elapsed += step.duration;
+
+        if (i < steps.length - 1) {
+            updateStepProgress(stepsContainerId, stepsProgressId, i + 1, true);
+        }
+    }
+
+    updateProgressBar(progressBarId, percentageId, statusId, 100, 'Concluído');
+    updateStepProgress(stepsContainerId, stepsProgressId, steps.length, true);
+    if (livePreview && (type === 'recording' || type === 'upload')) {
+        livePreview.innerHTML = `<p><i>Transcrição finalizada.</i></p>`;
+    }
+
+    // Adiciona o documento processado (transcrição) ao estado
+    const originalFileName = type === 'upload' ? state.uploadedFile?.name : (type === 'recording' ? document.getElementById('recordingFileName')?.textContent : 'Transcricao_Manual');
+    const newDocId = addProcessedDocument(originalFileName || 'Documento', type);
+    if(newDocId) {
+        state.currentDocumentId = newDocId; // Define o documento recém-criado como ativo
+    } else {
+        console.error("Falha ao criar ID para o novo documento de transcrição.");
+        // Lidar com o erro - talvez mostrar um toast e resetar
+        setProcessingState(false);
+        showToast('error', 'Erro Interno', 'Não foi possível salvar a transcrição processada.');
+        // Resetar a UI específica do tipo de processamento
+        if (type === 'recording') resetRecording();
+        else if (type === 'upload') resetUpload();
+        else if (type === 'manual' && manualTextarea) manualTextarea.disabled = false;
+        return; // Interrompe a função aqui
+    }
+
+
+    // Esconde progresso e mostra painel de conclusão
+    if (progressContainer) progressContainer.style.display = 'none';
+    if (stepsContainer) stepsContainer.style.display = 'none';
+    if (livePreview) livePreview.style.display = 'none';
+    if (completedPanel) {
+        completedPanel.classList.add('active');
+        completedPanel.style.display = 'flex';
+    }
+    if (type === 'manual' && manualTextarea) manualTextarea.disabled = false;
+
+    setProcessingState(false);
+    console.log(`Processamento de ${type} concluído. Novo Documento ID: ${newDocId}`);
+}
+
+/** Adiciona um documento de transcrição processado à lista */
+function addProcessedDocument(originalFileName: string, sourceType: 'recording' | 'upload' | 'manual'): string | null {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('pt-BR'); // dd/mm/yyyy
+    const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    const safeName = originalFileName.replace(/\.[^/.]+$/, ""); // Remove extensão
+    const newId = `doc${Date.now()}`; // ID único
+
+    // Usa o state.transcriptionText que foi atualizado/simulado em simulateProcessing
+    const contentSize = state.transcriptionText ? (state.transcriptionText.length / 1024).toFixed(1) : '0.0';
+
+    const newDoc: DocumentMetadata = {
+        id: newId,
+        patientId: state.currentPatientId || null, // Associa ao paciente atual, se houver
+        title: `Transcrição_${safeName}.txt`,
+        type: 'transcription',
+        date: dateStr,
+        time: timeStr,
+        icon: 'fas fa-file-alt',
+        color: 'var(--accent)',
+        size: `${contentSize} KB`
+    };
+
+    // Verifica se já existe um documento com o mesmo ID (improvável, mas seguro)
+    if (state.documents.some(doc => doc.id === newId)) {
+        console.error("Erro: Tentativa de adicionar documento com ID duplicado:", newId);
+        return null; // Retorna null para indicar falha
+    }
+
+    state.documents.push(newDoc);
+    console.log("Novo documento de transcrição adicionado:", newDoc);
+
+    // Opcional: Atualizar UI se necessário (ex: biblioteca)
+    if (state.currentView === 'library') {
+        renderDocumentLibrary();
+    }
+     // Atualiza documentos do paciente se a aba estiver ativa
+    if (state.currentView === 'patient' && state.activePatientTab === 'repository-panel') {
+        renderPatientDocuments();
+    }
+
+    return newId; // Retorna o ID do novo documento
+}
+
+/** Atualiza a UI dos indicadores de passo */
+function updateStepProgress(stepsContainerId: string, progressIndicatorId: string, currentStep: number, completed: boolean = false): void {
+    const stepsContainer = document.getElementById(stepsContainerId);
+    const progressIndicator = document.getElementById(progressIndicatorId);
+    if (!stepsContainer || !progressIndicator) return;
+
+    const steps = stepsContainer.querySelectorAll<HTMLElement>('.transcription-step');
+    steps.forEach((step, index) => {
+        const stepNumber = index + 1;
+        step.classList.remove('active', 'completed');
+        if (stepNumber < currentStep || (stepNumber === currentStep && completed)) {
+            step.classList.add('completed');
+        } else if (stepNumber === currentStep && !completed) {
+            step.classList.add('active');
+        }
+    });
+
+    const progressPercentage = completed ? ((currentStep) / steps.length) * 100 : ((currentStep - 0.5) / steps.length) * 100;
+    progressIndicator.style.width = `${Math.min(100, progressPercentage)}%`;
+}
+
+/** Atualiza a UI da barra de progresso */
+function updateProgressBar(barId: string, percentageId: string, statusId: string, percentage: number, statusText: string): void {
+    const bar = document.getElementById(barId);
+    const percentEl = document.getElementById(percentageId);
+    const statusEl = document.getElementById(statusId);
+
+    if (bar) bar.style.width = `${Math.min(percentage, 100)}%`;
+    if (percentEl) percentEl.textContent = `${Math.round(Math.min(percentage, 100))}%`;
+    if (statusEl) statusEl.textContent = statusText;
+}
+
+
+// --- View: Processamento (#processing-view) ---
+
+/** Configura a view de processamento de documentos */
+function setupProcessing(): void {
+    const optionsContainer = document.querySelector<HTMLElement>('#processing-view .document-format-options');
+    const startBtn = document.getElementById('startProcessingBtn');
+    // O botão viewResultsBtn já é tratado no setupEventListeners global
+
+    if (optionsContainer) {
+        optionsContainer.addEventListener('click', (e: MouseEvent) => {
+            const option = (e.target as Element)?.closest<HTMLDivElement>('.document-format-option');
+            if (option) {
+                option.classList.toggle('active');
+            }
+        });
+    }
+
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            if (!optionsContainer) return;
+            const selectedFormats = Array.from(optionsContainer.querySelectorAll<HTMLDivElement>('.document-format-option.active'))
+                .map(el => el.dataset.format as DocumentType)
+                .filter(format => format); // Filtra undefined/null
+
+            if (selectedFormats.length === 0) {
+                showToast('warning', 'Nenhum Formato', 'Selecione pelo menos um formato para gerar.');
+                return;
+            }
+            if (!state.currentDocumentId) {
+                showToast('error', 'Erro', 'Nenhum documento base selecionado para processamento.');
+                window.switchView('library');
+                return;
+            }
+            simulateGeneration(selectedFormats);
+        });
+    }
+}
+
+/**
+ * Simula a geração dos documentos selecionados.
+ * @param formats - Array com os tipos de formato selecionados.
+ */
+async function simulateGeneration(formats: DocumentType[]): Promise<void> {
+    if (state.isProcessing) return;
+    setProcessingState(true);
+    console.log(`Simulando geração para formatos: ${formats.join(', ')}`);
+
+    const progressContainer = document.getElementById('processingProgress');
+    const completedPanel = document.getElementById('processingCompletedPanel');
+    const startBtn = document.getElementById('startProcessingBtn');
+    const optionsContainer = document.querySelector<HTMLElement>('#processing-view .document-format-options');
+
+    // Esconde botão e opções, mostra progresso
+    if (startBtn) startBtn.style.display = 'none';
+    if (optionsContainer) optionsContainer.style.display = 'none';
+    if (progressContainer) progressContainer.style.display = 'block';
+
+    const totalSteps = formats.length;
+    let currentStep = 0;
+    const stepDuration = 1500; // Duração por formato
+
+    for (const format of formats) {
+        currentStep++;
+        const statusText = `Gerando ${format.charAt(0).toUpperCase() + format.slice(1)}... (${currentStep}/${totalSteps})`;
+        const percentage = (currentStep / totalSteps) * 100;
+        updateProgressBar('processingProgressBar', 'processingProgressPercentage', 'processingProgressStatus', percentage, statusText);
+
+        // Simula tempo de geração
+        await new Promise(resolve => setTimeout(resolve, stepDuration));
+
+        // Adiciona o documento gerado ao estado (simulação)
+        // Em um app real, aqui ocorreria a chamada API e a resposta traria o conteúdo
+        // Por ora, usamos o conteúdo de exemplo já no state
+        addGeneratedDocument(format);
+    }
+
+    updateProgressBar('processingProgressBar', 'processingProgressPercentage', 'processingProgressStatus', 100, 'Concluído');
+
+    // Esconde progresso, mostra painel de conclusão
+    if (progressContainer) progressContainer.style.display = 'none';
+    if (completedPanel) {
+        completedPanel.classList.add('active');
+        completedPanel.style.display = 'flex';
+    }
+
+    setProcessingState(false);
+    console.log("Geração de documentos concluída.");
+}
+
+/** Adiciona um documento gerado (VINTRA, SOAP, etc.) à lista */
+function addGeneratedDocument(formatType: DocumentType): void {
+    const baseDoc = state.documents.find(d => d.id === state.currentDocumentId);
+    if (!baseDoc) {
+        console.error("Documento base não encontrado para gerar formato:", formatType);
+        return;
+    }
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('pt-BR');
+    const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    const baseTitle = baseDoc.title.replace(/\.(txt|mp3|wav|m4a)$/i, '');
+    const newId = `doc${Date.now()}_${formatType}`; // ID mais específico
+
+    let icon = 'fas fa-file-medical-alt';
+    let color = 'var(--gray-600)';
+    switch(formatType) {
+        case 'vintra': icon = 'fas fa-clipboard-list'; color = 'var(--accent)'; break;
+        case 'soap': icon = 'fas fa-notes-medical'; color = 'var(--success)'; break;
+        case 'ipissima': icon = 'fas fa-comment-dots'; color = 'var(--accent-pink)'; break;
+        case 'narrative': icon = 'fas fa-book-open'; color = 'var(--warning-yellow)'; break;
+        case 'orientacoes': icon = 'fas fa-list-check'; color = '#8B5CF6'; break;
+    }
+
+    // Pega o conteúdo (de exemplo) do estado
+    const content = getDocumentContent(formatType);
+    if (content === null) {
+        console.error(`Conteúdo de exemplo para '${formatType}' não encontrado.`);
+        // Poderia criar um documento vazio ou com placeholder
+        return;
+    }
+    const contentSize = (content.length / 1024).toFixed(1);
+
+    const newDoc: DocumentMetadata = {
+        id: newId,
+        patientId: baseDoc.patientId,
+        title: `${formatType.toUpperCase()}_${baseTitle}.txt`,
+        type: formatType,
+        date: dateStr,
+        time: timeStr,
+        icon: icon,
+        color: color,
+        size: `${contentSize} KB`
+    };
+
+    // Evita adicionar duplicatas exatas (mesmo ID)
+     if (!state.documents.some(doc => doc.id === newId)) {
+        state.documents.push(newDoc);
+        console.log(`Novo documento gerado (${formatType}) adicionado:`, newDoc);
+
+        // Atualiza UI relevante
+        if (state.currentView === 'library') {
+            renderDocumentLibrary();
+        }
+        if (state.currentView === 'patient' && state.activePatientTab === 'repository-panel') {
+            renderPatientDocuments();
+        }
+        // Se a view de resultados estiver ativa, potencialmente atualizar as abas/conteúdo
+        if (state.currentView === 'results') {
+            // Poderia adicionar a tab dinamicamente ou apenas atualizar o conteúdo se a tab já existir
+            // Por simplicidade, vamos assumir que as tabs são fixas e o conteúdo será atualizado quando a tab for clicada
+        }
+    } else {
+         console.warn(`Documento com ID ${newId} já existe. Geração ignorada.`);
+    }
+}
+
+/** Inicia o fluxo de processamento a partir de um documento da biblioteca */
+function startProcessingDocument(docId: string): void {
+    const doc = state.documents.find(d => d.id === docId);
+    if (!doc) {
+        showToast('error', 'Erro', 'Documento não encontrado.');
+        return;
+    }
+
+    if (doc.type !== 'audio' && doc.type !== 'transcription') {
+        showToast('info', 'Não Processável', `Documentos do tipo '${doc.type}' não podem ser usados para gerar formatos VINTRA.`);
+        return;
+    }
+
+    console.log(`Iniciando fluxo de processamento para: ${doc.title}`);
+    state.currentDocumentId = docId; // Define como documento base
+
+    // Atualiza o título na view de processamento
+    const titleElement = document.getElementById('processingDocumentTitle');
+    if (titleElement) {
+        titleElement.textContent = escapeHtml(doc.title);
+    }
+
+    // Reseta a UI da view de processamento
+    const optionsContainer = document.querySelector<HTMLElement>('#processing-view .document-format-options');
+    const startBtn = document.getElementById('startProcessingBtn');
+    const progressContainer = document.getElementById('processingProgress');
+    const completedPanel = document.getElementById('processingCompletedPanel');
+
+    if(optionsContainer) {
+        optionsContainer.style.display = 'flex';
+        // Reseta seleção (deixa VINTRA e SOAP ativos por padrão, por exemplo)
+        optionsContainer.querySelectorAll<HTMLDivElement>('.document-format-option').forEach(opt => {
+            const format = opt.dataset.format;
+            opt.classList.toggle('active', format === 'vintra' || format === 'soap');
+        });
+    }
+    if(startBtn) startBtn.style.display = 'inline-flex';
+    if(progressContainer) progressContainer.style.display = 'none';
+    if(completedPanel) completedPanel.style.display = 'none';
+
+    window.switchView('processing');
+}
+
+
+// --- View: Resultados (#results-view) ---
+
+/** Configura a view de resultados */
+function setupResultsView(): void {
+    const tabsContainer = document.querySelector<HTMLElement>('#results-view .document-tabs');
+    const downloadBtn = document.getElementById('downloadResultsBtn');
+    const editBtn = document.getElementById('editResultBtn'); // Botão Editar na toolbar de resultados
+
+    if (tabsContainer) {
+        tabsContainer.addEventListener('click', (e: MouseEvent) => {
+            const tab = (e.target as Element)?.closest<HTMLButtonElement>('.document-tab');
+            if (tab?.dataset.panel && !tab.classList.contains('active')) {
+                activateResultsTab(tab.dataset.panel);
+            }
+        });
+    }
+
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            // Encontra o documento correspondente à aba ativa
+            const activeDocType = state.activeResultsTab.replace('-panel', '') as DocumentType;
+            // Assume que o último documento gerado desse tipo é o relevante
+            // (Idealmente, a view de resultados estaria ligada a um processamento específico)
+            const relevantDoc = state.documents
+                                   .filter(d => d.type === activeDocType && d.patientId === state.currentPatientId) // Filtra por tipo e paciente (se houver)
+                                   .sort((a, b) => parseDate(b.date, b.time).getTime() - parseDate(a.date, a.time).getTime())[0]; // Pega o mais recente
+
+            if (relevantDoc) {
+                downloadDocument(relevantDoc.id);
+            } else {
+                showToast('warning', 'Download Indisponível', `Não foi possível encontrar o documento '${activeDocType}' para download.`);
+            }
+        });
+    }
+
+     if (editBtn) {
+        editBtn.addEventListener('click', () => {
+             const activeDocType = state.activeResultsTab.replace('-panel', '') as DocumentType;
+             // Encontra o documento mais recente do tipo ativo
+             const relevantDoc = state.documents
+                                    .filter(d => d.type === activeDocType && d.patientId === state.currentPatientId)
+                                    .sort((a, b) => parseDate(b.date, b.time).getTime() - parseDate(a.date, a.time).getTime())[0];
+
+             if (relevantDoc) {
+                 editDocument(relevantDoc.id); // Chama a função de edição existente
+             } else {
+                 showToast('warning', 'Edição Indisponível', `Não foi possível encontrar o documento '${activeDocType}' para edição.`);
+             }
+        });
+     }
+}
+
+/** Ativa uma aba específica na view de resultados */
+function activateResultsTab(panelId: string): void {
+    console.log(`Ativando aba de resultados: ${panelId}`);
+    state.activeResultsTab = panelId;
+
+    // Atualiza estilo das abas
+    document.querySelectorAll<HTMLButtonElement>('#results-view .document-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.panel === panelId);
+    });
+
+    // Animação de troca de painéis
+    const panelsContainer = document.querySelector<HTMLElement>('#results-view .document-tab-panels');
+    const activePanel = document.getElementById(panelId);
+    const currentActivePanel = panelsContainer?.querySelector<HTMLElement>('.document-tab-panel.active');
+
+    if (!activePanel) {
+        console.error(`Painel de resultados não encontrado: ${panelId}`);
+        return;
+    }
+
+    // Pega o tipo de documento da aba e busca o conteúdo mais recente
+    const docType = panelId.replace('-panel', '') as DocumentType;
+    const content = getDocumentContent(docType) ?? `Conteúdo para '${docType}' não disponível.`; // Usará o conteúdo do state (exemplo)
+
+    // Atualiza o conteúdo dentro do painel ativo
+    const contentElement = activePanel.querySelector<HTMLDivElement>('.document-view');
+    if (contentElement) {
+        contentElement.innerHTML = `<pre>${escapeHtml(content)}</pre>`;
+    } else {
+        console.warn(`Elemento .document-view não encontrado em #${panelId}`);
+        // Fallback: Insere estrutura básica se não existir
+        activePanel.innerHTML = `<div class="document-content"><div class="document-container"><div class="document-view"><pre>${escapeHtml(content)}</pre></div></div></div>`;
+    }
+
+    // Habilita/desabilita botão de edição baseado no tipo
+    const editBtn = document.getElementById('editResultBtn');
+    if(editBtn) {
+        const isEditable = ['transcription', 'vintra', 'soap', 'ipissima', 'narrative', 'orientacoes'].includes(docType);
+        (editBtn as HTMLButtonElement).disabled = !isEditable;
+        editBtn.style.display = isEditable ? 'inline-flex' : 'none';
+    }
+
+
+    const showActivePanel = () => {
+        gsap.set(activePanel, { display: 'block', opacity: 0 });
+        activePanel.classList.add('active');
+        activePanel.scrollTop = 0;
+
+        gsap.to(activePanel, {
+            opacity: 1,
+            duration: 0.3,
+            ease: "power1.out"
+        });
+    };
+
+    if (currentActivePanel && currentActivePanel !== activePanel) {
+        gsap.to(currentActivePanel, {
+            opacity: 0,
+            duration: 0.2,
+            ease: "power1.in",
+            onComplete: () => {
+                currentActivePanel.classList.remove('active');
+                currentActivePanel.style.display = 'none';
+                showActivePanel();
+            }
+        });
+    } else if (!currentActivePanel) {
+        showActivePanel();
+    }
+}
+
+
+// --- Biblioteca de Documentos ---
+
+/** Configura a interatividade da biblioteca (filtros, busca) */
+function setupDocumentLibrary(): void {
+    const filtersContainer = document.querySelector<HTMLElement>('#library-view .library-filters');
+    const searchInput = document.querySelector<HTMLInputElement>('#library-view .library-search-input');
+
+    if (filtersContainer) {
+        filtersContainer.addEventListener('click', (e: MouseEvent) => {
+            const filterBtn = (e.target as Element)?.closest<HTMLButtonElement>('.library-filter');
+            if (filterBtn && !filterBtn.classList.contains('active')) {
+                filtersContainer.querySelector('.library-filter.active')?.classList.remove('active');
+                filterBtn.classList.add('active');
+                renderDocumentLibrary(filterBtn.dataset.filter || 'all', searchInput?.value || '');
+            }
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', debounce(() => {
+            const activeFilter = filtersContainer?.querySelector('.library-filter.active')?.dataset.filter || 'all';
+            renderDocumentLibrary(activeFilter, searchInput.value);
+        }, 300));
+    }
+}
+
+// --- Notificações Toast ---
+
+/** Mostra uma notificação toast */
+function showToast(type: 'success' | 'error' | 'warning' | 'info', title: string, message: string, duration: number = 5000): void {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+
+    let iconClass = 'fas fa-info-circle';
+    if (type === 'success') iconClass = 'fas fa-check-circle';
+    else if (type === 'error') iconClass = 'fas fa-times-circle';
+    else if (type === 'warning') iconClass = 'fas fa-exclamation-triangle';
+
+    toast.innerHTML = `
+        <div class="toast-icon ${type}"> <i class="${iconClass}"></i> </div>
+        <div class="toast-content">
+            <div class="toast-title">${escapeHtml(title)}</div>
+            <div class="toast-message">${escapeHtml(message)}</div>
+        </div>
+        <button class="toast-close"> <i class="fas fa-times"></i> </button>
+    `;
+
+    toast.querySelector<HTMLButtonElement>('.toast-close')?.addEventListener('click', () => removeToast(toast));
+    container.appendChild(toast);
+
+    gsap.fromTo(toast,
+        { opacity: 0, y: 20, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power2.out' }
+    );
+
+    setTimeout(() => removeToast(toast), duration);
+}
+
+/** Remove um toast específico com animação */
+function removeToast(toastElement: HTMLElement): void {
+    if (!toastElement?.parentNode) return;
+
+    gsap.to(toastElement, {
+        opacity: 0,
+        y: 10,
+        scale: 0.9,
+        duration: 0.3,
+        ease: 'power1.in',
+        onComplete: () => {
+            toastElement.remove();
+        }
+    });
+}
+
+
+// --- Modal Genérico ---
+
+/** Configura o modal genérico */
+function setupGenericModal(): void {
+    const modalOverlay = document.getElementById('genericModal');
+    const closeBtn = document.getElementById('genericModalClose');
+    const cancelBtn = document.getElementById('genericModalCancelBtn'); // Botão padrão "Fechar"
+
+    closeBtn?.addEventListener('click', hideGenericModal);
+    cancelBtn?.addEventListener('click', hideGenericModal);
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e: MouseEvent) => {
+            if (e.target === modalOverlay) {
+                hideGenericModal();
+            }
+        });
+    }
+}
+
+/** Mostra o modal genérico com título e conteúdo HTML */
+function showGenericModal(title: string, htmlContent: string): void {
+    const modal = document.getElementById('genericModal');
+    const modalTitle = document.getElementById('genericModalTitle');
+    const modalBody = document.getElementById('genericModalBody');
+
+    if (modal && modalTitle && modalBody) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = htmlContent; // CUIDADO: Garanta que htmlContent seja seguro
+
+        gsap.set(modal, { display: 'flex', opacity: 0 });
+        gsap.to(modal, { opacity: 1, duration: 0.3, ease: 'power1.out' });
+        gsap.fromTo(modal.querySelector('.modal-container'),
+            { scale: 0.95, y: 10 },
+            { scale: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+    } else {
+        console.error("Elementos do modal genérico não encontrados.");
+    }
+}
+
+/** Esconde o modal genérico */
+function hideGenericModal(): void {
+    const modal = document.getElementById('genericModal');
+    if (modal?.style.display !== 'none') {
+        gsap.to(modal, {
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power1.in',
+            onComplete: () => {
+                if(modal) modal.style.display = 'none';
+                const modalBody = document.getElementById('genericModalBody');
+                if (modalBody) modalBody.innerHTML = '';
+            }
+        });
+    }
+}
+
+
+// --- Utilitários ---
+
+/** Debounce: Atraso na execução de uma função */
+function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
+    let timeout: number | null = null;
+    return function executedFunction(...args: Parameters<T>): void {
+        const later = () => {
+            timeout = null;
+            func(...args);
+        };
+        if (timeout !== null) {
+            clearTimeout(timeout);
+        }
+        timeout = window.setTimeout(later, wait);
+    };
+}
+
+/** Escapa HTML para prevenir XSS */
+function escapeHtml(unsafe: any): string {
+    if (typeof unsafe !== 'string') {
+        try {
+            unsafe = String(unsafe);
+        } catch (e) {
+            return '';
+        }
+    }
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+/** Converte string de data "dd/mm/yyyy" e opcionalmente hora "HH:MM" para objeto Date */
+function parseDate(dateStr: string, timeStr?: string | null): Date {
+    const parts = dateStr.split('/');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Mês é 0-indexado
+    const year = parseInt(parts[2], 10);
+
+    let hour = 0;
+    let minute = 0;
+    if (timeStr) {
+        const timeParts = timeStr.split(':');
+        hour = parseInt(timeParts[0], 10);
+        minute = parseInt(timeParts[1], 10);
+    }
+
+    // Verifica se as partes são válidas antes de criar a data
+    if (isNaN(day) || isNaN(month) || isNaN(year) || isNaN(hour) || isNaN(minute)) {
+        console.warn(`Data/hora inválida encontrada: ${dateStr} ${timeStr || ''}. Retornando data atual.`);
+        return new Date(); // Retorna data atual como fallback
+    }
+
+    return new Date(year, month, day, hour, minute);
+}
+
+
+// --- Funções de Ação Pós-Processamento (Exemplo) ---
+
+/** Ação: Visualizar transcrição recém-processada na biblioteca */
+function viewTranscription(): void {
+    if (!state.currentDocumentId) {
+        showToast('warning', 'Nenhum Documento', 'Nenhum documento de transcrição ativo para visualizar.');
+        window.switchView('library');
+        return;
+    }
+    const doc = state.documents.find(d => d.id === state.currentDocumentId && d.type === 'transcription');
+    if (doc) {
+        window.switchView('library');
+        setTimeout(() => {
+            setActiveDocumentItem(doc.id);
+            viewDocumentInWorkspace(doc.id);
+        }, 400); // Atraso para renderização da view
+    } else {
+        showToast('error', 'Erro', 'Transcrição não encontrada na biblioteca.');
+        window.switchView('library');
+    }
+}
+
+/** Ação: Ir para a view de processamento com a transcrição atual */
+function processTranscription(): void {
+    if (!state.currentDocumentId) {
+        showToast('warning', 'Nenhum Documento', 'Nenhum documento de transcrição ativo para processar.');
+        window.switchView('library');
+        return;
+    }
+    const doc = state.documents.find(d => d.id === state.currentDocumentId && d.type === 'transcription');
+    if (doc) {
+        startProcessingDocument(doc.id); // Inicia fluxo de processamento
+    } else {
+        showToast('error', 'Erro', 'Documento de transcrição não encontrado para processar.');
+        window.switchView('library');
+    }
+}
+
+/* 
+ * VINTRA - Correções CSS para Bugs de Interface
+ * Para adicionar ao final do seu arquivo CSS atual
+ */
+
+/* -------------------------------------------- */
+/* Correção para o Dashboard não aparecer       */
+/* -------------------------------------------- */
+#dashboard-view.active {
+    display: block !important;
+}
+
+.workspace.active {
+    display: block !important; /* Garantir que views ativas sejam visíveis */
+}
+
+#library-view.active {
+    display: flex !important; /* Caso especial para o layout de biblioteca */
+}
+
+/* -------------------------------------------- */
+/* Correção para a Sidebar não preencher altura */
+/* -------------------------------------------- */
+.app-main {
+    flex: 1;
+    display: flex;
+    height: calc(100vh - 73px); /* Ajustar baseado na altura real do header */
+    overflow: hidden;
+    position: relative;
+}
+
+.app-sidebar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+/* -------------------------------------------- */
+/* Correção para os Toasts mal posicionados     */
+/* -------------------------------------------- */
+.toast-container {
     position: fixed;
-    bottom: var(--space-4);
-    right: var(--space-4);
-    padding: var(--space-2) var(--space-3);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border-radius: var(--radius-lg);
-    font-size: 0.75rem;
-    animation: saving-pulse 1.5s infinite;
-    z-index: 100;
-    transition: all var(--duration-md) var(--ease-gentle);
-    opacity: 0;
-    transform: translateY(10px);
-    pointer-events: none;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    pointer-events: none; /* Permite clicar através do container, mas não dos toasts */
 }
 
-.saving-indicator.visible {
-    opacity: 1;
-    transform: translateY(0);
+.toast {
+    width: 100%;
+    margin-top: 8px;
+    pointer-events: auto; /* Permite clicar no toast */
+    box-shadow: var(--shadow-lg);
 }
 
-/* Classe utilitária para ocultar elementos */
-.hidden {
-    display: none !important;
+/* -------------------------------------------- */
+/* Correção para o botão de login que "cresce"  */
+/* -------------------------------------------- */
+.btn-primary {
+    transition: all var(--duration-md) var(--ease-out);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn-primary:focus:not(:hover) {
+    transform: none;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.01);
+}
+
+#loginForm .btn-primary {
+    width: 100%; /* Garantir largura consistente */
+    max-width: 100%;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+/* -------------------------------------------- */
+/* Correções para problemas de layout geral     */
+/* -------------------------------------------- */
+.document-workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.document-content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 130px); /* Ajustar conforme necessário */
+}
+
+/* Ajuste para containers do paciente */
+.patient-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.patient-tab-panels {
+    flex: 1;
+    overflow: hidden;
+}
+
+.patient-tab-panel {
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* -------------------------------------------- */
+/* Correções para problemas de modal            */
+/* -------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-container {
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+.document-editor {
+    width: 100%;
+    min-height: 300px;
+    resize: vertical;
+}
+
+/* -------------------------------------------- */
+/* Ajustes para Responsividade                  */
+/* -------------------------------------------- */
+@media (max-width: 768px) {
+    .app-main {
+        height: calc(100vh - 60px); /* Header menor em mobile */
+    }
+    
+    .document-library {
+        width: 100%; /* Full width em mobile */
+        height: auto;
+        max-height: 40vh;
+    }
+    
+    #library-view.active {
+        flex-direction: column;
+    }
+    
+    .modal-container {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .patient-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+    }
+}
+
+/* -------------------------------------------- */
+/* Debug Helper - Adicionar para testes         */
+/* -------------------------------------------- */
+.debug-outline * {
+    outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.debug-active {
+    border: 2px solid red !important;
 }
