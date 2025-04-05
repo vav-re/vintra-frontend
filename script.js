@@ -1,10 +1,15 @@
 /**
  * VINTRA - Análise Dimensional Clínica
- * Script principal otimizado (Baseado na v4)
+ * Script principal otimizado e corrigido
  * Implementação JavaScript com todas as funcionalidades
  */
 
 // --- Estado Global ---
+window.VINTRA = {
+    initialized: false,
+    debug: true
+};
+
 const state = {
     currentView: null,
     currentPatientId: null,
@@ -45,44 +50,58 @@ const state = {
 // --- Inicialização ---
 document.addEventListener('DOMContentLoaded', () => {
     console.log("VINTRA Inicializando...");
-    loadDemoData();
-    setupEventListeners();
-    initCharts(); // Inicializa estruturas de gráficos
-    initFluidAnimations(); // Configura efeito ripple
-
-    // Estado inicial: Mostrar Splash brevemente, depois Login
-    const splashScreen = document.getElementById('splashScreen');
-    const loginScreen = document.getElementById('loginScreen');
-    const appContainer = document.getElementById('appContainer');
-
-    if (splashScreen && loginScreen && appContainer) {
-        gsap.set(splashScreen, { display: 'flex', opacity: 1 }); // Garante visibilidade inicial
-
-        gsap.to(splashScreen, {
-            opacity: 0,
-            duration: 0.5,
-            delay: 0.7,
-            ease: "power1.inOut",
-            onComplete: () => {
-                splashScreen.style.display = 'none';
-                gsap.set(loginScreen, { display: 'flex', opacity: 0 });
-                loginScreen.classList.add('visible');
-                gsap.to(loginScreen, {
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: "power1.out"
-                });
-            }
-        });
-    } else {
-        console.warn("Splash, Login ou App Container não encontrados. Exibindo App diretamente.");
-        if (appContainer) appContainer.style.display = 'flex';
-        window.switchView('dashboard'); // Fallback
-    }
-    
-    // Renderiza a seleção de pacientes no dashboard
-    renderPatientSelectionOnDashboard();
+    initializeVINTRA();
 });
+
+// Core initialization
+function initializeVINTRA() {
+    if (window.VINTRA.initialized) return;
+
+    try {
+        loadDemoData();
+        setupEventListeners();
+        initCharts(); // Inicializa estruturas de gráficos
+        initFluidAnimations(); // Configura efeito ripple
+
+        // Estado inicial: Mostrar Splash brevemente, depois Login
+        const splashScreen = document.getElementById('splashScreen');
+        const loginScreen = document.getElementById('loginScreen');
+        const appContainer = document.getElementById('appContainer');
+
+        if (splashScreen && loginScreen && appContainer) {
+            gsap.set(splashScreen, { display: 'flex', opacity: 1 }); // Garante visibilidade inicial
+
+            gsap.to(splashScreen, {
+                opacity: 0,
+                duration: 0.5,
+                delay: 0.7,
+                ease: "power1.inOut",
+                onComplete: () => {
+                    splashScreen.style.display = 'none';
+                    gsap.set(loginScreen, { display: 'flex', opacity: 0 });
+                    loginScreen.classList.add('visible');
+                    gsap.to(loginScreen, {
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: "power1.out"
+                    });
+                }
+            });
+        } else {
+            console.warn("Splash, Login ou App Container não encontrados. Exibindo App diretamente.");
+            if (appContainer) appContainer.style.display = 'flex';
+            window.switchView('dashboard'); // Fallback
+        }
+        
+        // Renderiza a seleção de pacientes no dashboard
+        renderPatientSelectionOnDashboard();
+        
+        window.VINTRA.initialized = true;
+        console.log('VINTRA initialized successfully');
+    } catch (error) {
+        console.error('VINTRA initialization failed:', error);
+    }
+}
 
 /** Configura todos os event listeners da aplicação */
 function setupEventListeners() {
@@ -867,6 +886,16 @@ function setupMobileMenu() {
     openBtn.addEventListener('click', openMobileMenu);
     closeBtn.addEventListener('click', closeMobileMenu);
     backdrop.addEventListener('click', closeMobileMenu);
+}
+
+/** Alterna o estado do menu mobile */
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu && menu.classList.contains('open')) {
+        closeMobileMenu();
+    } else {
+        openMobileMenu();
+    }
 }
 
 /** Abre o menu mobile */

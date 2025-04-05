@@ -10,20 +10,21 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style">
     
-    <!-- Stylesheet principal com atributo defer -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <!-- Stylesheet principal -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- Scripts essenciais com atributos de performance -->
+    <!-- Scripts essenciais com atributos defer (carregamento otimizado) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" defer></script>
+    <!-- Plugins do Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chartjs-plugin-datalabels.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chartjs-plugin-zoom.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chartjs-plugin-colorschemes.min.js" defer></script>
+    
+    <!-- Script principal da aplicação -->
     <script src="script.js" defer></script>
-
-    <!-- Fallback para CSS -->
-    <noscript>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    </noscript>
 
     <style>
         /* Estilos básicos para garantir a visibilidade inicial correta */
@@ -665,90 +666,5 @@
         <div class="toast-container" id="toastContainer"></div>
 
     </div>
-<script>
-    // VINTRA Core Initialization
-    (function() {
-        const VINTRA = {
-            initialized: false,
-            debug: true
-        };
-
-        // Core initialization
-        function initializeVINTRA() {
-            if (VINTRA.initialized) return;
-
-            try {
-                setupEventListeners();
-                initializeUIState();
-                VINTRA.initialized = true;
-                console.log('VINTRA initialized successfully');
-            } catch (error) {
-                console.error('VINTRA initialization failed:', error);
-            }
-        }
-
-        // Event listener setup
-        function setupEventListeners() {
-            const loginForm = document.getElementById('loginForm');
-            if (loginForm) {
-                loginForm.addEventListener('submit', handleLogin);
-            }
-
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            }
-        }
-
-        // Login handler
-        function handleLogin(e) {
-            e.preventDefault();
-            const password = document.getElementById('password');
-            if (password && password.value === '123') {
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('appContainer').style.display = 'block';
-                switchView('dashboard');
-            } else {
-                document.getElementById('passwordError').style.display = 'block';
-            }
-        }
-
-        // UI state initialization
-        function initializeUIState() {
-            const views = document.querySelectorAll('.workspace');
-            views.forEach(view => view.style.display = 'none');
-            const loginScreen = document.getElementById('loginScreen');
-            if (loginScreen) loginScreen.style.display = 'flex';
-        }
-
-        // View switching
-        window.switchView = function(viewId) {
-            if (!viewId) return;
-
-            try {
-                const views = document.querySelectorAll('.workspace');
-                views.forEach(view => {
-                    view.style.display = 'none';
-                    view.classList.remove('active');
-                });
-
-                const targetView = document.getElementById(`${viewId}-view`);
-                if (targetView) {
-                    targetView.style.display = viewId === 'library' ? 'flex' : 'block';
-                    targetView.classList.add('active');
-                }
-            } catch (error) {
-                console.error('Error switching view:', error);
-            }
-        };
-
-        // Initialize on DOM content loaded
-        document.addEventListener('DOMContentLoaded', initializeVINTRA);
-    })();
-</script>
 </body>
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chartjs-plugin-datalabels.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chartjs-plugin-zoom.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chartjs-plugin-colorschemes.min.js"></script>
