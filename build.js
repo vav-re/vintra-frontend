@@ -31,7 +31,8 @@ const minifiedHTML = htmlMinifier.minify(htmlContent, {
     minifyCSS: true,
     minifyJS: true
 });
-fs.writeFileSync(path.join(BUILD_DIR, 'index.html'), minifiedHTML);
+// Copiar imagens e outros arquivos estáticos
+fs.copyFileSync(path.join(SRC_DIR, 'foto.png'), path.join(BUILD_DIR, 'foto.png'));
 
 console.log('Build completed successfully!');
 
