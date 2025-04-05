@@ -10,14 +10,16 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style">
     
+    
     <!-- Stylesheet principal com atributo defer -->
  <link rel="stylesheet" href="/styles.min.css" media="print" onload="this.media='all'">
 
     <!-- Scripts essenciais com atributos de performance -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script src="/script.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+ <script src="./dist/script.js" defer></script>
+    
     <!-- Fallback para CSS -->
     <noscript>
         <link rel="stylesheet" href="styles.css">
