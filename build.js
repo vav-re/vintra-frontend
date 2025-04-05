@@ -34,3 +34,32 @@ const minifiedHTML = htmlMinifier.minify(htmlContent, {
 fs.writeFileSync(path.join(BUILD_DIR, 'index.html'), minifiedHTML);
 
 console.log('Build completed successfully!');
+
+// Adicione ao final do seu build.js
+console.log('Copiando arquivos estáticos...');
+
+// Lista de arquivos para copiar
+const staticFiles = [
+  'foto.png',
+  'favicon.ico'
+];
+
+// Cria diretório para imagens se necessário
+fs.mkdirSync(path.join(BUILD_DIR, 'img'), { recursive: true });
+
+// Copia cada arquivo
+staticFiles.forEach(file => {
+  try {
+    const src = path.join(SRC_DIR, file);
+    const dest = path.join(BUILD_DIR, file);
+    
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      console.log(`✓ Arquivo copiado: ${file}`);
+    } else {
+      console.warn(`⚠ Arquivo não encontrado: ${file}`);
+    }
+  } catch (err) {
+    console.error(`× Erro ao copiar ${file}:`, err);
+  }
+});

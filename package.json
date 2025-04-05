@@ -1,11 +1,12 @@
 {
-  "name": "vintra-frontend",
   "version": "1.0.0",
   "description": "VINTRA - Visualização INtegrativa TRAjetorial",
   "main": "script.js",
   "scripts": {
     "build": "node build.js",
-    "start": "serve dist"
+    "start": "serve dist",
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "chart.js": "^3.9.1",
@@ -16,21 +17,11 @@
     "html-minifier": "^4.0.0",
     "serve": "^14.2.1",
     "uglify-js": "^3.19.3"
-  }
-  {
-    "hosting": {
-      "public": "dist",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
-  }
+  },
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "engines": {
+    "node": ">=14.0.0"
+}
 }
